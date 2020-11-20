@@ -1,0 +1,12 @@
+#pragma once
+
+#include "mx.h"
+
+enum mx::EStreamDeviceType
+{
+	STREAM_DEVICE_TYPE_UNKNOWN,
+	
+	STREAM_DEVICE_TYPE_FILE,
+	STREAM_DEVICE_TYPE_MEMORY,
+	STREAM_DEVICE_TYPE_DIRECTORY
+};

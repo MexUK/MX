@@ -1,0 +1,202 @@
+#include "Writer.h"
+#include "Static/String.h" // temp - for pack754_32/64/80
+#include "EEndian.h"
+
+using namespace std;
+using namespace mx;
+
+Writer::Writer(Stream& stream) :
+	ReaderOrWriter(stream)
+{
+}
+
+// int
+void					Writer::ui8(uint8 uiValue)
+{
+	m_stream.writeAll(&uiValue, 1);
+}
+
+void					Writer::ui16(uint16 uiValue)
+{
+	if (m_uiEndian == LITTLE_ENDIAN)
+		return ui16le(uiValue);
+	else
+		return ui16be(uiValue);
+}
+
+void					Writer::ui16le(uint16 uiValue)
+{
+	uint8 ui[2];
+	ui[0] = uiValue % OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
+	m_stream.writeAll(ui, 2);
+}
+
+void					Writer::ui16be(uint16 uiValue)
+{
+	uint8 ui[2];
+	ui[1] = uiValue % OCTET_COMBINATION_COUNT;
+	ui[0] = uiValue / OCTET_COMBINATION_COUNT;
+	m_stream.writeAll(ui, 2);
+}
+
+void					Writer::ui24(uint32 uiValue)
+{
+	if (m_uiEndian == LITTLE_ENDIAN)
+		return ui24le(uiValue);
+	else
+		return ui24be(uiValue);
+}
+
+void					Writer::ui24le(uint32 uiValue)
+{
+	uint8 ui[3];
+	ui[0] = uiValue % OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
+	ui[2] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
+	m_stream.writeAll(ui, 3);
+}
+
+void					Writer::ui24be(uint32 uiValue)
+{
+	uint8 ui[3];
+	ui[2] = uiValue % OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
+	ui[0] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
+	m_stream.writeAll(ui, 3);
+}
+
+void					Writer::ui32(uint32 uiValue)
+{
+	if (m_uiEndian == LITTLE_ENDIAN)
+		return ui32le(uiValue);
+	else
+		return ui32be(uiValue);
+}
+
+void					Writer::ui32le(uint32 uiValue)
+{
+	uint8 ui[4];
+	ui[0] = uiValue % OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
+	ui[2] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
+	ui[3] = uiValue / THREE_OCTETS_COMBINATION_COUNT;
+	m_stream.writeAll(ui, 4);
+}
+
+void					Writer::ui32be(uint32 uiValue)
+{
+	uint8 ui[4];
+	ui[3] = uiValue % OCTET_COMBINATION_COUNT;
+	ui[2] = uiValue / OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
+	ui[0] = uiValue / THREE_OCTETS_COMBINATION_COUNT;
+	m_stream.writeAll(ui, 4);
+}
+
+void					Writer::ui64(uint64 uiValue)
+{
+	if (m_uiEndian == LITTLE_ENDIAN)
+		return ui64le(uiValue);
+	else
+		return ui64be(uiValue);
+}
+
+void					Writer::ui64le(uint64 uiValue)
+{
+	uint8 ui[8];
+	ui[0] = uiValue % OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
+	ui[2] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
+	ui[3] = uiValue / THREE_OCTETS_COMBINATION_COUNT;
+	ui[4] = uiValue / FOUR_OCTETS_COMBINATION_COUNT;
+	ui[5] = uiValue / FIVE_OCTETS_COMBINATION_COUNT;
+	ui[6] = uiValue / SIX_OCTETS_COMBINATION_COUNT;
+	ui[7] = uiValue / SEVEN_OCTETS_COMBINATION_COUNT;
+	m_stream.writeAll(ui, 8);
+}
+
+void					Writer::ui64be(uint64 uiValue)
+{
+	uint8 ui[8];
+	ui[7] = uiValue % OCTET_COMBINATION_COUNT;
+	ui[6] = uiValue / OCTET_COMBINATION_COUNT;
+	ui[5] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
+	ui[4] = uiValue / THREE_OCTETS_COMBINATION_COUNT;
+	ui[3] = uiValue / FOUR_OCTETS_COMBINATION_COUNT;
+	ui[2] = uiValue / FIVE_OCTETS_COMBINATION_COUNT;
+	ui[1] = uiValue / SIX_OCTETS_COMBINATION_COUNT;
+	ui[0] = uiValue / SEVEN_OCTETS_COMBINATION_COUNT;
+	m_stream.writeAll(ui, 8);
+}
+
+// float
+void					Writer::f32(float32 fValue)
+{
+	ui32le(pack754_32(fValue));
+}
+
+void					Writer::f64(float64 fValue)
+{
+	ui64le(pack754_64(fValue));
+}
+
+void					Writer::f80(float80 fValue)
+{
+	//ui80le(pack754_80(fValue));
+}
+
+// string
+void					Writer::cstr(char* pData, uint64 uiLength)
+{
+	m_stream.writeAll((uint8*)pData, uiLength);
+}
+
+void					Writer::str(string& strData)
+{
+	m_stream.writeAll((uint8*)strData.c_str(), strData.length());
+}
+
+void					Writer::mstr(string& strData)
+{
+	ui64le(strData.length());
+	m_stream.writeAll((uint8*)strData.c_str(), strData.length());
+}
+
+// vector
+void					Writer::vec2(glm::vec2& vec)
+{
+	f32(vec[0]);
+	f32(vec[1]);
+}
+
+void					Writer::vec3(glm::vec3& vec)
+{
+	f32(vec[0]);
+	f32(vec[1]);
+	f32(vec[2]);
+}
+
+// matrix
+void					Writer::mat4(glm::mat4& mat)
+{
+	f32(mat[0][0]);
+	f32(mat[0][1]);
+	f32(mat[0][2]);
+	f32(mat[0][3]);
+
+	f32(mat[1][0]);
+	f32(mat[1][1]);
+	f32(mat[1][2]);
+	f32(mat[1][3]);
+
+	f32(mat[2][0]);
+	f32(mat[2][1]);
+	f32(mat[2][2]);
+	f32(mat[2][3]);
+
+	f32(mat[3][0]);
+	f32(mat[3][1]);
+	f32(mat[3][2]);
+	f32(mat[3][3]);
+}

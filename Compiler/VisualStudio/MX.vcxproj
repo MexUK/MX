@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{B3D0FBA5-BC5F-4044-972F-579AC70F4D01}</ProjectGuid>
+    <RootNamespace>MX</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <ProjectName>MX</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\..\Output\Final\MX\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>..\..\..\Output\Intermediate\MX\$(Configuration)-$(Platform)\</IntDir>
+    <IncludePath>..\..\Code\;..\..\Code\ThirdParty\freetype-2.9.1\include\;..\..\Code\ThirdParty\squish-master\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\..\Input\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\Output\Final\MX\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>..\..\..\Output\Intermediate\MX\$(Configuration)-$(Platform)\</IntDir>
+    <IncludePath>..\..\Code\;..\..\Code\ThirdParty\freetype-2.9.1\include\;..\..\Code\ThirdParty\squish-master\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\..\Input\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>NOMINMAX;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>freetype.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>NOMINMAX;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>freetype.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Code\mx.h" />
+    <ClInclude Include="..\..\Code\Configuration\EGraphicsLibrary.h" />
+    <ClInclude Include="..\..\Code\Configuration\EOperatingSystem.h" />
+    <ClInclude Include="..\..\Code\Configuration\EPlatform.h" />
+    <ClInclude Include="..\..\Code\Configuration\EVersionedGraphicsLibrary.h" />
+    <ClInclude Include="..\..\Code\Configuration\EVersionedOperatingSystem.h" />
+    <ClInclude Include="..\..\Code\Configuration\EVersionedPlatform.h" />
+    <ClInclude Include="..\..\Code\Crash\CrashManager.h" />
+    <ClInclude Include="..\..\Code\Data\EEndian.h" />
+    <ClInclude Include="..\..\Code\Data\Reader.h" />
+    <ClInclude Include="..\..\Code\Data\ReaderOrWriter.h" />
+    <ClInclude Include="..\..\Code\Data\Writer.h" />
+    <ClInclude Include="..\..\Code\Exception\EExceptionCode.h" />
+    <ClInclude Include="..\..\Code\Format\EFileType.h" />
+    <ClInclude Include="..\..\Code\Format\Format.h" />
+    <ClInclude Include="..\..\Code\Format\FormatEntry.h" />
+    <ClInclude Include="..\..\Code\Format\FormatManager.h" />
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat.h" />
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header1.h" />
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version2.h" />
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version3.h" />
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version4.h" />
+    <ClInclude Include="..\..\Code\Format\Image\CUR\CURFormat.h" />
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat.h" />
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_HEADER.h" />
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_HEADER_DXT10.h" />
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part1.h" />
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part2.h" />
+    <ClInclude Include="..\..\Code\Format\Image\ICO\ICOFormat.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\EJSONType.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONArray.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONBoolean.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONContainer.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONManager.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONNull.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONNumber.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONObject.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONString.h" />
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONValue.h" />
+    <ClInclude Include="..\..\Code\Format\Web\URL\URL.h" />
+    <ClInclude Include="..\..\Code\Format\Web\URL\URLComponents.h" />
+    <ClInclude Include="..\..\Code\GPU\Base\GPUFont.h" />
+    <ClInclude Include="..\..\Code\GPU\Base\GPUImage.h" />
+    <ClInclude Include="..\..\Code\GPU\Base\GPUImageBuffers.h" />
+    <ClInclude Include="..\..\Code\GPU\Base\GPUProgram.h" />
+    <ClInclude Include="..\..\Code\GPU\Base\GPUTexture.h" />
+    <ClInclude Include="..\..\Code\GPU\Base\GraphicsLibrary.h" />
+    <ClInclude Include="..\..\Code\GPU\DirectX\DirectX.h" />
+    <ClInclude Include="..\..\Code\GPU\GPU.h" />
+    <ClInclude Include="..\..\Code\GPU\OpenGL\GLFont.h" />
+    <ClInclude Include="..\..\Code\GPU\OpenGL\GLImage.h" />
+    <ClInclude Include="..\..\Code\GPU\OpenGL\GLProgram.h" />
+    <ClInclude Include="..\..\Code\GPU\OpenGL\GLTexture.h" />
+    <ClInclude Include="..\..\Code\GPU\OpenGL\OpenGL.h" />
+    <ClInclude Include="..\..\Code\Image\eDXTCompressionType.h" />
+    <ClInclude Include="..\..\Code\Image\eRasterDataFormat.h" />
+    <ClInclude Include="..\..\Code\Image\ImageFile.h" />
+    <ClInclude Include="..\..\Code\Image\ImageManager.h" />
+    <ClInclude Include="..\..\Code\Image\RasterDataFormat.h" />
+    <ClInclude Include="..\..\Code\Image\RasterDataFormatManager.h" />
+    <ClInclude Include="..\..\Code\Object\IndexedInstance.h" />
+    <ClInclude Include="..\..\Code\Object\Manager.h" />
+    <ClInclude Include="..\..\Code\Object\Singleton.h" />
+    <ClInclude Include="..\..\Code\Pool\UMapContainer.h" />
+    <ClInclude Include="..\..\Code\Pool\VectorPool.h" />
+    <ClInclude Include="..\..\Code\Static\Components\Frustum.h" />
+    <ClInclude Include="..\..\Code\Static\Components\OBB.h" />
+    <ClInclude Include="..\..\Code\Static\Components\Plane.h" />
+    <ClInclude Include="..\..\Code\Static\DataPath.h" />
+    <ClInclude Include="..\..\Code\Static\Debug.h" />
+    <ClInclude Include="..\..\Code\Static\File.h" />
+    <ClInclude Include="..\..\Code\Static\Folder.h" />
+    <ClInclude Include="..\..\Code\Static\Image.h" />
+    <ClInclude Include="..\..\Code\Static\Input.h" />
+    <ClInclude Include="..\..\Code\Static\Math.h" />
+    <ClInclude Include="..\..\Code\Static\Memory.h" />
+    <ClInclude Include="..\..\Code\Static\Number.h" />
+    <ClInclude Include="..\..\Code\Static\Path.h" />
+    <ClInclude Include="..\..\Code\Static\Process.h" />
+    <ClInclude Include="..\..\Code\Static\Registry.h" />
+    <ClInclude Include="..\..\Code\Static\StdVector.h" />
+    <ClInclude Include="..\..\Code\Static\String.h" />
+    <ClInclude Include="..\..\Code\Static\Thread.h" />
+    <ClInclude Include="..\..\Code\Static\Timing.h" />
+    <ClInclude Include="..\..\Code\Static\Tokens.h" />
+    <ClInclude Include="..\..\Code\Stream\Errors\EStreamError.h" />
+    <ClInclude Include="..\..\Code\Stream\Errors\StreamException.h" />
+    <ClInclude Include="..\..\Code\Stream\FileStream.h" />
+    <ClInclude Include="..\..\Code\Stream\Flows\DirectoryStreamFlow.h" />
+    <ClInclude Include="..\..\Code\Stream\Flows\FileStreamFlow.h" />
+    <ClInclude Include="..\..\Code\Stream\Flows\MemoryStreamFlow.h" />
+    <ClInclude Include="..\..\Code\Stream\Internal\EStreamDeviceType.h" />
+    <ClInclude Include="..\..\Code\Stream\Internal\StreamFlow.h" />
+    <ClInclude Include="..\..\Code\Stream\MemoryStream.h" />
+    <ClInclude Include="..\..\Code\Stream\Stream.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\alpha.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\clusterfit.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\colourblock.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\colourfit.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\colourset.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\config.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\maths.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\rangefit.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\simd.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\simd_float.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\simd_sse.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\simd_ve.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\singlecolourfit.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\squish.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\STB\stb_image.h" />
+    <ClInclude Include="..\..\Code\ThirdParty\STB\stb_truetype.h" />
+    <ClInclude Include="..\..\Code\Types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Code\mx.cpp" />
+    <ClCompile Include="..\..\Code\Crash\CrashManager.cpp" />
+    <ClCompile Include="..\..\Code\Data\Reader.cpp" />
+    <ClCompile Include="..\..\Code\Data\ReaderOrWriter.cpp" />
+    <ClCompile Include="..\..\Code\Data\Writer.cpp" />
+    <ClCompile Include="..\..\Code\Format\Format.cpp" />
+    <ClCompile Include="..\..\Code\Format\FormatEntry.cpp" />
+    <ClCompile Include="..\..\Code\Format\FormatManager.cpp" />
+    <ClCompile Include="..\..\Code\Format\Image\BMP\BMPFormat.cpp" />
+    <ClCompile Include="..\..\Code\Format\Image\CUR\CURFormat.cpp" />
+    <ClCompile Include="..\..\Code\Format\Image\DDS\DDSFormat.cpp" />
+    <ClCompile Include="..\..\Code\Format\Image\ICO\ICOFormat.cpp" />
+    <ClCompile Include="..\..\Code\Format\Network\JSON\JSONManager.cpp" />
+    <ClCompile Include="..\..\Code\Format\Web\URL\URL.cpp" />
+    <ClCompile Include="..\..\Code\GPU\DirectX\DirectX.cpp" />
+    <ClCompile Include="..\..\Code\GPU\GPU.cpp" />
+    <ClCompile Include="..\..\Code\GPU\OpenGL\GLFont.cpp" />
+    <ClCompile Include="..\..\Code\GPU\OpenGL\GLImage.cpp" />
+    <ClCompile Include="..\..\Code\GPU\OpenGL\GLProgram.cpp" />
+    <ClCompile Include="..\..\Code\GPU\OpenGL\GLTexture.cpp" />
+    <ClCompile Include="..\..\Code\GPU\OpenGL\OpenGL.cpp" />
+    <ClCompile Include="..\..\Code\Image\ImageFile.cpp" />
+    <ClCompile Include="..\..\Code\Image\ImageManager.cpp" />
+    <ClCompile Include="..\..\Code\Image\RasterDataFormat.cpp" />
+    <ClCompile Include="..\..\Code\Image\RasterDataFormatManager.cpp" />
+    <ClCompile Include="..\..\Code\Pool\UMapContainer.cpp" />
+    <ClCompile Include="..\..\Code\Pool\VectorPool.cpp" />
+    <ClCompile Include="..\..\Code\Static\DataPath.cpp" />
+    <ClCompile Include="..\..\Code\Static\Debug.cpp" />
+    <ClCompile Include="..\..\Code\Static\File.cpp" />
+    <ClCompile Include="..\..\Code\Static\Folder.cpp" />
+    <ClCompile Include="..\..\Code\Static\Image.cpp" />
+    <ClCompile Include="..\..\Code\Static\Input.cpp" />
+    <ClCompile Include="..\..\Code\Static\Math.cpp" />
+    <ClCompile Include="..\..\Code\Static\Memory.cpp" />
+    <ClCompile Include="..\..\Code\Static\Number.cpp" />
+    <ClCompile Include="..\..\Code\Static\Path.cpp" />
+    <ClCompile Include="..\..\Code\Static\Process.cpp" />
+    <ClCompile Include="..\..\Code\Static\Registry.cpp" />
+    <ClCompile Include="..\..\Code\Static\StdVector.cpp" />
+    <ClCompile Include="..\..\Code\Static\String.cpp" />
+    <ClCompile Include="..\..\Code\Static\Thread.cpp" />
+    <ClCompile Include="..\..\Code\Static\Timing.cpp" />
+    <ClCompile Include="..\..\Code\Static\Tokens.cpp" />
+    <ClCompile Include="..\..\Code\Stream\Errors\StreamException.cpp" />
+    <ClCompile Include="..\..\Code\Stream\FileStream.cpp" />
+    <ClCompile Include="..\..\Code\Stream\Flows\FileStreamFlow.cpp" />
+    <ClCompile Include="..\..\Code\Stream\Flows\MemoryStreamFlow.cpp" />
+    <ClCompile Include="..\..\Code\Stream\Internal\StreamFlow.cpp" />
+    <ClCompile Include="..\..\Code\Stream\MemoryStream.cpp" />
+    <ClCompile Include="..\..\Code\Stream\Stream.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\alpha.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\clusterfit.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\colourblock.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\colourfit.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\colourset.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\maths.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\rangefit.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\singlecolourfit.cpp" />
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\squish.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

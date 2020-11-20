@@ -1,0 +1,714 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Crash">
+      <UniqueIdentifier>{9f2a83e0-b6aa-4b73-9033-a903077a2c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Crash">
+      <UniqueIdentifier>{efea40e1-6f1c-483f-813a-bef4dc5b264b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exception">
+      <UniqueIdentifier>{982604f2-e509-4114-9ab0-13d205e8e158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exception">
+      <UniqueIdentifier>{ca8638cd-6d32-4c69-b7b2-aec196cbc0b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format">
+      <UniqueIdentifier>{6bde7e44-792e-4b5f-a946-2c631a0503e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format">
+      <UniqueIdentifier>{95fc5dcc-7b7b-4577-8ba7-78d990a71de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Image">
+      <UniqueIdentifier>{fe203e81-7747-45a6-8a28-20aadff9f44c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Image">
+      <UniqueIdentifier>{22de9319-6bfd-4556-95de-a2e7376e0e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object">
+      <UniqueIdentifier>{be63a505-b234-4689-930d-d8a4ceb77181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object">
+      <UniqueIdentifier>{6a837242-5c6d-4f68-8413-97de3601d38b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pool">
+      <UniqueIdentifier>{634ba86b-3787-4047-ac1a-b257eb2c5f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pool">
+      <UniqueIdentifier>{fe2eeaf2-c3a8-4883-b282-7f5be439cc73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Static">
+      <UniqueIdentifier>{2f1d4b4a-e395-4e7f-9725-5f2262a14718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Static">
+      <UniqueIdentifier>{baafecc1-3359-4e9b-933f-58a9d5c3b327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Static\Components">
+      <UniqueIdentifier>{0f843236-a23b-482d-8765-fa5270821368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Static\Components">
+      <UniqueIdentifier>{bfec99b6-35e2-48b4-bdc5-18041a1ab52c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Image">
+      <UniqueIdentifier>{8798e917-a509-422c-8377-05b6ed48a33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Image">
+      <UniqueIdentifier>{a819b56b-76ca-4eaa-b881-1e45f0db95eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Network">
+      <UniqueIdentifier>{671f63cf-456f-4cd5-b06f-f1504d4b8a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Network">
+      <UniqueIdentifier>{c4953440-5026-43fa-bbfc-e13a8cdd10aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Web">
+      <UniqueIdentifier>{6ba41d7e-de4e-4669-b5b4-4cf089668528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Web">
+      <UniqueIdentifier>{10a25aa1-f324-47c1-b53a-2d614dd8f8da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Network\JSON">
+      <UniqueIdentifier>{21c9d40e-b80d-40c7-8b85-9b91e3e63ee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Network\JSON">
+      <UniqueIdentifier>{2d56ffea-7f9b-4c72-bc00-13ef6f556f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Web\URL">
+      <UniqueIdentifier>{d0fef81e-af4b-483b-8792-b96fd2f0a159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Web\URL">
+      <UniqueIdentifier>{cb61d509-23e5-4327-b39a-4c3980b6f2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Image\BMP">
+      <UniqueIdentifier>{6a7c32e9-6faa-4aed-a95f-41f34c551621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Image\ICO">
+      <UniqueIdentifier>{db115b62-29f9-4f5d-8f0b-7b79b8484435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Image\DDS">
+      <UniqueIdentifier>{b78f4638-858a-4edd-91f8-daab2b0b4f47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\Image\CUR">
+      <UniqueIdentifier>{5fecbce5-1df0-448d-b874-7fa9199f14e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Image\BMP">
+      <UniqueIdentifier>{9ff31c50-3c8c-4a5d-8b3b-08147c3613e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Image\ICO">
+      <UniqueIdentifier>{83cede2b-d8c3-4f8f-8429-b34854e58e7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Image\DDS">
+      <UniqueIdentifier>{f9f70d5f-b0bb-42f6-ba0d-1c58d029c4d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\Image\CUR">
+      <UniqueIdentifier>{e18eea03-b425-458e-a0f1-9f63d2279c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ThirdParty">
+      <UniqueIdentifier>{1ebe218a-5e4d-4766-aa62-7e6fce2e51cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ThirdParty\STB">
+      <UniqueIdentifier>{43a42dc5-d4c2-40c1-921a-bc30aee88ac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Configuration">
+      <UniqueIdentifier>{6f25b475-6305-432e-9f39-e4b76e0e5c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Configuration">
+      <UniqueIdentifier>{63025784-768e-4e04-8de1-aa71f3da2523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GPU">
+      <UniqueIdentifier>{144a72aa-5cde-4841-b245-18005bb77bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GPU\OpenGL">
+      <UniqueIdentifier>{4e4a18c5-0791-43f9-8c63-7476a920e241}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GPU\DirectX">
+      <UniqueIdentifier>{ad19ba9f-0a10-4814-8b14-54972355e2bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GPU\Base">
+      <UniqueIdentifier>{67b12f3b-8e75-4951-bef0-e8597ecd9a03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GPU">
+      <UniqueIdentifier>{35de7263-45e9-46a9-b45b-77a293aafa14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GPU\OpenGL">
+      <UniqueIdentifier>{6d746e4c-2ee1-452d-849e-683302b0d6d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GPU\DirectX">
+      <UniqueIdentifier>{bc10d2c0-fc2a-46c3-8fe1-2b4101715c5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GPU\Base">
+      <UniqueIdentifier>{3477e88a-567a-4679-baa1-3f3f6a4d8d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Stream">
+      <UniqueIdentifier>{8c6d4100-6907-4d7a-afc4-d1c98937d8da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Stream">
+      <UniqueIdentifier>{9a4671d4-bb41-43cb-8b75-25416b966f31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Stream\Flows">
+      <UniqueIdentifier>{fc0aeefb-59ee-4c72-a1a9-d047211e3bfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Stream\Flows">
+      <UniqueIdentifier>{7c5c8938-5e67-456c-9bcc-d16fc53ab547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Stream\Errors">
+      <UniqueIdentifier>{83a3e313-c677-4676-9c7f-4b07c80cf577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Stream\Errors">
+      <UniqueIdentifier>{1ed334d2-c201-4bfa-b9df-e4d37a631360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Stream\Internal">
+      <UniqueIdentifier>{7251eef4-c6db-428e-8875-5aa9332ab0b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Stream\Internal">
+      <UniqueIdentifier>{a85d697f-089a-449d-abe0-3aaefa22c091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data">
+      <UniqueIdentifier>{dbf36714-6279-4e28-9e31-345432325915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data">
+      <UniqueIdentifier>{d8085fe9-6331-4e0d-9aaf-d57210284f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdParty">
+      <UniqueIdentifier>{38fd1439-00d6-4b41-a413-9cf406f14082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdParty\squish">
+      <UniqueIdentifier>{9d76212e-f475-40b9-96d9-1ae3ca0b5a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ThirdParty\squish">
+      <UniqueIdentifier>{6dfaffb4-a0b9-4851-9056-8687ded23ecc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Code\Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Crash\CrashManager.h">
+      <Filter>Header Files\Crash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Exception\EExceptionCode.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Image\RasterDataFormat.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Image\RasterDataFormatManager.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Image\eDXTCompressionType.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Image\eRasterDataFormat.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Image\ImageFile.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Image\ImageManager.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Object\Manager.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Object\Singleton.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Object\IndexedInstance.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Pool\VectorPool.h">
+      <Filter>Header Files\Pool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Pool\UMapContainer.h">
+      <Filter>Header Files\Pool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\StdVector.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\String.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Timing.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Tokens.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\DataPath.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Debug.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\File.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Input.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Math.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Memory.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Path.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Process.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Registry.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Components\Frustum.h">
+      <Filter>Header Files\Static\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Components\Plane.h">
+      <Filter>Header Files\Static\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\FormatEntry.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\FormatManager.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\EFileType.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Format.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONObject.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONString.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONValue.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\EJSONType.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONArray.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONBoolean.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONContainer.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONManager.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONNull.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONNumber.h">
+      <Filter>Header Files\Format\Network\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Web\URL\URLComponents.h">
+      <Filter>Header Files\Format\Web\URL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Web\URL\URL.h">
+      <Filter>Header Files\Format\Web\URL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version2.h">
+      <Filter>Header Files\Format\Image\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version3.h">
+      <Filter>Header Files\Format\Image\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version4.h">
+      <Filter>Header Files\Format\Image\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat.h">
+      <Filter>Header Files\Format\Image\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header1.h">
+      <Filter>Header Files\Format\Image\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\CUR\CURFormat.h">
+      <Filter>Header Files\Format\Image\CUR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part1.h">
+      <Filter>Header Files\Format\Image\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part2.h">
+      <Filter>Header Files\Format\Image\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat.h">
+      <Filter>Header Files\Format\Image\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_HEADER.h">
+      <Filter>Header Files\Format\Image\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_HEADER_DXT10.h">
+      <Filter>Header Files\Format\Image\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\Image\ICO\ICOFormat.h">
+      <Filter>Header Files\Format\Image\ICO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\STB\stb_truetype.h">
+      <Filter>Header Files\ThirdParty\STB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\STB\stb_image.h">
+      <Filter>Header Files\ThirdParty\STB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Components\OBB.h">
+      <Filter>Header Files\Static\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Configuration\EPlatform.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Configuration\EGraphicsLibrary.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Configuration\EOperatingSystem.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Configuration\EVersionedOperatingSystem.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Configuration\EVersionedPlatform.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Configuration\EVersionedGraphicsLibrary.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\GPU.h">
+      <Filter>Header Files\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\Base\GPUProgram.h">
+      <Filter>Header Files\GPU\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\Base\GPUTexture.h">
+      <Filter>Header Files\GPU\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\Base\GraphicsLibrary.h">
+      <Filter>Header Files\GPU\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\Base\GPUFont.h">
+      <Filter>Header Files\GPU\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\Base\GPUImage.h">
+      <Filter>Header Files\GPU\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\Base\GPUImageBuffers.h">
+      <Filter>Header Files\GPU\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\DirectX\DirectX.h">
+      <Filter>Header Files\GPU\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\OpenGL\GLProgram.h">
+      <Filter>Header Files\GPU\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\OpenGL\GLTexture.h">
+      <Filter>Header Files\GPU\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\OpenGL\OpenGL.h">
+      <Filter>Header Files\GPU\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\OpenGL\GLFont.h">
+      <Filter>Header Files\GPU\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\GPU\OpenGL\GLImage.h">
+      <Filter>Header Files\GPU\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Number.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Thread.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Folder.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Image.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\Stream.h">
+      <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\MemoryStream.h">
+      <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\Flows\MemoryStreamFlow.h">
+      <Filter>Header Files\Stream\Flows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\Flows\DirectoryStreamFlow.h">
+      <Filter>Header Files\Stream\Flows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\Flows\FileStreamFlow.h">
+      <Filter>Header Files\Stream\Flows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\Errors\StreamException.h">
+      <Filter>Header Files\Stream\Errors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\Errors\EStreamError.h">
+      <Filter>Header Files\Stream\Errors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\Internal\EStreamDeviceType.h">
+      <Filter>Header Files\Stream\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\Internal\StreamFlow.h">
+      <Filter>Header Files\Stream\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Stream\FileStream.h">
+      <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Data\ReaderOrWriter.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Data\Writer.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Data\Reader.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Data\EEndian.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\maths.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\rangefit.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\simd.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\simd_float.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\simd_sse.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\simd_ve.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\singlecolourfit.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\squish.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\alpha.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\clusterfit.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\colourblock.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\colourfit.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\colourset.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\ThirdParty\squish-master\config.h">
+      <Filter>Header Files\ThirdParty\squish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\mx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Code\Crash\CrashManager.cpp">
+      <Filter>Source Files\Crash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Image\RasterDataFormat.cpp">
+      <Filter>Source Files\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Image\RasterDataFormatManager.cpp">
+      <Filter>Source Files\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Image\ImageFile.cpp">
+      <Filter>Source Files\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Image\ImageManager.cpp">
+      <Filter>Source Files\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Pool\UMapContainer.cpp">
+      <Filter>Source Files\Pool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Pool\VectorPool.cpp">
+      <Filter>Source Files\Pool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Path.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Process.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Registry.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\StdVector.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\String.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Timing.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Tokens.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\DataPath.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Debug.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\File.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Input.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Math.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Memory.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\Format.cpp">
+      <Filter>Source Files\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\FormatEntry.cpp">
+      <Filter>Source Files\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\FormatManager.cpp">
+      <Filter>Source Files\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\Network\JSON\JSONManager.cpp">
+      <Filter>Source Files\Format\Network\JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\Web\URL\URL.cpp">
+      <Filter>Source Files\Format\Web\URL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\Image\BMP\BMPFormat.cpp">
+      <Filter>Source Files\Format\Image\BMP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\Image\CUR\CURFormat.cpp">
+      <Filter>Source Files\Format\Image\CUR</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\Image\DDS\DDSFormat.cpp">
+      <Filter>Source Files\Format\Image\DDS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\Image\ICO\ICOFormat.cpp">
+      <Filter>Source Files\Format\Image\ICO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\GPU\GPU.cpp">
+      <Filter>Source Files\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\GPU\DirectX\DirectX.cpp">
+      <Filter>Source Files\GPU\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\GPU\OpenGL\GLProgram.cpp">
+      <Filter>Source Files\GPU\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\GPU\OpenGL\GLTexture.cpp">
+      <Filter>Source Files\GPU\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\GPU\OpenGL\OpenGL.cpp">
+      <Filter>Source Files\GPU\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\GPU\OpenGL\GLFont.cpp">
+      <Filter>Source Files\GPU\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\GPU\OpenGL\GLImage.cpp">
+      <Filter>Source Files\GPU\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Number.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Thread.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Folder.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Image.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Stream\Stream.cpp">
+      <Filter>Source Files\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Stream\Flows\FileStreamFlow.cpp">
+      <Filter>Source Files\Stream\Flows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Stream\Flows\MemoryStreamFlow.cpp">
+      <Filter>Source Files\Stream\Flows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Stream\Errors\StreamException.cpp">
+      <Filter>Source Files\Stream\Errors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Stream\Internal\StreamFlow.cpp">
+      <Filter>Source Files\Stream\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Stream\FileStream.cpp">
+      <Filter>Source Files\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Stream\MemoryStream.cpp">
+      <Filter>Source Files\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Data\Reader.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Data\Writer.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Data\ReaderOrWriter.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\colourset.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\maths.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\rangefit.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\singlecolourfit.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\squish.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\alpha.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\clusterfit.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\colourblock.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\ThirdParty\squish-master\colourfit.cpp">
+      <Filter>Source Files\ThirdParty\squish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\mx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
