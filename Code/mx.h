@@ -56,8 +56,6 @@ namespace mx
 
 	class DataPath;
 
-	enum EExceptionCode;
-
 	enum EFileType;
 
 

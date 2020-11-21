@@ -146,7 +146,6 @@
     <ClInclude Include="..\..\Code\Data\Reader.h" />
     <ClInclude Include="..\..\Code\Data\ReaderOrWriter.h" />
     <ClInclude Include="..\..\Code\Data\Writer.h" />
-    <ClInclude Include="..\..\Code\Exception\EExceptionCode.h" />
     <ClInclude Include="..\..\Code\Format\EFileType.h" />
     <ClInclude Include="..\..\Code\Format\Format.h" />
     <ClInclude Include="..\..\Code\Format\FormatEntry.h" />

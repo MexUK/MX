@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Exception">
-      <UniqueIdentifier>{982604f2-e509-4114-9ab0-13d205e8e158}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Exception">
-      <UniqueIdentifier>{ca8638cd-6d32-4c69-b7b2-aec196cbc0b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Format">
       <UniqueIdentifier>{6bde7e44-792e-4b5f-a946-2c631a0503e9}</UniqueIdentifier>
     </Filter>
@@ -33,9 +27,6 @@
     </Filter>
     <Filter Include="Header Files\Object">
       <UniqueIdentifier>{be63a505-b234-4689-930d-d8a4ceb77181}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object">
-      <UniqueIdentifier>{6a837242-5c6d-4f68-8413-97de3601d38b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Pool">
       <UniqueIdentifier>{634ba86b-3787-4047-ac1a-b257eb2c5f6e}</UniqueIdentifier>
@@ -115,9 +106,6 @@
     <Filter Include="Header Files\ThirdParty\STB">
       <UniqueIdentifier>{43a42dc5-d4c2-40c1-921a-bc30aee88ac4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Configuration">
-      <UniqueIdentifier>{6f25b475-6305-432e-9f39-e4b76e0e5c51}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Configuration">
       <UniqueIdentifier>{63025784-768e-4e04-8de1-aa71f3da2523}</UniqueIdentifier>
     </Filter>
@@ -188,9 +176,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Code\Types.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Exception\EExceptionCode.h">
-      <Filter>Header Files\Exception</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Code\Image\RasterDataFormat.h">
       <Filter>Header Files\Image</Filter>

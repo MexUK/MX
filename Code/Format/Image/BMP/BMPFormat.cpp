@@ -1,7 +1,6 @@
 #include "BMPFormat.h"
 #include "Image/ImageManager.h"
 #include "Static/Debug.h"
-#include "Exception/EExceptionCode.h"
 #include "Stream/Stream.h"
 #include "Static/Memory.h"
 #include "Format/Image/BMP/BMPFormat_Header1.h"
@@ -37,7 +36,6 @@ void			BMPFormat::_unserialize(void)
 	case 2:		return unserializeVersion2();
 	case 3:		return unserializeVersion3();
 	case 4:		return unserializeVersion4();
-	default:	throw EXCEPTION_UNSUPPORTED_FORMAT_VERSION;
 	}
 }
 
@@ -49,7 +47,6 @@ void			BMPFormat::_serialize(void)
 	case 2:		return serializeVersion2();
 	case 3:		return serializeVersion3();
 	case 4:		return serializeVersion4();
-	default:	throw EXCEPTION_UNSUPPORTED_FORMAT_VERSION;
 	}
 }
 
