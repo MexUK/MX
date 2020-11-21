@@ -1,4 +1,3 @@
-//#include <Windows.h>
 #include "File.h"
 #include "Static/Path.h"
 #include "Static/String.h"
@@ -6,7 +5,6 @@
 #include "Static/StdVector.h"
 #include "Static/Debug.h"
 #include <fstream>
-//#include "windows.h"
 #include "winnls.h"
 #include "shobjidl.h"
 #include "objbase.h"

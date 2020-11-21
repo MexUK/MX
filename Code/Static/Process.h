@@ -2,7 +2,6 @@
 
 #include "mx.h"
 #include <string>
-//#include <Windows.h>
 
 class mx::Process
 {

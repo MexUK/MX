@@ -1,4 +1,3 @@
-//#include <Windows.h>
 #include "Registry.h"
 #include "Static/String.h"
 

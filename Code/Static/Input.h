@@ -1,6 +1,5 @@
 #pragma once
 
-//#include <Windows.h>
 #include "mx.h"
 #include "Types.h"
 #include <string>

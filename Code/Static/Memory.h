@@ -4,7 +4,6 @@
 #include "Types.h"
 #include <cstdarg>
 #include <vector>
-//#include <Windows.h>
 
 class MemoryRange;
 

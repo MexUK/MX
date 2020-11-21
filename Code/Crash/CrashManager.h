@@ -2,7 +2,6 @@
 
 #include "mx.h"
 #include "Object/Singleton.h"
-//#include <Windows.h>
 
 class mx::CrashManager : public mx::Singleton<mx::CrashManager>
 {

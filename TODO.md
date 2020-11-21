@@ -8,6 +8,4 @@ add DirectX GPU code.
 
 fix all compiler warnings.
 
-remove commented out #include lines.
-
 (This todo list is incomplete).
