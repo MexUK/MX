@@ -10,6 +10,4 @@ fix all compiler warnings.
 
 remove duplicate code. e.g. the GetEncoderClassId function, and EEndian.
 
-rename Folder class to Directory or Dir.
-
 (This todo list is incomplete).
