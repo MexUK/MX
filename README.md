@@ -22,6 +22,10 @@ Dependencies
 
 Dependencies via Code: (Already Included)
 
+GLEW
+
+GLM
+
 squish
 
 STB
