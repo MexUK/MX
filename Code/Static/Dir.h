@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class mx::Folder
+class mx::Dir
 {
 public:
 	static bool							isFolder(std::string& strPath);

@@ -1,6 +1,5 @@
 #include "Image.h"
-#include "Static/Folder.h"
-#include <SOIL2.h>
+#include "Static/Dir.h"
 #include "squish.h"
 #include "Stream/Stream.h"
 #include "Format/Image/DDS/DDSFormat.h"
@@ -40,6 +39,8 @@ void mx::Image::convertToGIF(std::string& strPathIn, std::string& strPathOut)
 
 void mx::Image::convertToDDS(std::string& strPathIn, std::string& strPathOut)
 {
+	// TODO
+	/*
 	int width, height, channels;
 	int forceChannels = 4;// SOIL_LOAD_AUTO;
 	unsigned char *pData = SOIL_load_image(strPathIn.c_str(), &width, &height, &channels, forceChannels);
@@ -47,11 +48,12 @@ void mx::Image::convertToDDS(std::string& strPathIn, std::string& strPathOut)
 		return;
 
 	saveDDSDXT1(strPathOut, width, height, channels, pData);
+	*/
 }
 
 void mx::Image::saveDDSDXT1(std::string& strFilePathOut, int width, int height, int channels, unsigned char* pData)
 {
-	Folder::create(strFilePathOut);
+	Dir::create(strFilePathOut);
 
 	//SOIL_save_image(strPathOut.c_str(), SOIL_SAVE_TYPE_DDS, width, height, channels, pData);
 
@@ -115,7 +117,7 @@ void mx::Image::convertImages(std::string& strDirIn, std::string& strDirOut, std
 {
 	std::string strDirInSlashed = Path::slash(strDirIn);
 	std::string strDirOutSlashed = Path::slash(strDirOut);
-	std::vector<std::string> vecFileNames = Folder::getFileNames(strDirInSlashed, "");
+	std::vector<std::string> vecFileNames = Dir::getFileNames(strDirInSlashed, "");
 	for (std::string& strFileName : vecFileNames)
 	{
 		std::string strImageFilePathIn = strDirInSlashed + strFileName;
@@ -128,7 +130,7 @@ void mx::Image::resizeImages(std::string& strDirIn, std::string& strDirOut, int 
 {
 	std::string strDirInSlashed = Path::slash(strDirIn);
 	std::string strDirOutSlashed = Path::slash(strDirOut);
-	std::vector<std::string> vecFileNames = Folder::getFileNames(strDirInSlashed, "");
+	std::vector<std::string> vecFileNames = Dir::getFileNames(strDirInSlashed, "");
 	for (std::string& strFileName : vecFileNames)
 	{
 		std::string strImageFilePathIn = strDirInSlashed + strFileName;
@@ -141,7 +143,7 @@ void mx::Image::resizeImages(std::string& strDirIn, std::string& strDirOut, floa
 {
 	std::string strDirInSlashed = Path::slash(strDirIn);
 	std::string strDirOutSlashed = Path::slash(strDirOut);
-	std::vector<std::string> vecFileNames = Folder::getFileNames(strDirInSlashed, "");
+	std::vector<std::string> vecFileNames = Dir::getFileNames(strDirInSlashed, "");
 	for (std::string& strFileName : vecFileNames)
 	{
 		std::string strImageFilePathIn = strDirInSlashed + strFileName;
@@ -178,7 +180,7 @@ void mx::Image::saveImage(std::string& strPathOut, Gdiplus::Image *pImageOut)
 	}
 
 	std::string strDir = Path::getDirectory(strPathOut);
-	Folder::create(strDir);
+	Dir::create(strDir);
 
 	pImageOut->Save(String::convertStdStringToStdWString(strPathOut).c_str(), &clsid);
 }

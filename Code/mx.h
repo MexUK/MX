@@ -143,7 +143,7 @@ namespace mx
 	class EncryptionManager;
 	enum EEncryptionAlgorithm;
 	class File;
-	class Folder;
+	class Dir;
 	class ImageManager;
 	class Image;
 	class Input;

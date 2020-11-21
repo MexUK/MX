@@ -1,5 +1,5 @@
 //#include <Windows.h>
-#include "Folder.h"
+#include "Dir.h"
 #include "Static/String.h"
 #include "Static/Path.h"
 #include "Static/File.h"
@@ -16,13 +16,13 @@
 using namespace std;
 using namespace mx;
 
-bool						mx::Folder::isFolder(string& strPath)
+bool						mx::Dir::isFolder(string& strPath)
 {
 	uint32 uiAttributes = GetFileAttributes(String::convertStdStringToStdWString(strPath).c_str());
 	return uiAttributes != INVALID_FILE_ATTRIBUTES && (uiAttributes & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY;
 }
 
-bool						mx::Folder::create(string& strPath)
+bool						mx::Dir::create(string& strPath)
 {
 	if (strPath == "")
 		return false;
@@ -60,7 +60,7 @@ bool						mx::Folder::create(string& strPath)
 }
 
 // empty
-bool						mx::Folder::isEmpty(string& strFolderPath)
+bool						mx::Dir::isEmpty(string& strFolderPath)
 {
 #ifdef WIN32
 	bool bEntryFound = false;
@@ -100,7 +100,7 @@ bool						mx::Folder::isEmpty(string& strFolderPath)
 #endif
 }
 
-void						mx::Folder::empty(string& strFolderPath)
+void						mx::Dir::empty(string& strFolderPath)
 {
 	WIN32_FIND_DATAW FindFileData;
 	HANDLE hFind = FindFirstFile((String::convertStdStringToStdWString(strFolderPath) + L"*").c_str(), &FindFileData);
@@ -129,7 +129,7 @@ void						mx::Folder::empty(string& strFolderPath)
 	RemoveDirectory(String::convertStdStringToStdWString(strFolderPath).c_str());
 }
 
-void						mx::Folder::remove(string& strFolderPath, bool bRecursive)
+void						mx::Dir::remove(string& strFolderPath, bool bRecursive)
 {
 	if (bRecursive)
 	{
@@ -164,12 +164,12 @@ void						mx::Folder::remove(string& strFolderPath, bool bRecursive)
 	RemoveDirectory(String::convertStdStringToStdWString(strFolderPath).c_str());
 }
 
-void						mx::Folder::rename(std::string& strPath, std::string& strNewPath)
+void						mx::Dir::rename(std::string& strPath, std::string& strNewPath)
 {
 	return File::rename(strPath, strNewPath);
 }
 
-void						mx::Folder::copy(string& strSourceFolderPath, string& strDestinationFolderPath, string& strFileExtensionsIncluded, bool bOverwrite)
+void						mx::Dir::copy(string& strSourceFolderPath, string& strDestinationFolderPath, string& strFileExtensionsIncluded, bool bOverwrite)
 {
 	vector<string>
 		vecDirs;
@@ -203,7 +203,7 @@ void						mx::Folder::copy(string& strSourceFolderPath, string& strDestinationFo
 	}
 }
 
-vector<string>				mx::Folder::getFileNames(string& strFolderPath, string strFileExtensions)
+vector<string>				mx::Dir::getFileNames(string& strFolderPath, string strFileExtensions)
 {
 	string strFolderPath2 = Path::slash(strFolderPath);
 	string strExtensionFilterUpper = String::upper(strFileExtensions);
@@ -241,7 +241,7 @@ vector<string>				mx::Folder::getFileNames(string& strFolderPath, string strFile
 	return vecFileNames;
 }
 
-vector<string>				mx::Folder::getFilePaths(string& strFolderPath, bool bDeep, string strFileExtensions)
+vector<string>				mx::Dir::getFilePaths(string& strFolderPath, bool bDeep, string strFileExtensions)
 {
 	string strFolderPathSlashed = Path::slash(strFolderPath);
 	string strFolderPathWildcard = strFolderPathSlashed + "*";
@@ -289,7 +289,7 @@ vector<string>				mx::Folder::getFilePaths(string& strFolderPath, bool bDeep, st
 	return vecFilePathsToReturn;
 }
 
-vector<string>				mx::Folder::getFolderNames(string& strFolderPath)
+vector<string>				mx::Dir::getFolderNames(string& strFolderPath)
 {
 	string strFolderPathWildcard = Path::slash(strFolderPath) + "*";
 
@@ -319,7 +319,7 @@ vector<string>				mx::Folder::getFolderNames(string& strFolderPath)
 	return vecFolderNames;
 }
 
-vector<string>				mx::Folder::getFolderPaths(string& strFolderPath, bool bDeep)
+vector<string>				mx::Dir::getFolderPaths(string& strFolderPath, bool bDeep)
 {
 	string strFolderPathSlashed = Path::slash(strFolderPath);
 	string strFolderPathWildcard = strFolderPathSlashed + "*";
@@ -357,7 +357,7 @@ vector<string>				mx::Folder::getFolderPaths(string& strFolderPath, bool bDeep)
 }
 
 // internal
-bool						mx::Folder::createSingle(string& strPath)
+bool						mx::Dir::createSingle(string& strPath)
 {
 	return CreateDirectory(String::convertStdStringToStdWString(strPath).c_str(), NULL) != 0;
 }

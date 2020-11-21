@@ -432,9 +432,6 @@
     <ClInclude Include="..\..\Code\Static\Number.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\Static\Folder.h">
-      <Filter>Header Files\Static</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Code\Static\Image.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
@@ -524,6 +521,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Code\mx.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Dir.h">
+      <Filter>Header Files\Static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -638,9 +638,6 @@
     <ClCompile Include="..\..\Code\Static\Number.cpp">
       <Filter>Source Files\Static</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\Static\Folder.cpp">
-      <Filter>Source Files\Static</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Code\Static\Image.cpp">
       <Filter>Source Files\Static</Filter>
     </ClCompile>
@@ -703,6 +700,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Code\mx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Dir.cpp">
+      <Filter>Source Files\Static</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

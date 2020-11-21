@@ -2,7 +2,7 @@
 #include "File.h"
 #include "Static/Path.h"
 #include "Static/String.h"
-#include "Static/Folder.h"
+#include "Static/Dir.h"
 #include "Static/StdVector.h"
 #include "Static/Debug.h"
 #include <fstream>
@@ -20,7 +20,7 @@ using namespace mx;
 void		File::_editFile(string& strPath, string& strData, bool bAppend, bool bBinaryMode)
 {
 	string str = Path::getDirectory(strPath);
-	Folder::create(str);
+	Dir::create(str);
 
 	uint32 uiFileOpenFlags = ios::out | (bBinaryMode ? ios::binary : 0) | (bAppend ? ios::app : ios::trunc);
 	ofstream file(strPath.c_str(), uiFileOpenFlags);
@@ -134,7 +134,7 @@ void			File::rename(string& strPath, string& strNewPath)
 
 void			File::renameFoldersWildcard(string& strInputOutputPath, vector<string>& vecPreviousWildcardNames, string& strNewWildcardName, bool bRecursively, bool bCaseSensitive)
 {
-	vector<string> vecFolderPathsOneLevel = Folder::getFolderPaths(strInputOutputPath, bRecursively);
+	vector<string> vecFolderPathsOneLevel = Dir::getFolderPaths(strInputOutputPath, bRecursively);
 	for(string& strFolderPath : vecFolderPathsOneLevel)
 	{
 		string strFolderName = Path::getFolderName(strFolderPath);
@@ -145,7 +145,7 @@ void			File::renameFoldersWildcard(string& strInputOutputPath, vector<string>& v
 			{
 				string strFolderNameRenamed = String::replace(strFolderName, strPreviousWildcardName, strNewWildcardName, bCaseSensitive);
 				string strFolderPathRenamed = Path::replaceFolderName(strFolderPath, strFolderNameRenamed);
-				Folder::rename(strFolderPath, strFolderPathRenamed);
+				Dir::rename(strFolderPath, strFolderPathRenamed);
 				if(bRecursively)
 				{
 					renameFoldersWildcard(strFolderPathRenamed, vecPreviousWildcardNames, strNewWildcardName, true, bCaseSensitive);
@@ -164,7 +164,7 @@ void			File::renameFoldersWildcard(string& strInputOutputPath, vector<string>& v
 
 void			File::renameFilesWildcard(string& strInputOutputPath, vector<string>& vecPreviousWildcardNames, string& strNewWildcardName, bool bRecursively, bool bCaseSensitive)
 {
-	vector<string> vecFolderPathsOneLevel = Folder::getFolderPaths(strInputOutputPath, bRecursively);
+	vector<string> vecFolderPathsOneLevel = Dir::getFolderPaths(strInputOutputPath, bRecursively);
 	for(string& strFolderOrFilePath : vecFolderPathsOneLevel)
 	{
 		bool bIsFolder = Path::hasSlash(strFolderOrFilePath);
@@ -195,7 +195,7 @@ void			File::renameFilesWildcard(string& strInputOutputPath, vector<string>& vec
 
 void			File::renameFilesContentWildcard(string& strInputOutputPath, vector<string>& vecPreviousWildcardNames, string& strNewWildcardName, bool bRecursively, bool bCaseSensitive)
 {
-	vector<string> vecFolderPathsOneLevel = Folder::getFolderPaths(strInputOutputPath, bRecursively);
+	vector<string> vecFolderPathsOneLevel = Dir::getFolderPaths(strInputOutputPath, bRecursively);
 	for(string& strFolderOrFilePath : vecFolderPathsOneLevel)
 	{
 		for(string& strPreviousWildcardName : vecPreviousWildcardNames)
@@ -311,9 +311,9 @@ void						File::copy(string& strSourcePath, string& strDestPath, bool bOverwrite
 	}
 
 	string strDestFolderPath = Path::getDirectory(strDestPath);
-	if (!Folder::isFolder(strDestFolderPath))
+	if (!Dir::isFolder(strDestFolderPath))
 	{
-		Folder::create(strDestFolderPath);
+		Dir::create(strDestFolderPath);
 	}
 
 	const uint32 uiBufferSize = 4096;
@@ -360,9 +360,9 @@ bool						File::move(string& strSourcePath, string& strDestPath)
 	string strMovedFilePath;
 	
 	string strDestFolderPath = Path::getDirectory(strDestPath);
-	if (!Folder::isFolder(strDestFolderPath))
+	if (!Dir::isFolder(strDestFolderPath))
 	{
-		Folder::create(strDestFolderPath);
+		Dir::create(strDestFolderPath);
 	}
 
 	// move existing file in destination to other location
@@ -408,7 +408,7 @@ string						File::findFile(string& strFileName, string& strFolderPath)
 	}
 
 	// search deep folders for file
-	vector<string> vecFolderPaths = Folder::getFolderPaths(strFolderPath, true);
+	vector<string> vecFolderPaths = Dir::getFolderPaths(strFolderPath, true);
 	for (string& strFolderPath2 : vecFolderPaths)
 	{
 		strPotentialFilePath = strFolderPath2 + strFileName;
@@ -452,7 +452,7 @@ string							File::findImageFile(string& strFileNameWithoutExtension, string& st
 	}
 
 	// search deep folders for file
-	vector<string> vecFolderPaths = Folder::getFolderPaths(strFolderPath, true);
+	vector<string> vecFolderPaths = Dir::getFolderPaths(strFolderPath, true);
 	for (string& strFolderPath2 : vecFolderPaths)
 	{
 		for (string& strImageExtension : vecImageExtensions)

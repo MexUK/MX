@@ -1,6 +1,6 @@
 #include "FileStreamFlow.h"
 #include "Stream/Errors/StreamException.h"
-#include "Static/Folder.h"
+#include "Static/Dir.h"
 #include <iostream>
 
 using namespace std;
@@ -46,7 +46,7 @@ void			FileStreamFlow::open()
 	if (m_strFilePath.empty())
 		throw new StreamException(STREAM_ERROR_EMPTY_FILE_PATH);
 
-	Folder::create(m_strFilePath);
+	Dir::create(m_strFilePath);
 
 	bool bBinaryMode = true;
 	bool bAppendMode = false;
