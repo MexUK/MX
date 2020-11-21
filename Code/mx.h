@@ -54,8 +54,6 @@ namespace mx
 	enum EVersionedOperatingSystem;
 	enum EVersionedPlatform;
 
-	class CrashManager;
-
 	class DataPath;
 
 	enum EExceptionCode;
@@ -139,6 +137,7 @@ namespace mx
 	class Timing;
 
 	class CompressionManager;
+	class Crashes;
 	class Debug;
 	class EncryptionManager;
 	enum EEncryptionAlgorithm;

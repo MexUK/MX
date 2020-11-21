@@ -142,7 +142,6 @@
     <ClInclude Include="..\..\Code\Configuration\EVersionedGraphicsLibrary.h" />
     <ClInclude Include="..\..\Code\Configuration\EVersionedOperatingSystem.h" />
     <ClInclude Include="..\..\Code\Configuration\EVersionedPlatform.h" />
-    <ClInclude Include="..\..\Code\Crash\CrashManager.h" />
     <ClInclude Include="..\..\Code\Data\EEndian.h" />
     <ClInclude Include="..\..\Code\Data\Reader.h" />
     <ClInclude Include="..\..\Code\Data\ReaderOrWriter.h" />
@@ -203,6 +202,7 @@
     <ClInclude Include="..\..\Code\Static\Components\Frustum.h" />
     <ClInclude Include="..\..\Code\Static\Components\OBB.h" />
     <ClInclude Include="..\..\Code\Static\Components\Plane.h" />
+    <ClInclude Include="..\..\Code\Static\Crashes.h" />
     <ClInclude Include="..\..\Code\Static\DataPath.h" />
     <ClInclude Include="..\..\Code\Static\Debug.h" />
     <ClInclude Include="..\..\Code\Static\File.h" />
@@ -249,7 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Code\mx.cpp" />
-    <ClCompile Include="..\..\Code\Crash\CrashManager.cpp" />
     <ClCompile Include="..\..\Code\Data\Reader.cpp" />
     <ClCompile Include="..\..\Code\Data\ReaderOrWriter.cpp" />
     <ClCompile Include="..\..\Code\Data\Writer.cpp" />
@@ -275,6 +274,7 @@
     <ClCompile Include="..\..\Code\Image\RasterDataFormatManager.cpp" />
     <ClCompile Include="..\..\Code\Pool\UMapContainer.cpp" />
     <ClCompile Include="..\..\Code\Pool\VectorPool.cpp" />
+    <ClCompile Include="..\..\Code\Static\Crashes.cpp" />
     <ClCompile Include="..\..\Code\Static\DataPath.cpp" />
     <ClCompile Include="..\..\Code\Static\Debug.cpp" />
     <ClCompile Include="..\..\Code\Static\File.cpp" />

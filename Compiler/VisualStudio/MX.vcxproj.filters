@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Crash">
-      <UniqueIdentifier>{9f2a83e0-b6aa-4b73-9033-a903077a2c25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Crash">
-      <UniqueIdentifier>{efea40e1-6f1c-483f-813a-bef4dc5b264b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Exception">
       <UniqueIdentifier>{982604f2-e509-4114-9ab0-13d205e8e158}</UniqueIdentifier>
     </Filter>
@@ -194,9 +188,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Code\Types.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Crash\CrashManager.h">
-      <Filter>Header Files\Crash</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Code\Exception\EExceptionCode.h">
       <Filter>Header Files\Exception</Filter>
@@ -525,11 +516,11 @@
     <ClInclude Include="..\..\Code\Static\Dir.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Crashes.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Code\Crash\CrashManager.cpp">
-      <Filter>Source Files\Crash</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Code\Image\RasterDataFormat.cpp">
       <Filter>Source Files\Image</Filter>
     </ClCompile>
@@ -702,6 +693,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Code\Static\Dir.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Crashes.cpp">
       <Filter>Source Files\Static</Filter>
     </ClCompile>
   </ItemGroup>
