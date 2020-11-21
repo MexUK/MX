@@ -432,9 +432,6 @@
     <ClInclude Include="..\..\Code\Static\Number.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\Static\Thread.h">
-      <Filter>Header Files\Static</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Code\Static\Folder.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
@@ -639,9 +636,6 @@
       <Filter>Source Files\GPU\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Code\Static\Number.cpp">
-      <Filter>Source Files\Static</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Static\Thread.cpp">
       <Filter>Source Files\Static</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Code\Static\Folder.cpp">

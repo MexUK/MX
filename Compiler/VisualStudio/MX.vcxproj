@@ -217,7 +217,6 @@
     <ClInclude Include="..\..\Code\Static\Registry.h" />
     <ClInclude Include="..\..\Code\Static\StdVector.h" />
     <ClInclude Include="..\..\Code\Static\String.h" />
-    <ClInclude Include="..\..\Code\Static\Thread.h" />
     <ClInclude Include="..\..\Code\Static\Timing.h" />
     <ClInclude Include="..\..\Code\Static\Tokens.h" />
     <ClInclude Include="..\..\Code\Stream\Errors\EStreamError.h" />
@@ -290,7 +289,6 @@
     <ClCompile Include="..\..\Code\Static\Registry.cpp" />
     <ClCompile Include="..\..\Code\Static\StdVector.cpp" />
     <ClCompile Include="..\..\Code\Static\String.cpp" />
-    <ClCompile Include="..\..\Code\Static\Thread.cpp" />
     <ClCompile Include="..\..\Code\Static\Timing.cpp" />
     <ClCompile Include="..\..\Code\Static\Tokens.cpp" />
     <ClCompile Include="..\..\Code\Stream\Errors\StreamException.cpp" />

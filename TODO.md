@@ -12,6 +12,4 @@ remove duplicate code. e.g. the GetEncoderClassId function, and EEndian.
 
 rename Folder class to Directory or Dir.
 
-remove the thread classes.
-
 (This todo list is incomplete).
