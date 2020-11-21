@@ -173,7 +173,7 @@ void mx::Image::saveImage(std::string& strPathOut, Gdiplus::Image *pImageOut)
 	std::string strExt = Path::ext(strPathOut);
 	
 	CLSID clsid;
-	if (GetEncoderClsid2(getEncodingTypeFromFileExtension(strExt).c_str(), &clsid) == -1)
+	if (GetEncoderClsid(getEncodingTypeFromFileExtension(strExt).c_str(), &clsid) == -1)
 	{
 		unloadGdiplus();
 		return;
@@ -212,7 +212,7 @@ std::wstring mx::Image::getEncodingTypeFromFileExtension(std::string& strFileExt
 		return L"";
 }
 
-int GetEncoderClsid2(const WCHAR* format, CLSID* pClsid)
+int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
 {
 	UINT  num = 0;		  // number of image encoders
 	UINT  size = 0;		 // size of the image encoder array in bytes

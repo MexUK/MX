@@ -8,6 +8,6 @@ add DirectX GPU code.
 
 fix all compiler warnings.
 
-remove duplicate code. e.g. the GetEncoderClassId function, and EEndian.
+remove commented out #include lines.
 
 (This todo list is incomplete).

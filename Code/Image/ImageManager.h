@@ -9,8 +9,6 @@
 #include "d3d9.h"
 #include <string>
 
-int GetEncoderClsid(const WCHAR* format, CLSID* pClsid);
-
 class mx::RasterDataFormatManager;
 class mx::ImageFile;
 

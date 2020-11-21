@@ -6,7 +6,7 @@
 #include "Static/Path.h"
 #include <string>
 
-int GetEncoderClsid2(const WCHAR* format, CLSID* pClsid);
+int GetEncoderClsid(const WCHAR* format, CLSID* pClsid);
 
 class mx::Image
 {
