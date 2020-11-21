@@ -6,6 +6,10 @@ add DirectX GPU code.
 
 fix all compiler warnings.
 
-Tidy Format folder.
+tidy Format folder.
+
+add code for memory stream.
+
+add code for directory stream.
 
 (This todo list is incomplete).
