@@ -22,6 +22,8 @@ Dependencies
 
 Dependencies via Code: (Already Included)
 
+freetype
+
 GLEW
 
 GLM
