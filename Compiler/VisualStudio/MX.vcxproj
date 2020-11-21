@@ -194,7 +194,6 @@
     <ClInclude Include="..\..\Code\Image\RasterDataFormat.h" />
     <ClInclude Include="..\..\Code\Image\RasterDataFormatManager.h" />
     <ClInclude Include="..\..\Code\Object\IndexedInstance.h" />
-    <ClInclude Include="..\..\Code\Object\Manager.h" />
     <ClInclude Include="..\..\Code\Object\Singleton.h" />
     <ClInclude Include="..\..\Code\Pool\UMapContainer.h" />
     <ClInclude Include="..\..\Code\Pool\VectorPool.h" />

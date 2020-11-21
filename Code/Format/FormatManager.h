@@ -1,11 +1,10 @@
 #pragma once
 
 #include "mx.h"
-#include "Object/Manager.h"
 #include <string>
 
 template<class T>
-class mx::FormatManager : public mx::Manager
+class mx::FormatManager
 {
 public:
 	static T*					unserializeMemory(std::string& strData);

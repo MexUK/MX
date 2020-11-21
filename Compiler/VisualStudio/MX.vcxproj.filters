@@ -195,9 +195,6 @@
     <ClInclude Include="..\..\Code\Image\ImageManager.h">
       <Filter>Header Files\Image</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\Object\Manager.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Code\Object\Singleton.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>

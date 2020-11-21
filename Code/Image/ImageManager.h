@@ -2,7 +2,6 @@
 
 #include "mx.h"
 #include "Types.h"
-#include "Object/Manager.h"
 #include "Object/Singleton.h"
 #include "EDXTCompressionType.h"
 #include "ERasterDataFormat.h"
@@ -12,7 +11,7 @@
 class mx::RasterDataFormatManager;
 class mx::ImageFile;
 
-class mx::ImageManager : public mx::Manager, public mx::Singleton<mx::ImageManager>
+class mx::ImageManager : public mx::Singleton<mx::ImageManager>
 {
 public:
 	ImageManager(void);
