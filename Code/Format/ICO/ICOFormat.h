@@ -2,7 +2,7 @@
 
 #include "mx.h"
 #include "Types.h"
-#include "Format/Image/BMP/BMPFormat.h"
+#include "Format/BMP/BMPFormat.h"
 
 class mx::ICOFormat : public mx::BMPFormat
 {

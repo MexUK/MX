@@ -1,23 +1,25 @@
 #pragma once
 
 #include "mx.h"
-#include "Format/Web/URL/URLComponents.h"
 #include <string>
 #include <vector>
+
+#define DEFAULT_URL_PROTOCOL "http"
+#define DEFAULT_URL_HTTP_PORT 80
 
 class mx::URL
 {
 public:
 	URL(void);
 	
-	void						loadFromURL(std::string& strURL);
+	static URL					load(std::string& strURL);
 	std::vector<std::string>	getHTTPHeaders(void);
 	
 	void						setProtocol(std::string& strProtocol) { m_strProtocol = strProtocol; }
 	std::string					getProtocol(void) { return m_strProtocol; }
 	
-	void						setDomains(std::string& strDomains) { m_strDomains = strDomains; }
-	std::string					getDomains(void) { return m_strDomains; }
+	void						setHost(std::string& strHost) { m_strHost = strHost; }
+	std::string					getHost(void) { return m_strHost; }
 	
 	void						setPort(uint16 usPort) { m_usPort = usPort; }
 	uint16						getPort(void) { return m_usPort; }
@@ -31,11 +33,12 @@ public:
 	void						setFragment(std::string& strFragment) { m_strFragment = strFragment; }
 	std::string					getFragment(void) { return m_strFragment; }
 	
-	static URLComponents		getURLComponents(std::string& strURL);
+private:
+	void						_load(std::string& strURL);
 
 private:
 	std::string					m_strProtocol;
-	std::string					m_strDomains;
+	std::string					m_strHost;
 	uint16						m_usPort;
 	std::string					m_strPath;
 	std::string					m_strQuery;

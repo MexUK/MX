@@ -4,18 +4,12 @@
 #include <vector>
 #include <unordered_map>
 
-class mx::JSONObject;
-class mx::JSONContainer;
-class mx::JSONString;
-
-class mx::JSONManager
+class mx::JSON
 {
 public:
-	JSONManager(void);
+	JSON(void);
 
-	mx::JSONObject*				unserializeString(std::string& strJSON);
-
-	//void						loadObjectIntoLua(JSONObject *pObject);
+	mx::JSONObject*				parse(std::string& strJSON);
 
 private:
 	std::string					parseString(std::string& strJSON);
@@ -23,9 +17,6 @@ private:
 
 	void						setLatestKey(mx::JSONString *pString) { m_pLatestKey = pString; }
 	mx::JSONString*				getLatestKey(void) { return m_pLatestKey; }
-
-	//void						loadArrayIntoLua(JSONArray *pArray);
-	//void						loadValueIntoLua(JSONValue *pValue);
 
 	mx::JSONObject*				m_pEntryContainer;
 	mx::JSONContainer*			m_pLatestContainer;

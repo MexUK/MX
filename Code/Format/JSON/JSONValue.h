@@ -1,7 +1,7 @@
 #pragma once
 
 #include "mx.h"
-#include "Format/Network/JSON/EJSONType.h"
+#include "Format/JSON/EJSONType.h"
 
 class mx::JSONString;
 class mx::JSONValue;

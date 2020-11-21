@@ -1,7 +1,7 @@
 #pragma once
 
 #include "mx.h"
-#include "Format/Network/JSON/JSONValue.h"
+#include "Format/JSON/JSONValue.h"
 
 class mx::JSONBoolean : public mx::JSONValue
 {

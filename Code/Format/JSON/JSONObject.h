@@ -1,9 +1,9 @@
 #pragma once
 
 #include "mx.h"
-#include "Format/Network/JSON/JSONContainer.h"
-#include "Format/Network/JSON/JSONString.h"
-#include "Format/Network/JSON/JSONValue.h"
+#include "Format/JSON/JSONContainer.h"
+#include "Format/JSON/JSONString.h"
+#include "Format/JSON/JSONValue.h"
 
 class mx::JSONObject : public mx::JSONContainer
 {

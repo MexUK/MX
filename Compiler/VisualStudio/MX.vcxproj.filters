@@ -46,60 +46,6 @@
     <Filter Include="Source Files\Static\Components">
       <UniqueIdentifier>{bfec99b6-35e2-48b4-bdc5-18041a1ab52c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Format\Image">
-      <UniqueIdentifier>{8798e917-a509-422c-8377-05b6ed48a33e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Image">
-      <UniqueIdentifier>{a819b56b-76ca-4eaa-b881-1e45f0db95eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Format\Network">
-      <UniqueIdentifier>{671f63cf-456f-4cd5-b06f-f1504d4b8a1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Network">
-      <UniqueIdentifier>{c4953440-5026-43fa-bbfc-e13a8cdd10aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Format\Web">
-      <UniqueIdentifier>{6ba41d7e-de4e-4669-b5b4-4cf089668528}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Web">
-      <UniqueIdentifier>{10a25aa1-f324-47c1-b53a-2d614dd8f8da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Format\Network\JSON">
-      <UniqueIdentifier>{21c9d40e-b80d-40c7-8b85-9b91e3e63ee7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Network\JSON">
-      <UniqueIdentifier>{2d56ffea-7f9b-4c72-bc00-13ef6f556f04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Format\Web\URL">
-      <UniqueIdentifier>{d0fef81e-af4b-483b-8792-b96fd2f0a159}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Web\URL">
-      <UniqueIdentifier>{cb61d509-23e5-4327-b39a-4c3980b6f2e8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Format\Image\BMP">
-      <UniqueIdentifier>{6a7c32e9-6faa-4aed-a95f-41f34c551621}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Format\Image\ICO">
-      <UniqueIdentifier>{db115b62-29f9-4f5d-8f0b-7b79b8484435}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Format\Image\DDS">
-      <UniqueIdentifier>{b78f4638-858a-4edd-91f8-daab2b0b4f47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Format\Image\CUR">
-      <UniqueIdentifier>{5fecbce5-1df0-448d-b874-7fa9199f14e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Image\BMP">
-      <UniqueIdentifier>{9ff31c50-3c8c-4a5d-8b3b-08147c3613e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Image\ICO">
-      <UniqueIdentifier>{83cede2b-d8c3-4f8f-8429-b34854e58e7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Image\DDS">
-      <UniqueIdentifier>{f9f70d5f-b0bb-42f6-ba0d-1c58d029c4d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Format\Image\CUR">
-      <UniqueIdentifier>{e18eea03-b425-458e-a0f1-9f63d2279c54}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\ThirdParty">
       <UniqueIdentifier>{1ebe218a-5e4d-4766-aa62-7e6fce2e51cf}</UniqueIdentifier>
     </Filter>
@@ -171,6 +117,42 @@
     </Filter>
     <Filter Include="Header Files\ThirdParty\squish">
       <UniqueIdentifier>{6dfaffb4-a0b9-4851-9056-8687ded23ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\BMP">
+      <UniqueIdentifier>{aae8291f-52a1-484b-8e07-4fffdb8e4818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\CUR">
+      <UniqueIdentifier>{49c2ec75-94cd-44a1-bdbe-fa88e087a5b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DDS">
+      <UniqueIdentifier>{9aba26c1-3b6c-444a-8c72-21e8029d1215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\ICO">
+      <UniqueIdentifier>{a9963393-d112-4079-8a54-e242498828c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\JSON">
+      <UniqueIdentifier>{9917978d-10d6-4325-a89d-3c898a55bda9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\URL">
+      <UniqueIdentifier>{ad009122-decd-48b0-8a10-d1b87e6784ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\BMP">
+      <UniqueIdentifier>{07a191e8-50c7-46ba-98bb-c18ac257ef0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\CUR">
+      <UniqueIdentifier>{99343605-9cf2-4343-ae16-ded2183d3136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DDS">
+      <UniqueIdentifier>{96e11f2a-302c-4010-b766-1d1e62bb5aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\ICO">
+      <UniqueIdentifier>{ac03738b-2619-400f-9c40-868f5f413415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\JSON">
+      <UniqueIdentifier>{fd4d52f3-c31b-4e4f-b4a3-de0c0e1b75be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\URL">
+      <UniqueIdentifier>{6964ea6c-6783-4931-9bf6-86ab7853b3d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -252,89 +234,8 @@
     <ClInclude Include="..\..\Code\Static\Components\Plane.h">
       <Filter>Header Files\Static\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\Format\FormatEntry.h">
-      <Filter>Header Files\Format</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\FormatManager.h">
-      <Filter>Header Files\Format</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\EFileType.h">
-      <Filter>Header Files\Format</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Code\Format\Format.h">
       <Filter>Header Files\Format</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONObject.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONString.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONValue.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\EJSONType.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONArray.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONBoolean.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONContainer.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONManager.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONNull.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Network\JSON\JSONNumber.h">
-      <Filter>Header Files\Format\Network\JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Web\URL\URLComponents.h">
-      <Filter>Header Files\Format\Web\URL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Web\URL\URL.h">
-      <Filter>Header Files\Format\Web\URL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version2.h">
-      <Filter>Header Files\Format\Image\BMP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version3.h">
-      <Filter>Header Files\Format\Image\BMP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header2_Version4.h">
-      <Filter>Header Files\Format\Image\BMP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat.h">
-      <Filter>Header Files\Format\Image\BMP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\BMP\BMPFormat_Header1.h">
-      <Filter>Header Files\Format\Image\BMP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\CUR\CURFormat.h">
-      <Filter>Header Files\Format\Image\CUR</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part1.h">
-      <Filter>Header Files\Format\Image\DDS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part2.h">
-      <Filter>Header Files\Format\Image\DDS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat.h">
-      <Filter>Header Files\Format\Image\DDS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_HEADER.h">
-      <Filter>Header Files\Format\Image\DDS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\DDS\DDSFormat_Header_DDS_HEADER_DXT10.h">
-      <Filter>Header Files\Format\Image\DDS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\Image\ICO\ICOFormat.h">
-      <Filter>Header Files\Format\Image\ICO</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Code\ThirdParty\STB\stb_truetype.h">
       <Filter>Header Files\ThirdParty\STB</Filter>
@@ -501,6 +402,75 @@
     <ClInclude Include="..\..\Code\Static\Crashes.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version2.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version3.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version4.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header1.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\CUR\CURFormat.h">
+      <Filter>Header Files\Format\CUR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\DDS\DDSFormat_Header_DDS_HEADER_DXT10.h">
+      <Filter>Header Files\Format\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part1.h">
+      <Filter>Header Files\Format\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part2.h">
+      <Filter>Header Files\Format\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\DDS\DDSFormat.h">
+      <Filter>Header Files\Format\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\DDS\DDSFormat_Header_DDS_HEADER.h">
+      <Filter>Header Files\Format\DDS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\ICO\ICOFormat.h">
+      <Filter>Header Files\Format\ICO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSONString.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSONValue.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\EJSONType.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSONArray.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSONBoolean.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSONContainer.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSONNull.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSONNumber.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSONObject.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\URL\URL.h">
+      <Filter>Header Files\Format\URL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\JSON\JSON.h">
+      <Filter>Header Files\Format\JSON</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Code\Image\RasterDataFormat.cpp">
@@ -562,30 +532,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Code\Format\Format.cpp">
       <Filter>Source Files\Format</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Format\FormatEntry.cpp">
-      <Filter>Source Files\Format</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Format\FormatManager.cpp">
-      <Filter>Source Files\Format</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Format\Network\JSON\JSONManager.cpp">
-      <Filter>Source Files\Format\Network\JSON</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Format\Web\URL\URL.cpp">
-      <Filter>Source Files\Format\Web\URL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Format\Image\BMP\BMPFormat.cpp">
-      <Filter>Source Files\Format\Image\BMP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Format\Image\CUR\CURFormat.cpp">
-      <Filter>Source Files\Format\Image\CUR</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Format\Image\DDS\DDSFormat.cpp">
-      <Filter>Source Files\Format\Image\DDS</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Format\Image\ICO\ICOFormat.cpp">
-      <Filter>Source Files\Format\Image\ICO</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Code\GPU\GPU.cpp">
       <Filter>Source Files\GPU</Filter>
@@ -679,6 +625,24 @@
     </ClCompile>
     <ClCompile Include="..\..\Code\Static\Crashes.cpp">
       <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\BMP\BMPFormat.cpp">
+      <Filter>Source Files\Format\BMP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\CUR\CURFormat.cpp">
+      <Filter>Source Files\Format\CUR</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\DDS\DDSFormat.cpp">
+      <Filter>Source Files\Format\DDS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\ICO\ICOFormat.cpp">
+      <Filter>Source Files\Format\ICO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\URL\URL.cpp">
+      <Filter>Source Files\Format\URL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\JSON\JSON.cpp">
+      <Filter>Source Files\Format\JSON</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

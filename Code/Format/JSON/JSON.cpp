@@ -1,23 +1,24 @@
-#include "JSONManager.h"
-#include "Format/Network/JSON/JSONObject.h"
-#include "Format/Network/JSON/JSONArray.h"
-#include "Format/Network/JSON/JSONBoolean.h"
-#include "Format/Network/JSON/JSONNull.h"
-#include "Format/Network/JSON/JSONNumber.h"
+#include "JSON.h"
+#include "Format/JSON/JSONObject.h"
+#include "Format/JSON/JSONArray.h"
+#include "Format/JSON/JSONBoolean.h"
+#include "Format/JSON/JSONNull.h"
+#include "Format/JSON/JSONNumber.h"
 #include "Static/String.h"
 
 using namespace std;
 using namespace mx;
 
-JSONManager::JSONManager(void)
+JSON::JSON(void) :
+	m_pEntryContainer(new JSONObject),
+	m_pLatestContainer(m_pEntryContainer),
+	m_bExpectingKeyOrObjectEnd(true),
+	m_pLatestKey(nullptr),
+	m_uiSeek(0)
 {
-	m_pEntryContainer = new JSONObject;
-	m_pLatestContainer = m_pEntryContainer;
-	m_bExpectingKeyOrObjectEnd = true;
-	m_pLatestKey = nullptr;
 }
 
-JSONObject*	JSONManager::unserializeString(string& strJSONRef)
+JSONObject* JSON::parse(string& strJSONRef)
 {
 	string strJSON = String::trim(strJSONRef).substr(1, strJSONRef.length() - 2);
 
@@ -113,7 +114,7 @@ JSONObject*	JSONManager::unserializeString(string& strJSONRef)
 	return m_pEntryContainer;
 }
 
-string		JSONManager::parseString(string& strJSON)
+string		JSON::parseString(string& strJSON)
 {
 	string strString;
 	unsigned char ucChar;
@@ -162,7 +163,7 @@ string		JSONManager::parseString(string& strJSON)
 	}
 	return strString;
 }
-double			JSONManager::parseNumber(string& strJSON)
+double			JSON::parseNumber(string& strJSON)
 {
 	string strNumber;
 	bool bBreakLoop = false;

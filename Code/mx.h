@@ -56,13 +56,10 @@ namespace mx
 
 	class DataPath;
 
-	enum EFileType;
-
 
 	template<class T> class FormatManager;
 	class Format;
 	class ContainerFormat;
-	class FormatEntry;
 	enum EEndian;
 
 	class BMPFormat;
@@ -70,21 +67,18 @@ namespace mx
 	struct BMPFormat_Header2_Version2;
 	struct BMPFormat_Header2_Version3;
 	struct BMPFormat_Header2_Version4;
-	class BMPManager;
 
 	class CURFormat;
-	class CURManager;
 
 	class DDSFormat;
 	struct DDSFormat_Header_DDS_HEADER;
 	struct DDSFormat_Header_DDS_HEADER_DXT10;
 	struct DDSFormat_Header_DDS_PIXELFORMAT_Part1;
 	struct DDSFormat_Header_DDS_PIXELFORMAT_Part2;
-	class DDSManager;
 
 	class ICOFormat;
-	class ICOManager;
 
+	class JSON;
 	enum EJSONType;
 	class JSONString;
 	class JSONValue;
@@ -94,10 +88,8 @@ namespace mx
 	class JSONContainer;
 	class JSONArray;
 	class JSONObject;
-	class JSONManager;
 
 	class URL;
-	struct URLComponents;
 
 	class ImageFile;
 	class ImageManager;
@@ -106,7 +98,6 @@ namespace mx
 
 	template<class Class> class IndexedInstance;
 	template<class SingletonClass> class Singleton;
-	class Manager;
 
 	template <class T> class VectorPool;
 	template <class Key, class Value> class UMapContainer;

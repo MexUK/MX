@@ -9,9 +9,16 @@ URL::URL(void) :
 {
 }
 
-void						URL::loadFromURL(string& strURLRef)
+URL							URL::load(string& strURL)
 {
-	string strURL = strURLRef;
+	URL url;
+	url._load(strURL);
+	return url;
+}
+
+void						URL::_load(string& strURL2)
+{
+	string strURL = strURL2;
 	string str;
 
 	// protocol
@@ -24,7 +31,7 @@ void						URL::loadFromURL(string& strURLRef)
 	}
 	else
 	{
-		str = "http";
+		str = DEFAULT_URL_PROTOCOL;
 		setProtocol(str);
 	}
 	
@@ -79,20 +86,21 @@ void						URL::loadFromURL(string& strURLRef)
 	}
 	else
 	{
-		setPort(80);
+		// todo - ftp, tls/ssl, etc.
+		setPort(DEFAULT_URL_HTTP_PORT);
 	}
 	
-	// domains
+	// host
 	uiPosition = strURL.find("/");
 	if(uiPosition != string::npos)
 	{
 		str = strURL.substr(0, uiPosition);
-		setDomains(str);
+		setHost(str);
 		strURL = strURL.substr(uiPosition + 1);
 	}
 	else
 	{
-		setDomains(strURL);
+		setHost(strURL);
 		strURL = "";
 	}
 }
@@ -101,79 +109,6 @@ vector<string>	URL::getHTTPHeaders(void)
 {
 	vector<string> vecHeaders;
 	vecHeaders.push_back("GET " + getPath() + " HTTP/1.1");
-	vecHeaders.push_back("Host: " + getDomains());
+	vecHeaders.push_back("Host: " + getHost());
 	return vecHeaders;
-}
-
-URLComponents	URL::getURLComponents(string& strURLRef)
-{
-	string strURL = strURLRef;
-	URLComponents url;
-	size_t uiPos;
-
-	// protocol
-	uiPos = strURL.find_first_of("://");
-	if (uiPos == string::npos)
-	{
-		url.m_strProtocol = "http";
-	}
-	else
-	{
-		url.m_strProtocol = strURL.substr(0, uiPos);
-		strURL = strURL.substr(uiPos + 3);
-	}
-
-	// hash
-	uiPos = strURL.find_last_of("#");
-	if (uiPos == string::npos)
-	{
-		url.m_strHash = "";
-	}
-	else
-	{
-		url.m_strHash = strURL.substr(uiPos + 1);
-		strURL = strURL.substr(0, uiPos);
-	}
-
-	// query
-	uiPos = strURL.find_last_of("?");
-	if (uiPos == string::npos)
-	{
-		url.m_strQuery = "";
-	}
-	else
-	{
-		url.m_strQuery = strURL.substr(uiPos + 1);
-		strURL = strURL.substr(0, uiPos);
-	}
-
-	// path
-	uiPos = strURL.find_first_of("/");
-	if (uiPos == string::npos)
-	{
-		url.m_strPath = "/";
-	}
-	else
-	{
-		url.m_strPath = strURL.substr(uiPos);
-		strURL = strURL.substr(0, uiPos);
-	}
-
-	// port
-	uiPos = strURL.find_first_of(":");
-	if (uiPos == string::npos)
-	{
-		url.m_usPort = 80;
-	}
-	else
-	{
-		string str = strURL.substr(uiPos + 1);
-		url.m_usPort = String::toNumber(str);
-		strURL = strURL.substr(0, uiPos);
-	}
-
-	// domains
-	url.m_strDomains = strURL;
-
-	return url;
 }

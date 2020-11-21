@@ -3,10 +3,10 @@
 #include "Static/Debug.h"
 #include "Stream/Stream.h"
 #include "Static/Memory.h"
-#include "Format/Image/BMP/BMPFormat_Header1.h"
-#include "Format/Image/BMP/BMPFormat_Header2_Version2.h"
-#include "Format/Image/BMP/BMPFormat_Header2_Version3.h"
-#include "Format/Image/BMP/BMPFormat_Header2_Version4.h"
+#include "Format/BMP/BMPFormat_Header1.h"
+#include "Format/BMP/BMPFormat_Header2_Version2.h"
+#include "Format/BMP/BMPFormat_Header2_Version3.h"
+#include "Format/BMP/BMPFormat_Header2_Version4.h"
 
 using namespace std;
 using namespace mx;

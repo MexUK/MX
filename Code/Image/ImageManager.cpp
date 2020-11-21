@@ -6,8 +6,8 @@
 #include "Static/Image.h"
 #include "Static/Path.h"
 #include "Stream/FileStream.h"
-#include "Format/Image/BMP/BMPFormat.h"
-#include "Format/Image/DDS/DDSFormat.h"
+#include "Format/BMP/BMPFormat.h"
+#include "Format/DDS/DDSFormat.h"
 #include "Image/ImageManager.h"
 #include "ThirdParty/STB/stb_image.h"
 

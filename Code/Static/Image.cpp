@@ -2,7 +2,7 @@
 #include "Static/Dir.h"
 #include "squish.h"
 #include "Stream/Stream.h"
-#include "Format/Image/DDS/DDSFormat.h"
+#include "Format/DDS/DDSFormat.h"
 
 using namespace mx;
 using namespace squish;
