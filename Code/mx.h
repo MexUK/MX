@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Types.h"
+
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -10,6 +11,47 @@
 #include "ThirdParty/GLM/gtc/type_ptr.hpp"
 #include "ThirdParty/GLM/gtx/matrix_decompose.hpp"
 
+#ifndef MX_SKIP_THE_NO_DEFINES
+	#define NOGDICAPMASKS
+	//#define NOVIRTUALKEYCODES
+	//#define NOWINMESSAGES
+	//#define NOWINSTYLES
+	#define NOSYSMETRICS
+	#define NOMENUS
+	#define NOICONS
+	#define NOKEYSTATES
+	#define NOSYSCOMMANDS
+	#define NORASTEROPS
+	//#define NOSHOWWINDOW
+	#define OEMRESOURCE
+	#define NOATOM
+	//#define NOCLIPBOARD
+	#define NOCOLOR
+	//#define NOCTLMGR
+	#define NODRAWTEXT
+	//#define NOGDI // Needed by GDI+
+	#define NOKERNEL
+	//#define NOUSER
+	//#define NONLS
+	//#define NOMB
+	#define NOMEMMGR
+	//#define NOMETAFILE // Needed by GDI+
+	#define NOMINMAX
+	//#define NOMSG
+	#define NOOPENFILE
+	#define NOSCROLL
+	#define NOSERVICE
+	#define NOSOUND
+	//#define NOTEXTMETRIC
+	#define NOWH
+	#define NOWINOFFSETS
+	#define NOCOMM
+	#define NOKANJI
+	#define NOHELP
+	#define NOPROFILER
+	#define NODEFERWINDOWPOS
+	#define NOMCX
+#endif
 #include <Windows.h>
 
 #include "ThirdParty/GLEW/GL/glew.h"
