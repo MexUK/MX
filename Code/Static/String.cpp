@@ -277,12 +277,12 @@ string				String::packInt8(int8 iChar)
 
 string				String::packFloat32(float32 fValue, bool bBigEndian)
 {
-	return packUint32((uint32)pack754_32(fValue), bBigEndian);
+	return packUint32((uint32)MX_THIRD_PARTY_pack754_32(fValue), bBigEndian);
 }
 
 string				String::packFloat64(float64 fValue, bool bBigEndian)
 {
-	return packUint64((uint64) pack754_64(fValue), bBigEndian);
+	return packUint64((uint64)MX_THIRD_PARTY_pack754_64(fValue), bBigEndian);
 }
 
 string				String::packVector2D(vec2& vecVector, bool bBigEndian)
@@ -398,7 +398,7 @@ int8			String::unpackInt8(string& strData)
 
 float32				String::unpackFloat32(string& strData, bool bBigEndian)
 {
-	return (float32)unpack754_32(unpackUint32(strData, bBigEndian));
+	return (float32)MX_THIRD_PARTY_unpack754_32(unpackUint32(strData, bBigEndian));
 }
 
 vec2			String::unpackVector2D(string& strData, bool bBigEndian)

@@ -3,7 +3,7 @@
 #include "mx.h"
 #include <string>
 
-#define DEFAULT_CRASH_LOG_FILE_PATH "CrashLog.txt"
+#define MX_DEFAULT_CRASH_LOG_FILE_PATH "CrashLog.txt"
 
 class mx::Crashes
 {

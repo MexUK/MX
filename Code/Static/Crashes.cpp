@@ -20,7 +20,7 @@ void					Crashes::unbind(void)
 // crash
 LONG WINAPI				Crashes::onCrash(_EXCEPTION_POINTERS *pExceptionInfo)
 {
-	string strFilePath = m_strFilePath.empty() ? DEFAULT_CRASH_LOG_FILE_PATH : m_strFilePath;
+	string strFilePath = m_strFilePath.empty() ? MX_DEFAULT_CRASH_LOG_FILE_PATH : m_strFilePath;
 	string strLogText = getLogText(pExceptionInfo);
 	File::appendText(strFilePath, strLogText);
 	return EXCEPTION_CONTINUE_SEARCH;

@@ -7,10 +7,10 @@
 #include <deque>
 #include <atlstr.h>
 
-#define pack754_32(f) (mx::pack754((f), 32, 8))
-#define pack754_64(f) (mx::pack754((f), 64, 11))
-#define unpack754_32(i) (mx::unpack754((i), 32, 8))
-#define unpack754_64(i) (mx::unpack754((i), 64, 11))
+#define MX_THIRD_PARTY_pack754_32(f) (mx::pack754((f), 32, 8))
+#define MX_THIRD_PARTY_pack754_64(f) (mx::pack754((f), 64, 11))
+#define MX_THIRD_PARTY_unpack754_32(i) (mx::unpack754((i), 32, 8))
+#define MX_THIRD_PARTY_unpack754_64(i) (mx::unpack754((i), 64, 11))
 
 class mx::String
 {

@@ -27,16 +27,16 @@ void					Writer::ui16(uint16 uiValue)
 void					Writer::ui16le(uint16 uiValue)
 {
 	uint8 ui[2];
-	ui[0] = uiValue % OCTET_COMBINATION_COUNT;
-	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
+	ui[0] = uiValue % MX_OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / MX_OCTET_COMBINATION_COUNT;
 	m_stream.writeAll(ui, 2);
 }
 
 void					Writer::ui16be(uint16 uiValue)
 {
 	uint8 ui[2];
-	ui[1] = uiValue % OCTET_COMBINATION_COUNT;
-	ui[0] = uiValue / OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue % MX_OCTET_COMBINATION_COUNT;
+	ui[0] = uiValue / MX_OCTET_COMBINATION_COUNT;
 	m_stream.writeAll(ui, 2);
 }
 
@@ -51,18 +51,18 @@ void					Writer::ui24(uint32 uiValue)
 void					Writer::ui24le(uint32 uiValue)
 {
 	uint8 ui[3];
-	ui[0] = uiValue % OCTET_COMBINATION_COUNT;
-	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
-	ui[2] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
+	ui[0] = uiValue % MX_OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / MX_OCTET_COMBINATION_COUNT;
+	ui[2] = uiValue / MX_TWO_OCTETS_COMBINATION_COUNT;
 	m_stream.writeAll(ui, 3);
 }
 
 void					Writer::ui24be(uint32 uiValue)
 {
 	uint8 ui[3];
-	ui[2] = uiValue % OCTET_COMBINATION_COUNT;
-	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
-	ui[0] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
+	ui[2] = uiValue % MX_OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / MX_OCTET_COMBINATION_COUNT;
+	ui[0] = uiValue / MX_TWO_OCTETS_COMBINATION_COUNT;
 	m_stream.writeAll(ui, 3);
 }
 
@@ -77,20 +77,20 @@ void					Writer::ui32(uint32 uiValue)
 void					Writer::ui32le(uint32 uiValue)
 {
 	uint8 ui[4];
-	ui[0] = uiValue % OCTET_COMBINATION_COUNT;
-	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
-	ui[2] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
-	ui[3] = uiValue / THREE_OCTETS_COMBINATION_COUNT;
+	ui[0] = uiValue % MX_OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / MX_OCTET_COMBINATION_COUNT;
+	ui[2] = uiValue / MX_TWO_OCTETS_COMBINATION_COUNT;
+	ui[3] = uiValue / MX_THREE_OCTETS_COMBINATION_COUNT;
 	m_stream.writeAll(ui, 4);
 }
 
 void					Writer::ui32be(uint32 uiValue)
 {
 	uint8 ui[4];
-	ui[3] = uiValue % OCTET_COMBINATION_COUNT;
-	ui[2] = uiValue / OCTET_COMBINATION_COUNT;
-	ui[1] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
-	ui[0] = uiValue / THREE_OCTETS_COMBINATION_COUNT;
+	ui[3] = uiValue % MX_OCTET_COMBINATION_COUNT;
+	ui[2] = uiValue / MX_OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / MX_TWO_OCTETS_COMBINATION_COUNT;
+	ui[0] = uiValue / MX_THREE_OCTETS_COMBINATION_COUNT;
 	m_stream.writeAll(ui, 4);
 }
 
@@ -105,45 +105,46 @@ void					Writer::ui64(uint64 uiValue)
 void					Writer::ui64le(uint64 uiValue)
 {
 	uint8 ui[8];
-	ui[0] = uiValue % OCTET_COMBINATION_COUNT;
-	ui[1] = uiValue / OCTET_COMBINATION_COUNT;
-	ui[2] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
-	ui[3] = uiValue / THREE_OCTETS_COMBINATION_COUNT;
-	ui[4] = uiValue / FOUR_OCTETS_COMBINATION_COUNT;
-	ui[5] = uiValue / FIVE_OCTETS_COMBINATION_COUNT;
-	ui[6] = uiValue / SIX_OCTETS_COMBINATION_COUNT;
-	ui[7] = uiValue / SEVEN_OCTETS_COMBINATION_COUNT;
+	ui[0] = uiValue % MX_OCTET_COMBINATION_COUNT;
+	ui[1] = uiValue / MX_OCTET_COMBINATION_COUNT;
+	ui[2] = uiValue / MX_TWO_OCTETS_COMBINATION_COUNT;
+	ui[3] = uiValue / MX_THREE_OCTETS_COMBINATION_COUNT;
+	ui[4] = uiValue / MX_FOUR_OCTETS_COMBINATION_COUNT;
+	ui[5] = uiValue / MX_FIVE_OCTETS_COMBINATION_COUNT;
+	ui[6] = uiValue / MX_SIX_OCTETS_COMBINATION_COUNT;
+	ui[7] = uiValue / MX_SEVEN_OCTETS_COMBINATION_COUNT;
 	m_stream.writeAll(ui, 8);
 }
 
 void					Writer::ui64be(uint64 uiValue)
 {
 	uint8 ui[8];
-	ui[7] = uiValue % OCTET_COMBINATION_COUNT;
-	ui[6] = uiValue / OCTET_COMBINATION_COUNT;
-	ui[5] = uiValue / TWO_OCTETS_COMBINATION_COUNT;
-	ui[4] = uiValue / THREE_OCTETS_COMBINATION_COUNT;
-	ui[3] = uiValue / FOUR_OCTETS_COMBINATION_COUNT;
-	ui[2] = uiValue / FIVE_OCTETS_COMBINATION_COUNT;
-	ui[1] = uiValue / SIX_OCTETS_COMBINATION_COUNT;
-	ui[0] = uiValue / SEVEN_OCTETS_COMBINATION_COUNT;
+	ui[7] = uiValue % MX_OCTET_COMBINATION_COUNT;
+	ui[6] = uiValue / MX_OCTET_COMBINATION_COUNT;
+	ui[5] = uiValue / MX_TWO_OCTETS_COMBINATION_COUNT;
+	ui[4] = uiValue / MX_THREE_OCTETS_COMBINATION_COUNT;
+	ui[3] = uiValue / MX_FOUR_OCTETS_COMBINATION_COUNT;
+	ui[2] = uiValue / MX_FIVE_OCTETS_COMBINATION_COUNT;
+	ui[1] = uiValue / MX_SIX_OCTETS_COMBINATION_COUNT;
+	ui[0] = uiValue / MX_SEVEN_OCTETS_COMBINATION_COUNT;
 	m_stream.writeAll(ui, 8);
 }
 
 // float
 void					Writer::f32(float32 fValue)
 {
-	ui32le(pack754_32(fValue));
+	ui32le(MX_THIRD_PARTY_pack754_32(fValue));
 }
 
 void					Writer::f64(float64 fValue)
 {
-	ui64le(pack754_64(fValue));
+	ui64le(MX_THIRD_PARTY_pack754_64(fValue));
 }
 
 void					Writer::f80(float80 fValue)
 {
-	//ui80le(pack754_80(fValue));
+	// todo
+	//ui80le(MX_THIRD_PARTY_pack754_80(fValue));
 }
 
 // string

@@ -31,7 +31,7 @@ void						URL::_load(string& strURL2)
 	}
 	else
 	{
-		str = DEFAULT_URL_PROTOCOL;
+		str = MX_DEFAULT_URL_PROTOCOL;
 		setProtocol(str);
 	}
 	
@@ -87,7 +87,7 @@ void						URL::_load(string& strURL2)
 	else
 	{
 		// todo - ftp, tls/ssl, etc.
-		setPort(DEFAULT_URL_HTTP_PORT);
+		setPort(MX_DEFAULT_URL_HTTP_PORT);
 	}
 	
 	// host

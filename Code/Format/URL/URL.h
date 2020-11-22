@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#define DEFAULT_URL_PROTOCOL "http"
-#define DEFAULT_URL_HTTP_PORT 80
+#define MX_DEFAULT_URL_PROTOCOL		"http"
+#define MX_DEFAULT_URL_HTTP_PORT	80
 
 class mx::URL
 {

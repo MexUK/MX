@@ -30,14 +30,14 @@ uint16					Reader::ui16le()
 {
 	uint8 ui[2];
 	m_stream.readAll(ui, 2);
-	return ui[0] + (ui[1] * OCTET_COMBINATION_COUNT);
+	return ui[0] + (ui[1] * MX_OCTET_COMBINATION_COUNT);
 }
 
 uint16					Reader::ui16be()
 {
 	uint8 ui[2];
 	m_stream.readAll(ui, 2);
-	return ui[1] + (ui[0] * OCTET_COMBINATION_COUNT);
+	return ui[1] + (ui[0] * MX_OCTET_COMBINATION_COUNT);
 }
 
 uint32					Reader::ui24()
@@ -52,14 +52,14 @@ uint32					Reader::ui24le()
 {
 	uint8 ui[3];
 	m_stream.readAll(ui, 3);
-	return ui[0] + (ui[1] * OCTET_COMBINATION_COUNT) + (ui[2] * TWO_OCTETS_COMBINATION_COUNT);
+	return ui[0] + (ui[1] * MX_OCTET_COMBINATION_COUNT) + (ui[2] * MX_TWO_OCTETS_COMBINATION_COUNT);
 }
 
 uint32					Reader::ui24be()
 {
 	uint8 ui[3];
 	m_stream.readAll(ui, 3);
-	return ui[2] + (ui[1] * OCTET_COMBINATION_COUNT) + (ui[0] * TWO_OCTETS_COMBINATION_COUNT);
+	return ui[2] + (ui[1] * MX_OCTET_COMBINATION_COUNT) + (ui[0] * MX_TWO_OCTETS_COMBINATION_COUNT);
 }
 
 uint32					Reader::ui32()
@@ -74,14 +74,14 @@ uint32					Reader::ui32le()
 {
 	uint8 ui[4];
 	m_stream.readAll(ui, 4);
-	return ui[0] + (ui[1] * OCTET_COMBINATION_COUNT) + (ui[2] * TWO_OCTETS_COMBINATION_COUNT) + (ui[3] * THREE_OCTETS_COMBINATION_COUNT);
+	return ui[0] + (ui[1] * MX_OCTET_COMBINATION_COUNT) + (ui[2] * MX_TWO_OCTETS_COMBINATION_COUNT) + (ui[3] * MX_THREE_OCTETS_COMBINATION_COUNT);
 }
 
 uint32					Reader::ui32be()
 {
 	uint8 ui[4];
 	m_stream.readAll(ui, 4);
-	return ui[3] + (ui[2] * OCTET_COMBINATION_COUNT) + (ui[1] * TWO_OCTETS_COMBINATION_COUNT) + (ui[0] * THREE_OCTETS_COMBINATION_COUNT);
+	return ui[3] + (ui[2] * MX_OCTET_COMBINATION_COUNT) + (ui[1] * MX_TWO_OCTETS_COMBINATION_COUNT) + (ui[0] * MX_THREE_OCTETS_COMBINATION_COUNT);
 }
 
 uint64					Reader::ui64()
@@ -96,32 +96,33 @@ uint64					Reader::ui64le()
 {
 	uint8 ui[8];
 	m_stream.readAll(ui, 8);
-	return ui[0] + (ui[1] * OCTET_COMBINATION_COUNT) + (ui[2] * TWO_OCTETS_COMBINATION_COUNT) + (ui[3] * THREE_OCTETS_COMBINATION_COUNT)
-		+ (ui[4] * FOUR_OCTETS_COMBINATION_COUNT) + (ui[5] * FIVE_OCTETS_COMBINATION_COUNT) + (ui[6] * SIX_OCTETS_COMBINATION_COUNT) + (ui[7] * SEVEN_OCTETS_COMBINATION_COUNT);
+	return ui[0] + (ui[1] * MX_OCTET_COMBINATION_COUNT) + (ui[2] * MX_TWO_OCTETS_COMBINATION_COUNT) + (ui[3] * MX_THREE_OCTETS_COMBINATION_COUNT)
+		+ (ui[4] * MX_FOUR_OCTETS_COMBINATION_COUNT) + (ui[5] * MX_FIVE_OCTETS_COMBINATION_COUNT) + (ui[6] * MX_SIX_OCTETS_COMBINATION_COUNT) + (ui[7] * MX_SEVEN_OCTETS_COMBINATION_COUNT);
 }
 
 uint64					Reader::ui64be()
 {
 	uint8 ui[8];
 	m_stream.readAll(ui, 8);
-	return ui[7] + (ui[6] * OCTET_COMBINATION_COUNT) + (ui[5] * TWO_OCTETS_COMBINATION_COUNT) + (ui[4] * THREE_OCTETS_COMBINATION_COUNT)
-		+ (ui[3] * FOUR_OCTETS_COMBINATION_COUNT) + (ui[2] * FIVE_OCTETS_COMBINATION_COUNT) + (ui[1] * SIX_OCTETS_COMBINATION_COUNT) + (ui[0] * SEVEN_OCTETS_COMBINATION_COUNT);
+	return ui[7] + (ui[6] * MX_OCTET_COMBINATION_COUNT) + (ui[5] * MX_TWO_OCTETS_COMBINATION_COUNT) + (ui[4] * MX_THREE_OCTETS_COMBINATION_COUNT)
+		+ (ui[3] * MX_FOUR_OCTETS_COMBINATION_COUNT) + (ui[2] * MX_FIVE_OCTETS_COMBINATION_COUNT) + (ui[1] * MX_SIX_OCTETS_COMBINATION_COUNT) + (ui[0] * MX_SEVEN_OCTETS_COMBINATION_COUNT);
 }
 
 // float
 float32					Reader::f32()
 {
-	return unpack754_32(ui32le());
+	return MX_THIRD_PARTY_unpack754_32(ui32le());
 }
 
 float64					Reader::f64()
 {
-	return unpack754_64(ui64le());
+	return MX_THIRD_PARTY_unpack754_64(ui64le());
 }
 
 float80					Reader::f80()
 {
-	//unpack754_80(ui80le());
+	// todo
+	//MX_THIRD_PARTY_unpack754_80(ui80le());
 	return 0.0f;
 }
 

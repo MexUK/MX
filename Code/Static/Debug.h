@@ -11,27 +11,27 @@
 * Add log type DEBUG_LAUNCHER
 */
 
-#define DEBUG_LAUNCH		1
-#define DEBUG_MAIN			2
-#define DEBUG_NET_SCRIPT	4
-#define DEBUG_INPUT			8
-#define DEBUG_RENDER		16
-#define DEBUG_HOOK			32
-#define DEBUG_NETWORK		64
-#define DEBUG_GAME_LOG		128
-#define DEBUG_CLOSE			256
+#define MX_DEBUG_LAUNCH			1
+#define MX_DEBUG_MAIN			2
+#define MX_DEBUG_NET_SCRIPT		4
+#define MX_DEBUG_INPUT			8
+#define MX_DEBUG_RENDER			16
+#define MX_DEBUG_HOOK			32
+#define MX_DEBUG_NETWORK		64
+#define MX_DEBUG_GAME_LOG		128
+#define MX_DEBUG_CLOSE			256
 
-#define DEBUG_NONE			0
-#define DEBUG_MIN			DEBUG_MAIN
-#define DEBUG_ALL			DEBUG_LAUNCH | DEBUG_MAIN | DEBUG_NET_SCRIPT | DEBUG_INPUT | DEBUG_RENDER | DEBUG_HOOK | DEBUG_NETWORK | DEBUG_GAME_LOG | DEBUG_CLOSE
+#define MX_DEBUG_NONE			0
+#define MX_DEBUG_MIN			MX_DEBUG_MAIN
+#define MX_DEBUG_ALL			MX_DEBUG_LAUNCH | MX_DEBUG_MAIN | MX_DEBUG_NET_SCRIPT | MX_DEBUG_INPUT | MX_DEBUG_RENDER | MX_DEBUG_HOOK | MX_DEBUG_NETWORK | MX_DEBUG_GAME_LOG | MX_DEBUG_CLOSE
 
-#define DEBUG_BUFFER_SIZE	65536
+#define MX_DEBUG_BUFFER_SIZE	65536
 
-#define DEBUG_LOG_CALLS		va_list args;\
-							char szBuffer[DEBUG_BUFFER_SIZE];\
-							va_start(args, pFormat);\
-							vsprintf_s(szBuffer, sizeof(szBuffer), pFormat, args);\
-							va_end(args);
+#define MX_DEBUG_LOG_CALLS		va_list args;\
+								char szBuffer[MX_DEBUG_BUFFER_SIZE];\
+								va_start(args, pFormat);\
+								vsprintf_s(szBuffer, sizeof(szBuffer), pFormat, args);\
+								va_end(args);
 
 class mx::Debug
 {
