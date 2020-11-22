@@ -471,6 +471,12 @@
     <ClInclude Include="..\..\Code\Format\JSON\JSON.h">
       <Filter>Header Files\Format\JSON</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Components\ImageData.h">
+      <Filter>Header Files\Static\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Components\EImageFormat.h">
+      <Filter>Header Files\Static\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Code\Image\RasterDataFormat.cpp">
@@ -643,6 +649,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Code\Format\JSON\JSON.cpp">
       <Filter>Source Files\Format\JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Components\ImageData.cpp">
+      <Filter>Source Files\Static\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

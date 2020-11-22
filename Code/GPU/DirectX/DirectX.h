@@ -11,7 +11,7 @@ public:
 	GPUProgram*					addProgram(std::string& strVertexShaderFilePath, std::string& strFragmentShaderFilePath);
 	GPUImageBuffers*			addImageBuffers(GPUProgram *pProgram);
 	GPUImage*					addImage(GPUProgram *pProgram, std::string& strImageFilePath, GPUImageBuffers *pGpuImageBuffers = nullptr);
-	uint32						addTexture(GPUProgram *pProgram, std::string& strTextureRasterData, ERasterDataFormat uiFormat, glm::uvec2& vecTextureImageSize, bool bResetActiveTexture = false);
+	uint32						addTexture(GPUProgram *pProgram, uint8* pImageData, EImageFormat uiFormat, glm::uvec2& vecTextureImageSize, bool bResetActiveTexture = false);
 
 	void						resizeScene(glm::uvec2& vecRenderSize);
 	void						reset(void);

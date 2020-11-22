@@ -9,7 +9,6 @@
 #include "Format/BMP/BMPFormat.h"
 #include "Format/DDS/DDSFormat.h"
 #include "Image/ImageManager.h"
-#include "ThirdParty/STB/stb_image.h"
 
 using namespace std;
 using namespace glm;
@@ -35,94 +34,7 @@ void					ImageManager::uninit(void)
 
 ImageFile*				ImageManager::loadImageFromFile(string& strFilePath)
 {
-	string str = Path::ext(strFilePath);
-	string strFileExtensionUpper = String::upper(str);
-	ImageFile *pImageFile = new ImageFile;
-
-	if (strFileExtensionUpper == "BMP")
-	{
-		BMPFormat* pBMPFormat = Format::unserializeFileHeap<BMPFormat>(strFilePath);
-		pImageFile->m_uiImageWidth = pBMPFormat->getWidth();
-		pImageFile->m_uiImageHeight = pBMPFormat->getHeight();
-		pImageFile->m_uiBPP = pBMPFormat->getBPP();
-		pImageFile->m_uiRasterFormat = pBMPFormat->getRasterDataFormat();
-		pImageFile->m_strRasterData = pBMPFormat->getRasterData();
-		delete pBMPFormat;
-	}
-	else if (strFileExtensionUpper == "PNG"
-		  || strFileExtensionUpper == "GIF"
-		  || strFileExtensionUpper == "JPG"
-		  || strFileExtensionUpper == "JPEG"
-		  || strFileExtensionUpper == "TGA"
-		  || strFileExtensionUpper == "PGM"
-		  || strFileExtensionUpper == "PPM"
-		  || strFileExtensionUpper == "HDR")
-	{
-		int w, h, n;
-		uint8 *pBGRAData = stbi_load(strFilePath.c_str(), &w, &h, &n, 4);
-		if (pBGRAData == NULL)
-		{
-			stbi_image_free(pBGRAData);
-			delete pImageFile;
-			return nullptr;
-		}
-		pImageFile->m_uiImageWidth = w;
-		pImageFile->m_uiImageHeight = h;
-		pImageFile->m_uiBPP = 32;
-		switch (n)
-		{
-		case 3:
-			//pImageFile->m_uiRasterFormat = RASTERDATAFORMAT_RGB24;
-			pImageFile->m_uiRasterFormat = RASTERDATAFORMAT_RGBA32;
-			break;
-		case 4:
-		default:
-			pImageFile->m_uiRasterFormat = RASTERDATAFORMAT_RGBA32;
-			break;
-		}
-		pImageFile->m_strRasterData = string((char*)pBGRAData, w * h * 4); // * 4
-		stbi_image_free(pBGRAData);
-	}
-	else if (strFileExtensionUpper == "DDS")
-	{
-		Stream stream(strFilePath);
-		DDSFormat ddsFormat(stream);
-		ddsFormat.unserialize();
-
-		pImageFile->m_uiImageWidth = ddsFormat.m_uiWidth;
-		pImageFile->m_uiImageHeight = ddsFormat.m_uiHeight;
-		pImageFile->m_uiBPP = 4;
-		pImageFile->m_uiRasterFormat = RASTERDATAFORMAT_DXT1;
-		pImageFile->m_strRasterData = ddsFormat.m_strRasterData;
-
-		/*
-		int width, height, channels;
-		int forceChannels = SOIL_LOAD_AUTO;
-		unsigned char *pRasterData = SOIL_load_image(strFilePath.c_str(), &width, &height, &channels, forceChannels);
-		if (!pRasterData)
-			return nullptr;
-		*/
-
-		//int reuseTextureId = 0;
-		//SOIL_create_OGL_texture(pRasterData, width, height, channels, reuseTextureId, 0);
-
-		/*
-		pImageFile->m_uiImageWidth = width;
-		pImageFile->m_uiImageHeight = height;
-		pImageFile->m_uiBPP = 4;// channels * 8;
-		pImageFile->m_uiRasterFormat = RASTERDATAFORMAT_DXT1;
-		pImageFile->m_strRasterData = string((char*)pRasterData, (width * height) / 2);
-		*/
-
-		/*
-		pImageFile->m_uiImageWidth = width;
-		pImageFile->m_uiImageHeight = height;
-		pImageFile->m_uiBPP = 24;
-		pImageFile->m_uiRasterFormat = RASTERDATAFORMAT_RGB24;
-		pImageFile->m_strRasterData = string((char*)pRasterData, width * height * 3);
-		*/
-	}
-	return pImageFile;
+	return nullptr;
 }
 
 string					ImageManager::convertBGRA32ToRasterDataFormat(string& strRasterData, ERasterDataFormat ERasterDataFormatValue, string* strPaletteDataOut, uint32 uiWidth, uint32 uiHeight)

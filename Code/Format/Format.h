@@ -28,7 +28,7 @@ public:
 	bool			serialize();
 
 	template <class T>
-	static T		unserializeFile(std::string& strFilePath, T& format)
+	static void		unserializeFile(std::string& strFilePath, T& format)
 	{
 		Stream stream(strFilePath);
 		format.unserialize();

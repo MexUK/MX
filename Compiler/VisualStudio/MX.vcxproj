@@ -88,7 +88,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>STB_IMAGE_IMPLEMENTATION;NOMINMAX;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Lib>
       <AdditionalDependencies>freetype.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -110,7 +112,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>STB_IMAGE_IMPLEMENTATION;NOMINMAX;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -193,7 +197,9 @@
     <ClInclude Include="..\..\Code\Object\Singleton.h" />
     <ClInclude Include="..\..\Code\Pool\UMapContainer.h" />
     <ClInclude Include="..\..\Code\Pool\VectorPool.h" />
+    <ClInclude Include="..\..\Code\Static\Components\EImageFormat.h" />
     <ClInclude Include="..\..\Code\Static\Components\Frustum.h" />
+    <ClInclude Include="..\..\Code\Static\Components\ImageData.h" />
     <ClInclude Include="..\..\Code\Static\Components\OBB.h" />
     <ClInclude Include="..\..\Code\Static\Components\Plane.h" />
     <ClInclude Include="..\..\Code\Static\Crashes.h" />
@@ -266,6 +272,7 @@
     <ClCompile Include="..\..\Code\Image\RasterDataFormatManager.cpp" />
     <ClCompile Include="..\..\Code\Pool\UMapContainer.cpp" />
     <ClCompile Include="..\..\Code\Pool\VectorPool.cpp" />
+    <ClCompile Include="..\..\Code\Static\Components\ImageData.cpp" />
     <ClCompile Include="..\..\Code\Static\Crashes.cpp" />
     <ClCompile Include="..\..\Code\Static\DataPath.cpp" />
     <ClCompile Include="..\..\Code\Static\Debug.cpp" />

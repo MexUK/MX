@@ -4,6 +4,7 @@
 #include "Types.h"
 #include "Static/String.h"
 #include "Static/Path.h"
+#include "Static/Components/ImageData.h"
 #include <string>
 
 int GetEncoderClsid(const WCHAR* format, CLSID* pClsid);
@@ -25,6 +26,8 @@ public:
 	static void resizeImages(std::string& strDirIn, std::string& strDirOut, int iWidth, int iHeight);
 	static void resizeImages(std::string& strDirIn, std::string& strDirOut, float fScale);
 
+	static void load(std::string& strPathIn, ImageData& imageData);
+
 private:
 	static void convertImageFormat(std::string& strPathIn, std::string& strPathOut, std::wstring wstrEncodingTypeOut);
 
@@ -33,10 +36,10 @@ private:
 	static void loadGdiplus();
 	static void unloadGdiplus();
 	
-	static Gdiplus::Image* loadImage(std::string& strPathIn);
-	static void saveImage(std::string& strPathOut, Gdiplus::Image* pImageOut);
+	static Gdiplus::Image* loadImageGDIPlus(std::string& strPathIn);
+	static void saveImageGDIPlus(std::string& strPathOut, Gdiplus::Image* pImageOut);
 
-	static void saveDDSDXT1(std::string& strFilePathOut, int width, int height, int channels, unsigned char *pData);
+	static void saveDDSDXT1(std::string& strFilePathOut, mx::ImageData& image);
 
 private:
 	static Gdiplus::GdiplusStartupInput m_startupInput;

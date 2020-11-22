@@ -52,7 +52,7 @@ public:
 	void							setBPP(uint16 usBPP) { m_usBPP = usBPP; }
 	uint16							getBPP(void) { return m_usBPP; }
 
-	ERasterDataFormat				getRasterDataFormat(void);
+	EImageFormat					getRasterDataFormat(void);
 
 private:
 	void							unserializeVersion1(void);

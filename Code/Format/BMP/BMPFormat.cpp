@@ -1,6 +1,7 @@
 #include "BMPFormat.h"
 #include "Image/ImageManager.h"
 #include "Static/Debug.h"
+#include "Static/Image.h"
 #include "Stream/Stream.h"
 #include "Static/Memory.h"
 #include "Format/BMP/BMPFormat_Header1.h"
@@ -10,7 +11,6 @@
 
 using namespace std;
 using namespace mx;
-
 
 BMPFormat::BMPFormat(mx::Stream& stream) :
 	Format(stream, true, LITTLE_ENDIAN),
@@ -90,19 +90,19 @@ void			BMPFormat::swapRows(void)
 }
 
 // raster data format
-ERasterDataFormat	BMPFormat::getRasterDataFormat(void)
+EImageFormat	BMPFormat::getRasterDataFormat(void)
 {
 	if (m_usBPP == 24)
 	{
-		return RASTERDATAFORMAT_BGR24;
+		return UNCOMPRESSED_RGB;
 	}
 	else if (m_usBPP == 32)
 	{
-		return RASTERDATAFORMAT_BGRA32;
+		return UNCOMPRESSED_RGBA;
 	}
 	else
 	{
-		return RASTERDATAFORMAT_UNKNOWN;
+		return UNKNOWN_IMAGE_FORMAT;
 	}
 }
 

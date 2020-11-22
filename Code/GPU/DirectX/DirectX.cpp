@@ -24,7 +24,7 @@ GPUProgram*						DirectX::addProgram(string& strVertexShaderFilePath, string& st
 	return nullptr;
 }
 
-uint32							DirectX::addTexture(GPUProgram *pProgram, string& strTextureRasterData, ERasterDataFormat uiFormat, uvec2& vecTextureImageSize, bool bResetActiveTexture)
+uint32							DirectX::addTexture(GPUProgram *pProgram, uint8* pImageData, EImageFormat uiFormat, uvec2& vecTextureImageSize, bool bResetActiveTexture)
 {
 	return -1;
 }

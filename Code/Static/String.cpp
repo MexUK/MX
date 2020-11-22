@@ -715,6 +715,13 @@ string				String::removeComments(string& strText, vector<string>& vecCommentChar
 	return strTextWithoutComment;
 }
 
+char*				String::copy(string& str)
+{
+	char *pData = (char*)malloc(str.length());
+	memcpy(pData, str.c_str(), str.length());
+	return pData;
+}
+
 bool				String::isIn(string& strText, string& strFind, bool bCaseSensitive, uint32 uiStartIndex)
 {
 	if(bCaseSensitive)

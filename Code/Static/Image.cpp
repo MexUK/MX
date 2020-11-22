@@ -2,6 +2,8 @@
 #include "Static/Dir.h"
 #include "squish.h"
 #include "Stream/Stream.h"
+#include "Static/String.h"
+#include "Format/BMP/BMPFormat.h"
 #include "Format/DDS/DDSFormat.h"
 
 using namespace mx;
@@ -39,34 +41,30 @@ void mx::Image::convertToGIF(std::string& strPathIn, std::string& strPathOut)
 
 void mx::Image::convertToDDS(std::string& strPathIn, std::string& strPathOut)
 {
-	// TODO
-	/*
-	int width, height, channels;
-	int forceChannels = 4;// SOIL_LOAD_AUTO;
-	unsigned char *pData = SOIL_load_image(strPathIn.c_str(), &width, &height, &channels, forceChannels);
-	if (!pData)
+	mx::ImageData image;
+	load(strPathIn, image);
+	if (!image.m_pData)
 		return;
 
-	saveDDSDXT1(strPathOut, width, height, channels, pData);
-	*/
+	saveDDSDXT1(strPathOut, image);
 }
 
-void mx::Image::saveDDSDXT1(std::string& strFilePathOut, int width, int height, int channels, unsigned char* pData)
+void mx::Image::saveDDSDXT1(std::string& strFilePathOut, mx::ImageData& image)
 {
 	Dir::create(strFilePathOut);
 
-	//SOIL_save_image(strPathOut.c_str(), SOIL_SAVE_TYPE_DDS, width, height, channels, pData);
-
-	unsigned char* pDataOut = new unsigned char[(width * height) / 2];
-	squish::CompressImage(pData, width, height, pDataOut, kDxt1);
+	unsigned char* pDataOut = new unsigned char[image.getDataSize()];
+	squish::CompressImage(image.m_pData, image.m_vecSize.x, image.m_vecSize.y, pDataOut, kDxt1);
 
 	Stream s(strFilePathOut);
 	DDSFormat format(s);
-	format.m_uiWidth = width;
-	format.m_uiHeight = height;
+	format.m_uiWidth = image.m_vecSize.x;
+	format.m_uiHeight = image.m_vecSize.y;
 	format.m_uiBPP = 4;
-	format.m_strRasterData = std::string((char*)pDataOut, (width * height) / 2);
+	format.m_strRasterData = std::string((char*)pDataOut, (image.m_vecSize.x * image.m_vecSize.y) / 2);
 	format.serialize();
+
+	delete[] pDataOut;
 }
 
 // size
@@ -75,13 +73,13 @@ void mx::Image::resize(std::string& strPathIn, std::string& strPathOut, int iWid
 	loadGdiplus();
 
 	{
-		Gdiplus::Image* pImage = loadImage(strPathIn);
+		Gdiplus::Image* pImage = loadImageGDIPlus(strPathIn);
 
 		Gdiplus::Image* pNewImage = new Gdiplus::Bitmap(iWidth, iHeight);
 		Gdiplus::Graphics g(pNewImage);
 		g.DrawImage(pImage, 0, 0, iWidth, iHeight);
 
-		saveImage(strPathOut, pNewImage);
+		saveImageGDIPlus(strPathOut, pNewImage);
 
 		delete pImage;
 		delete pNewImage;
@@ -95,7 +93,7 @@ void mx::Image::resize(std::string& strPathIn, std::string& strPathOut, float fS
 	loadGdiplus();
 
 	{
-		Gdiplus::Image* pImage = loadImage(strPathIn);
+		Gdiplus::Image* pImage = loadImageGDIPlus(strPathIn);
 
 		int iNewWidth = (int)(fScale * ((float)pImage->GetWidth()));
 		int iNewHeight = (int)(fScale * ((float)pImage->GetHeight()));
@@ -104,7 +102,7 @@ void mx::Image::resize(std::string& strPathIn, std::string& strPathOut, float fS
 		Gdiplus::Graphics g(pNewImage);
 		g.DrawImage(pImage, 0, 0, iNewWidth, iNewHeight);
 
-		saveImage(strPathOut, pNewImage);
+		saveImageGDIPlus(strPathOut, pNewImage);
 
 		delete pNewImage;
 	}
@@ -152,6 +150,66 @@ void mx::Image::resizeImages(std::string& strDirIn, std::string& strDirOut, floa
 	}
 }
 
+// load image
+void mx::Image::load(std::string& strPathIn, ImageData& imageData)
+{
+	std::string strExt = Path::ext(strPathIn);
+	std::string strExtUpper = String::upper(strExt);
+	
+	if (strExtUpper == "BMP")
+	{
+		Stream stream;
+		BMPFormat bmp(stream);
+		Format::unserializeFile<BMPFormat>(strPathIn, bmp);
+		
+		imageData.m_uiFormat = bmp.getRasterDataFormat();
+		imageData.m_vecSize.x = bmp.getWidth();
+		imageData.m_vecSize.y = bmp.getHeight();
+		imageData.m_pData = (uint8*)String::copy(bmp.getRasterData());
+		
+		return;
+	}
+	else if (strExtUpper == "DDS")
+	{
+		Stream stream;
+		DDSFormat dds(stream);
+		Format::unserializeFile<DDSFormat>(strPathIn, dds);
+		
+		imageData.m_uiFormat = COMPRESSED_RGB_DXT1; // todo
+		imageData.m_vecSize.x = dds.m_uiWidth;
+		imageData.m_vecSize.y = dds.m_uiHeight;
+		imageData.m_pData = (uint8*)String::copy(dds.m_strRasterData);
+		
+		return;
+	}
+	else if(strExtUpper == "PNG"
+		|| strExtUpper == "GIF"
+		|| strExtUpper == "JPG"
+		|| strExtUpper == "JPEG"
+		|| strExtUpper == "TGA"
+		|| strExtUpper == "PGM"
+		|| strExtUpper == "PPM"
+		|| strExtUpper == "HDR")
+	{
+		int w, h, n;
+		uint8 *pData = stbi_load(strPathIn.c_str(), &w, &h, &n, 0);
+		if (pData)
+		{
+			imageData.m_uiFormat = n == 3 ? UNCOMPRESSED_RGB : UNCOMPRESSED_RGBA;
+			imageData.m_vecSize.x = w;
+			imageData.m_vecSize.y = h;
+			imageData.m_pData = pData;
+			
+			return;
+		}
+	}
+	
+	imageData.m_uiFormat = UNKNOWN_IMAGE_FORMAT;
+	imageData.m_vecSize.x = 0;
+	imageData.m_vecSize.y = 0;
+	imageData.m_pData = nullptr;
+}
+
 // internal
 void mx::Image::loadGdiplus()
 {
@@ -163,12 +221,12 @@ void mx::Image::unloadGdiplus()
 	Gdiplus::GdiplusShutdown(m_uiToken);
 }
 
-Gdiplus::Image* mx::Image::loadImage(std::string& strPathIn)
+Gdiplus::Image* mx::Image::loadImageGDIPlus(std::string& strPathIn)
 {
 	return new Gdiplus::Image(String::convertStdStringToStdWString(strPathIn).c_str(), FALSE);
 }
 
-void mx::Image::saveImage(std::string& strPathOut, Gdiplus::Image *pImageOut)
+void mx::Image::saveImageGDIPlus(std::string& strPathOut, Gdiplus::Image *pImageOut)
 {
 	std::string strExt = Path::ext(strPathOut);
 	
@@ -189,8 +247,8 @@ void mx::Image::convertImageFormat(std::string& strPathIn, std::string& strPathO
 {
 	loadGdiplus();
 
-	Gdiplus::Image *pImage = loadImage(strPathIn);
-	saveImage(strPathOut, pImage);
+	Gdiplus::Image *pImage = loadImageGDIPlus(strPathIn);
+	saveImageGDIPlus(strPathOut, pImage);
 
 	unloadGdiplus();
 }

@@ -437,7 +437,7 @@ string							File::findImageFile(string& strFileNameWithoutExtension, string& st
 		"pgm",
 		"ppm",
 		"hdr"
-	}; // must match list in ImageManager::loadImageFromFile
+	}; // must match list in ImageManager::loadImageFromFile - todo
 
 	// check if file exists in root folder
 	for (string& strImageExtension : vecImageExtensions)

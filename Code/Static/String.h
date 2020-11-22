@@ -124,6 +124,9 @@ public:
 	static std::string						escapeMenuText(std::string& strText);
 	static std::string						removeComments(std::string& strText, std::vector<std::string>& vecCommentCharacters);
 
+	// allocation/copy
+	static char*							copy(std::string& str);
+
 	// string/wstring conversion
 	static std::wstring						convertStdStringToStdWString(std::string& str)
 	{

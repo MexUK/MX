@@ -15,6 +15,8 @@
 #include "ThirdParty/GLEW/GL/glew.h"
 #include "ThirdParty/GLEW/GL/wglew.h"
 
+#include "ThirdParty/STB/stb_image.h"
+
 #define min(x,y) ((x) < (y) ? (x) : (y)) // for GDI+
 #define max(x,y) ((x) > (y) ? (x) : (y)) // for GDI+
 #include <Gdiplus.h>
@@ -150,7 +152,9 @@ namespace mx
 	struct Plane;
 	struct Frustum;
 	struct OBB;
-
+	class ImageData;
+	enum EImageFormat;
+	
 	uint64_t pack754(float80 f, unsigned bits, unsigned expbits);
 	float80 unpack754(uint64_t i, unsigned bits, unsigned expbits);
 };

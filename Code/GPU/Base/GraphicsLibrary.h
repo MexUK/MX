@@ -4,6 +4,7 @@
 #include <vector>
 #include "mx.h"
 #include "Image/ERasterDataFormat.h"
+#include "Static/Components/EImageFormat.h"
 
 class mx::GraphicsLibrary
 {
@@ -13,7 +14,7 @@ public:
 	virtual mx::GPUProgram*				addProgram(std::string& strVertexShaderFilePath, std::string& strFragmentShaderFilePath) = 0;
 	virtual mx::GPUImageBuffers*		addImageBuffers(GPUProgram *pProgram) = 0;
 	virtual mx::GPUImage*				addImage(GPUProgram *pProgram, std::string& strImageFilePath, GPUImageBuffers *pGpuImageBuffers = nullptr) = 0;
-	virtual uint32						addTexture(GPUProgram *pProgram, std::string& strTextureRasterData, ERasterDataFormat uiFormat, glm::uvec2& vecTextureImageSize, bool bResetActiveTexture = false) = 0;
+	virtual uint32						addTexture(GPUProgram *pProgram, uint8 *pImageData, EImageFormat uiFormat, glm::uvec2& vecTextureImageSize, bool bResetActiveTexture = false) = 0;
 
 	virtual void						resizeScene(glm::uvec2& vecRenderSize) = 0;
 	virtual void						reset(void) = 0;

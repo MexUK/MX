@@ -1,7 +1,10 @@
 #include "OpenGL.h"
 #include "Static/String.h"
 #include "Static/File.h"
+#include "Static/Image.h"
 #include "Static/Math.h"
+#include "Static/Components/ImageData.h"
+#include "Static/Components/EImageFormat.h"
 #include "Image/ImageManager.h"
 #include "Image/ImageFile.h"
 #include "GLProgram.h"
@@ -357,7 +360,7 @@ void					OpenGL::checkForGLError(string strMarkerText)
 }
 
 // textures
-uint32					OpenGL::addTexture(GPUProgram *pProgram, string& strTextureRasterData, ERasterDataFormat uiFormat, uvec2& vecTextureImageSize, bool bResetActiveTexture)
+uint32					OpenGL::addTexture(GPUProgram *pProgram, uint8 *pImageData, EImageFormat uiFormat, uvec2& vecTextureImageSize, bool bResetActiveTexture)
 {
 	checkForGLError("C0");
 
@@ -405,17 +408,12 @@ uint32					OpenGL::addTexture(GPUProgram *pProgram, string& strTextureRasterData
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
 	int level = 0;
-	if (uiFormat == RASTERDATAFORMAT_BGRA32)
-		glTexImage2D(GL_TEXTURE_2D, level, GL_RGBA8, vecTextureImageSize.x, vecTextureImageSize.y, 0, GL_BGRA, GL_UNSIGNED_BYTE, strTextureRasterData.data());
-	else if (uiFormat == RASTERDATAFORMAT_RGBA32)
-		glTexImage2D(GL_TEXTURE_2D, level, GL_RGBA8, vecTextureImageSize.x, vecTextureImageSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, strTextureRasterData.data());
-	else if(uiFormat == RASTERDATAFORMAT_BGR24)
-		glTexImage2D(GL_TEXTURE_2D, level, GL_RGB8, vecTextureImageSize.x, vecTextureImageSize.y, 0, GL_BGR, GL_UNSIGNED_BYTE, strTextureRasterData.data());
-	else if(uiFormat == RASTERDATAFORMAT_RGB24)
-		glTexImage2D(GL_TEXTURE_2D, level, GL_RGB8, vecTextureImageSize.x, vecTextureImageSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, strTextureRasterData.data());
-	else if(uiFormat == RASTERDATAFORMAT_DXT1)
-		//glTexImage2D(GL_TEXTURE_2D, level, GL_RGB8, vecTextureImageSize.x, vecTextureImageSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, strTextureRasterData.data());
-		glCompressedTexImage2D(GL_TEXTURE_2D, level, GL_COMPRESSED_RGB_S3TC_DXT1_EXT, vecTextureImageSize.x, vecTextureImageSize.y, 0, strTextureRasterData.length(), strTextureRasterData.data());
+	if (uiFormat == UNCOMPRESSED_RGB)
+		glTexImage2D(GL_TEXTURE_2D, level, GL_RGB8, vecTextureImageSize.x, vecTextureImageSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, pImageData);
+	else if (uiFormat == UNCOMPRESSED_RGBA)
+		glTexImage2D(GL_TEXTURE_2D, level, GL_RGBA8, vecTextureImageSize.x, vecTextureImageSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pImageData);
+	else if(uiFormat == COMPRESSED_RGB_DXT1)
+		glCompressedTexImage2D(GL_TEXTURE_2D, level, GL_COMPRESSED_RGB_S3TC_DXT1_EXT, vecTextureImageSize.x, vecTextureImageSize.y, 0, (vecTextureImageSize.x * vecTextureImageSize.y) / 2, pImageData);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -500,8 +498,9 @@ GPUImageBuffers*			OpenGL::addImageBuffers(GPUProgram *pProgram)
 GPUImage*				OpenGL::addImage(GPUProgram *pProgram, string& strImageFilePath, GPUImageBuffers *pGpuImageBuffers)
 {
 	// load image file
-	ImageFile *pImage = ImageManager::loadImageFromFile(strImageFilePath);
-	//ImageManager::swapRows(pImage->m_strRasterData, pImage->m_uiImageWidth, pImage->m_uiImageHeight);
+	ImageData image;
+	Image::load(strImageFilePath, image);
+	//ImageManager::swapRows(pImage->m_strRasterData, pImage->m_uiImageWidth, pImage->m_uiImageHeight); // todo
 
 	// create object to return
 	GLImage *pGLImage = new GLImage;
@@ -509,9 +508,7 @@ GPUImage*				OpenGL::addImage(GPUProgram *pProgram, string& strImageFilePath, GP
 	pGLImage->m_pImageBuffers = pGpuImageBuffers ? pGpuImageBuffers : addImageBuffers(pProgram);
 
 	// send texture to GPU
-	uvec2 vecImageSize = uvec2(pImage->m_uiImageWidth, pImage->m_uiImageHeight);
-	pGLImage->m_uiTextureBuffer = addTexture(pProgram, pImage->m_strRasterData, pImage->m_uiRasterFormat, vecImageSize, true);
-	delete pImage;
+	pGLImage->m_uiTextureBuffer = addTexture(pProgram, image.m_pData, image.m_uiFormat, image.m_vecSize, true);
 
 	return pGLImage;
 }
