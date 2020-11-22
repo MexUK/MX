@@ -158,9 +158,9 @@ void mx::Image::load(std::string& strPathIn, ImageData& imageData)
 	
 	if (strExtUpper == "BMP")
 	{
-		Stream stream;
+		Stream stream(strPathIn);
 		BMPFormat bmp(stream);
-		Format::unserializeFile<BMPFormat>(strPathIn, bmp);
+		Format::unserializeFile<BMPFormat>(bmp);
 		
 		imageData.m_uiFormat = bmp.getRasterDataFormat();
 		imageData.m_vecSize.x = bmp.getWidth();
@@ -171,9 +171,9 @@ void mx::Image::load(std::string& strPathIn, ImageData& imageData)
 	}
 	else if (strExtUpper == "DDS")
 	{
-		Stream stream;
+		Stream stream(strPathIn);
 		DDSFormat dds(stream);
-		Format::unserializeFile<DDSFormat>(strPathIn, dds);
+		Format::unserializeFile<DDSFormat>(dds);
 		
 		imageData.m_uiFormat = COMPRESSED_RGB_DXT1; // todo
 		imageData.m_vecSize.x = dds.m_uiWidth;

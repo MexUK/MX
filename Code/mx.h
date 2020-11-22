@@ -134,7 +134,6 @@ namespace mx
 	enum EEncryptionAlgorithm;
 	class File;
 	class Dir;
-	class ImageManager;
 	class Image;
 	class Input;
 	enum EDXTCompressionType;
