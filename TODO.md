@@ -6,8 +6,14 @@ add code for memory stream.
 
 add code for directory stream.
 
-remove unused declarations from mx namespace.
-
 support x64 too.
+
+rename UMapContainer to UMapPool.
+
+ensure both DLL injection techniques are in the same file. (currently one is in Static/Memory and the other one is in Static/Process).
+
+tidy Static/Memory.
+
+split Static/Input into 2 places. (currently it contains both GUI input based code and keyboard input based code).
 
 (This todo list is incomplete).

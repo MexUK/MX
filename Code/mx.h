@@ -25,45 +25,47 @@
 
 namespace mx
 {
+	// reference parameters
 	extern bool					g_bDefaultBool;
 	extern glm::vec2			g_vecDefaultVec2;
 	extern glm::uvec2			g_vecDefaultUvec2;
 	extern glm::vec3			g_vecDefaultVec3;
 	extern std::string			g_strBlankString;
-
-	const uint32f				SECTOR_BYTE_COUNT = 2048;
-
-	class GPU;
-	class GraphicsLibrary;
-
-	class OpenGL;
-	class DirectX;
 	
-	class GPUFont;
-	class GPUImage;
-	class GPUImageBuffers;
-	class GPUProgram;
-	class GPUTexture;
-
-	class GLTexture;
-	class GLFont;
-	class GLProgram;
-	class GLImage;
-
+	// misc
+	const uint32				SECTOR_BYTE_COUNT = 2048;
+	
+	// configuration
 	enum EGraphicsLibrary;
 	enum EOperatingSystem;
 	enum EPlatform;
 	enum EVersionedGraphicsLibrary;
 	enum EVersionedOperatingSystem;
 	enum EVersionedPlatform;
-
-	class DataPath;
-
-
-	template<class T> class FormatManager;
-	class Format;
-	class ContainerFormat;
+	
+	// data
+	class Reader;
+	class Writer;
+	class ReaderOrWriter;
+	
 	enum EEndian;
+	
+	class Stream;
+	class StreamException;
+	enum EStreamDeviceType;
+	enum EStreamError;
+	
+	class StreamFlow;
+	class FileStreamFlow;
+	class MemoryStreamFlow;
+	class DirectoryStreamFlow;
+	
+	class FileStream;
+	class MemoryStream;
+	class DirectoryStream;
+	
+	// format
+	class Format;
 
 	class BMPFormat;
 	struct BMPFormat_Header1;
@@ -80,7 +82,7 @@ namespace mx
 	struct DDSFormat_Header_DDS_PIXELFORMAT_Part2;
 
 	class ICOFormat;
-
+	
 	class JSON;
 	enum EJSONType;
 	class JSONString;
@@ -93,43 +95,39 @@ namespace mx
 	class JSONObject;
 
 	class URL;
-
+	
+	// GPU
+	class GPU;
+	class GraphicsLibrary;
+	
+	class OpenGL;
+	class DirectX;
+	
+	class GPUFont;
+	class GPUImage;
+	class GPUImageBuffers;
+	class GPUProgram;
+	class GPUTexture;
+	
+	class GLTexture;
+	class GLFont;
+	class GLProgram;
+	class GLImage;
+	
+	// object
 	template<class Class> class IndexedInstance;
 	template<class SingletonClass> class Singleton;
-
+	
+	// pool
 	template <class T> class VectorPool;
 	template <class Key, class Value> class UMapContainer;
-
-	class DataReader;
-	class DataStream;
-	enum EDataStreamType;
-	class DataWriter;
-
-	enum EStreamDeviceType;
-	enum EStreamError;
-	class Stream;
-	class StreamException;
-	class StreamPoint;
-	class StreamFlow;
-	class FileStreamFlow;
-	class MemoryStreamFlow;
-	class DirectoryStreamFlow;
-	class FileStream;
-	class MemoryStream;
-	class DirectoryStream;
-	class ReaderOrWriter;
-	class Reader;
-	class Writer;
-
-	class Timing;
-
-	class CompressionManager;
+	
+	// static
 	class Crashes;
+	class DataPath;
 	class Debug;
-	class EncryptionManager;
-	enum EEncryptionAlgorithm;
-	class File;
 	class Dir;
+	class File;
 	class Image;
 	class Input;
 	class Math;
@@ -140,14 +138,16 @@ namespace mx
 	class Registry;
 	class String;
 	class StdVector;
-	class Thread;
-
+	class Timing;
+	
+	// static components
 	struct Plane;
 	struct Frustum;
 	struct OBB;
 	class ImageData;
 	enum EImageFormat;
 	
+	// third party
 	uint64_t pack754(float80 f, unsigned bits, unsigned expbits);
 	float80 unpack754(uint64_t i, unsigned bits, unsigned expbits);
 };
