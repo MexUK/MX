@@ -93,11 +93,6 @@ namespace mx
 
 	class URL;
 
-	class ImageFile;
-	class ImageManager;
-	class RasterDataFormat;
-	class RasterDataFormatManager;
-
 	template<class Class> class IndexedInstance;
 	template<class SingletonClass> class Singleton;
 
@@ -136,8 +131,6 @@ namespace mx
 	class Dir;
 	class Image;
 	class Input;
-	enum EDXTCompressionType;
-	enum ERasterDataFormat;
 	class Math;
 	class Memory;
 	class Number;

@@ -8,6 +8,13 @@ ImageData::ImageData() :
 {
 }
 
+ImageData::ImageData(mx::EImageFormat uiFormat, glm::uvec2& vecSize, uint8* pData) :
+	m_uiFormat(uiFormat),
+	m_vecSize(vecSize),
+	m_pData(pData)
+{
+}
+
 ImageData::~ImageData()
 {
 	if(m_pData)

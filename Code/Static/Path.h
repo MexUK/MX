@@ -26,9 +26,9 @@ public:
 	static std::string			replaceFileName(std::string& strPath, std::string& strNewFileName);
 
 	static std::string			ext(std::string& strPath);
-	static bool					isExt(std::string& strPath, std::string strExt);
-	static std::string			setExt(std::string& strPath, std::string& strExtension);
-	static std::string			setExtWithCase(std::string& strPath, std::string& strExtension);
+	static bool					isExt(std::string& strPath, std::string strExtension);
+	static std::string			setExt(std::string& strPath, std::string strExtension);
+	static std::string			setExtWithCase(std::string& strPath, std::string strExtension);
 	static std::string			removeExt(std::string& strPath);
 
 	static bool					isValidPath(std::string& strPath);

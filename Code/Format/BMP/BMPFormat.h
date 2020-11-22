@@ -5,11 +5,13 @@
 #include "mx.h"
 #include "Types.h"
 #include "Format/Format.h"
+#include "Static/Components/ImageData.h"
 
 class mx::BMPFormat : public mx::Format
 {
 public:
 	BMPFormat(mx::Stream& stream);
+	BMPFormat(mx::Stream& stream, mx::ImageData& image);
 
 	void							_unserialize(void);
 	void							_serialize(void);
@@ -21,9 +23,6 @@ public:
 	uint8							getBMPVersion(void) { return m_uiBMPVersion; }
 
 	void							setRasterDataBGRA32(std::string& strRasterDataBGRA32); // currently the same as setRasterData, it just sets the data 1 on 1
-	std::string						getRasterDataBGRA32(void);
-
-	void							swapRows(void);
 
 	void							setFileType(uint16 usFileType) { m_usFileType = usFileType; }
 	uint16							getFileType(void) { return m_usFileType; }

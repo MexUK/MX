@@ -1,5 +1,4 @@
 #include "BMPFormat.h"
-#include "Image/ImageManager.h"
 #include "Static/Debug.h"
 #include "Static/Image.h"
 #include "Stream/Stream.h"
@@ -16,13 +15,28 @@ BMPFormat::BMPFormat(mx::Stream& stream) :
 	Format(stream, true, LITTLE_ENDIAN),
 	m_bSkipBMPFileHeaderForSerialize(false),
 	m_bHasPalette(false),
-	m_uiBMPVersion(0),
+	m_uiBMPVersion(4),
 	m_usFileType(0),
 	m_usFileSize(0),
 	m_usColourPlaneCount(0),
 	m_uiWidth(0),
 	m_uiHeight(0),
 	m_usBPP(0)
+{
+}
+
+BMPFormat::BMPFormat(Stream& stream, ImageData& image) :
+	Format(stream, true, LITTLE_ENDIAN),
+	m_bSkipBMPFileHeaderForSerialize(false),
+	m_bHasPalette(false),
+	m_uiBMPVersion(4),
+	m_usFileType(0),
+	m_usFileSize(0),
+	m_usColourPlaneCount(0),
+	m_uiWidth(image.m_vecSize.x),
+	m_uiHeight(image.m_vecSize.y),
+	m_usBPP(image.getBitsPerPixel()),
+	m_strRasterData((char*)image.m_pData, image.getDataSize())
 {
 }
 
@@ -83,12 +97,6 @@ uint8			BMPFormat::detectBMPVersion(void)
 	return uiBMPVersion;
 }
 
-// rows
-void			BMPFormat::swapRows(void)
-{
-	ImageManager::swapRows(m_strRasterData, m_uiWidth, m_uiHeight);
-}
-
 // raster data format
 EImageFormat	BMPFormat::getRasterDataFormat(void)
 {
@@ -110,21 +118,6 @@ EImageFormat	BMPFormat::getRasterDataFormat(void)
 void			BMPFormat::setRasterDataBGRA32(string& strRasterDataBGRA32)
 {
 	m_strRasterData = strRasterDataBGRA32;
-}
-string			BMPFormat::getRasterDataBGRA32(void)
-{
-	if (m_usBPP == 24)
-	{
-		return ImageManager::convertBGR24ToBGRA32(m_strRasterData);
-	}
-	else if (m_usBPP == 32)
-	{
-		return m_strRasterData;
-	}
-	else
-	{
-		return "";
-	}
 }
 
 // version serialization

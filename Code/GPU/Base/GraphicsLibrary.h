@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include "mx.h"
-#include "Image/ERasterDataFormat.h"
 #include "Static/Components/EImageFormat.h"
 
 class mx::GraphicsLibrary

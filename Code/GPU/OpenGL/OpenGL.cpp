@@ -5,8 +5,8 @@
 #include "Static/Math.h"
 #include "Static/Components/ImageData.h"
 #include "Static/Components/EImageFormat.h"
-#include "Image/ImageManager.h"
-#include "Image/ImageFile.h"
+#include "Format/BMP/BMPFormat.h"
+#include "Stream/Stream.h"
 #include "GLProgram.h"
 #include "GLImage.h"
 
@@ -531,16 +531,25 @@ void					OpenGL::reset(void)
 void					OpenGL::takeScreenshot(uvec2& vecSize, string& strBMPFilePath, bool bAlsoTakeJPEG)
 {
 	GLubyte *pPixelsBGRA32 = getScreenPixels(vecSize);
+	string strNextFilePathOutBMP = File::getNextIncrementingFileName(strBMPFilePath);
 
-	::uint uiImageDataSize = vecSize.x * vecSize.y * 4;
-	string strPixelsBGRA32((char*)pPixelsBGRA32, uiImageDataSize);
-	string strPixelsRGBA32 = ImageManager::convertBGRA32ToRGBA32(strPixelsBGRA32);
-	delete[] pPixelsBGRA32;
+	{
+		ImageData image(UNCOMPRESSED_RGBA, vecSize, pPixelsBGRA32);
 
-	string strBMPFilePathOut;
-	ImageManager::saveBMPFile(strPixelsRGBA32, vecSize, strBMPFilePath, strBMPFilePathOut);
-	if(bAlsoTakeJPEG)
-		ImageManager::copyBMPtoJPEG(strBMPFilePathOut);
+		Stream stream(strNextFilePathOutBMP);
+		BMPFormat bmp(stream, image);
+
+		bmp.serialize();
+
+		delete[] image.m_pData;
+		image.m_pData = nullptr;
+	}
+
+	if (bAlsoTakeJPEG)
+	{
+		string strNextFilePathOutJPG = Path::setExtWithCase(strNextFilePathOutBMP, "JPG");
+		Image::convertToJPG(strNextFilePathOutBMP, strNextFilePathOutJPG);
+	}
 }
 
 uint8*					OpenGL::getScreenPixels(uvec2& vecSize)

@@ -187,12 +187,6 @@
     <ClInclude Include="..\..\Code\GPU\OpenGL\GLProgram.h" />
     <ClInclude Include="..\..\Code\GPU\OpenGL\GLTexture.h" />
     <ClInclude Include="..\..\Code\GPU\OpenGL\OpenGL.h" />
-    <ClInclude Include="..\..\Code\Image\eDXTCompressionType.h" />
-    <ClInclude Include="..\..\Code\Image\eRasterDataFormat.h" />
-    <ClInclude Include="..\..\Code\Image\ImageFile.h" />
-    <ClInclude Include="..\..\Code\Image\ImageManager.h" />
-    <ClInclude Include="..\..\Code\Image\RasterDataFormat.h" />
-    <ClInclude Include="..\..\Code\Image\RasterDataFormatManager.h" />
     <ClInclude Include="..\..\Code\Object\IndexedInstance.h" />
     <ClInclude Include="..\..\Code\Object\Singleton.h" />
     <ClInclude Include="..\..\Code\Pool\UMapContainer.h" />
@@ -266,10 +260,6 @@
     <ClCompile Include="..\..\Code\GPU\OpenGL\GLProgram.cpp" />
     <ClCompile Include="..\..\Code\GPU\OpenGL\GLTexture.cpp" />
     <ClCompile Include="..\..\Code\GPU\OpenGL\OpenGL.cpp" />
-    <ClCompile Include="..\..\Code\Image\ImageFile.cpp" />
-    <ClCompile Include="..\..\Code\Image\ImageManager.cpp" />
-    <ClCompile Include="..\..\Code\Image\RasterDataFormat.cpp" />
-    <ClCompile Include="..\..\Code\Image\RasterDataFormatManager.cpp" />
     <ClCompile Include="..\..\Code\Pool\UMapContainer.cpp" />
     <ClCompile Include="..\..\Code\Pool\VectorPool.cpp" />
     <ClCompile Include="..\..\Code\Static\Components\ImageData.cpp" />

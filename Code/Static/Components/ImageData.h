@@ -8,10 +8,11 @@ class mx::ImageData
 public:
 	mx::EImageFormat	m_uiFormat;
 	glm::uvec2			m_vecSize;
-	unsigned char*		m_pData;
+	uint8*				m_pData;
 
 public:
 	ImageData();
+	ImageData(mx::EImageFormat uiFormat, glm::uvec2& vecSize, uint8* pData);
 	~ImageData();
 	
 	uint32				getBitsPerPixel();

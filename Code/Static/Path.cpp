@@ -86,7 +86,7 @@ string			Path::ext(string& strPath)
 	return strPath.substr(uiPosition + 1);
 }
 
-bool			Path::isExt(string& strPath, string strExt)
+bool			Path::isExt(string& strPath, string strExtension)
 {
 	size_t uiPosition = strPath.find_last_of(".");
 	if (uiPosition == string::npos)
@@ -94,10 +94,10 @@ bool			Path::isExt(string& strPath, string strExt)
 		return "";
 	}
 	string strExt1 = strPath.substr(uiPosition + 1);
-	return String::lower(strExt1) == String::lower(strExt);
+	return String::lower(strExt1) == String::lower(strExtension);
 }
 
-string			Path::setExt(string& strPath, string& strExtension)
+string			Path::setExt(string& strPath, string strExtension)
 {
 	size_t uiPosition = strPath.find_last_of(".");
 	if (uiPosition == string::npos)
@@ -107,7 +107,7 @@ string			Path::setExt(string& strPath, string& strExtension)
 	return strPath.substr(0, uiPosition + 1) + strExtension;
 }
 
-string			Path::setExtWithCase(string& strPath, string& strExtension)
+string			Path::setExtWithCase(string& strPath, string strExtension)
 {
 	string str = ext(strPath);
 	str = String::getTextInSameCase(strExtension, str);

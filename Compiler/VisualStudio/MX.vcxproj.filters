@@ -19,12 +19,6 @@
     <Filter Include="Source Files\Format">
       <UniqueIdentifier>{95fc5dcc-7b7b-4577-8ba7-78d990a71de9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Image">
-      <UniqueIdentifier>{fe203e81-7747-45a6-8a28-20aadff9f44c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Image">
-      <UniqueIdentifier>{22de9319-6bfd-4556-95de-a2e7376e0e38}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Object">
       <UniqueIdentifier>{be63a505-b234-4689-930d-d8a4ceb77181}</UniqueIdentifier>
     </Filter>
@@ -158,24 +152,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Code\Types.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Image\RasterDataFormat.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Image\RasterDataFormatManager.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Image\eDXTCompressionType.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Image\eRasterDataFormat.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Image\ImageFile.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Image\ImageManager.h">
-      <Filter>Header Files\Image</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Code\Object\Singleton.h">
       <Filter>Header Files\Object</Filter>
@@ -479,18 +455,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Code\Image\RasterDataFormat.cpp">
-      <Filter>Source Files\Image</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Image\RasterDataFormatManager.cpp">
-      <Filter>Source Files\Image</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Image\ImageFile.cpp">
-      <Filter>Source Files\Image</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\Image\ImageManager.cpp">
-      <Filter>Source Files\Image</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Code\Pool\UMapContainer.cpp">
       <Filter>Source Files\Pool</Filter>
     </ClCompile>
