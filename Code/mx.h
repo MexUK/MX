@@ -27,6 +27,7 @@ namespace mx
 {
 	extern bool					g_bDefaultBool;
 	extern glm::vec2			g_vecDefaultVec2;
+	extern glm::uvec2			g_vecDefaultUvec2;
 	extern glm::vec3			g_vecDefaultVec3;
 	extern std::string			g_strBlankString;
 

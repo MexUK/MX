@@ -13,30 +13,25 @@ using namespace mx;
 
 BMPFormat::BMPFormat(mx::Stream& stream) :
 	Format(stream, true, LITTLE_ENDIAN),
+	m_image(ImageData(
+		UNKNOWN_IMAGE_FORMAT,
+		g_vecDefaultUvec2,
+		nullptr
+	)),
 	m_bSkipBMPFileHeaderForSerialize(false),
 	m_bHasPalette(false),
 	m_uiBMPVersion(4),
-	m_usFileType(0),
-	m_usFileSize(0),
-	m_usColourPlaneCount(0),
-	m_uiWidth(0),
-	m_uiHeight(0),
-	m_usBPP(0)
+	m_usColourPlaneCount(0)
 {
 }
 
 BMPFormat::BMPFormat(Stream& stream, ImageData& image) :
 	Format(stream, true, LITTLE_ENDIAN),
+	m_image(image),
 	m_bSkipBMPFileHeaderForSerialize(false),
 	m_bHasPalette(false),
 	m_uiBMPVersion(4),
-	m_usFileType(0),
-	m_usFileSize(0),
-	m_usColourPlaneCount(0),
-	m_uiWidth(image.m_vecSize.x),
-	m_uiHeight(image.m_vecSize.y),
-	m_usBPP(image.getBitsPerPixel()),
-	m_strRasterData((char*)image.m_pData, image.getDataSize())
+	m_usColourPlaneCount(0)
 {
 }
 
@@ -97,43 +92,20 @@ uint8			BMPFormat::detectBMPVersion(void)
 	return uiBMPVersion;
 }
 
-// raster data format
-EImageFormat	BMPFormat::getRasterDataFormat(void)
-{
-	if (m_usBPP == 24)
-	{
-		return UNCOMPRESSED_RGB;
-	}
-	else if (m_usBPP == 32)
-	{
-		return UNCOMPRESSED_RGBA;
-	}
-	else
-	{
-		return UNKNOWN_IMAGE_FORMAT;
-	}
-}
-
-// raster data
-void			BMPFormat::setRasterDataBGRA32(string& strRasterDataBGRA32)
-{
-	m_strRasterData = strRasterDataBGRA32;
-}
-
 // version serialization
 void			BMPFormat::unserializeVersion1(void)
 {
 	uint16 uiFileType = m_reader.ui16();
 	uint16 uiBitmapType = m_reader.ui16();
-	m_uiWidth = m_reader.ui16();
-	m_uiHeight = m_reader.ui16();
+	m_image.m_vecSize.x = m_reader.ui16();
+	m_image.m_vecSize.y = m_reader.ui16();
 	uint16 uiBitmapLineWidthBytes = m_reader.ui16();
 	m_usColourPlaneCount = m_reader.ui8();
-	m_usBPP = m_reader.ui8();
+	uint8 uiBPP = m_reader.ui8();
 	uint32 uiBitmapBitsZero = m_reader.ui8();
 	
-	uint32 uiByteCount = m_uiWidth * m_uiHeight * (uint32)((float32)m_usBPP / 8.0f);
-	m_strRasterData = m_reader.str(uiByteCount);
+	uint32 uiImageDataSize = m_image.m_vecSize.x * m_image.m_vecSize.y * (uint32)(((float32)uiBPP) / 8.0f);
+	m_reader.cstr((char*)m_image.m_pData, uiImageDataSize);
 }
 
 void			BMPFormat::unserializeVersion2(void)
@@ -156,13 +128,12 @@ void			BMPFormat::unserializeVersion2(void)
 
 	// raster data
 	uiByteCount = header2.m_uiWidth * header2.m_uiHeight * (uint32)((float32)header2.m_usBPP / 8.0f);
-	m_strRasterData = m_reader.str(uiByteCount);
+	m_reader.cstr((char*)m_image.m_pData, uiByteCount);
 
 	// copy from raw structs to wrapper structs
-	m_uiWidth = header2.m_uiWidth;
-	m_uiHeight = header2.m_uiHeight;
+	m_image.m_vecSize.x = header2.m_uiWidth;
+	m_image.m_vecSize.y = header2.m_uiHeight;
 	m_usColourPlaneCount = header2.m_usPlaneCount;
-	m_usBPP = header2.m_usBPP;
 }
 
 void			BMPFormat::unserializeVersion3(void)
@@ -184,14 +155,13 @@ void			BMPFormat::unserializeVersion3(void)
 	}
 
 	// raster data
-	uiByteCount = header2.m_uiWidth * header2.m_uiHeight * (uint32)((float32)header2.m_usBPP / 8.0f);
-	m_strRasterData = m_reader.str(uiByteCount);
+	uiByteCount = header2.m_uiWidth * header2.m_uiHeight * (uint32)(((float32)header2.m_usBPP) / 8.0f);
+	m_reader.cstr((char*)m_image.m_pData, uiByteCount);
 
 	// copy from raw structs to wrapper structs
-	m_uiWidth = header2.m_uiWidth;
-	m_uiHeight = header2.m_uiHeight;
+	m_image.m_vecSize.x = header2.m_uiWidth;
+	m_image.m_vecSize.y = header2.m_uiHeight;
 	m_usColourPlaneCount = header2.m_usPlaneCount;
-	m_usBPP = header2.m_usBPP;
 }
 
 void			BMPFormat::unserializeVersion4(void)
@@ -214,36 +184,35 @@ void			BMPFormat::unserializeVersion4(void)
 
 	// raster data
 	uiByteCount = header2.m_uiWidth * header2.m_uiHeight * (uint32)((float32)header2.m_usBPP / 8.0f);
-	m_strRasterData = m_reader.str(uiByteCount);
+	m_reader.cstr((char*)m_image.m_pData, uiByteCount);
 
 	// copy from raw structs to wrapper structs
-	m_uiWidth = header2.m_uiWidth;
-	m_uiHeight = header2.m_uiHeight;
+	m_image.m_vecSize.x = header2.m_uiWidth;
+	m_image.m_vecSize.y = header2.m_uiHeight;
 	m_usColourPlaneCount = header2.m_usPlaneCount;
-	m_usBPP = header2.m_usBPP;
 }
 
 void			BMPFormat::serializeVersion1(void)
 {
-	uint32 uiBitmapLineWidthBytes = m_uiWidth * (uint32)(((float32)m_usBPP) / 8.0f);
+	uint32 uiBitmapLineWidthBytes = m_image.m_vecSize.x * (uint32)(((float32)m_image.getBitsPerPixel()) / 8.0f);
 	
 	m_writer.ui16(0x0002); // RT_BITMAP
 	m_writer.ui16(0x0000); // bitmap type
-	m_writer.ui16((uint16)m_uiWidth);
-	m_writer.ui16((uint16)m_uiHeight);
+	m_writer.ui16((uint16)m_image.m_vecSize.x);
+	m_writer.ui16((uint16)m_image.m_vecSize.y);
 	m_writer.ui16((uint16)uiBitmapLineWidthBytes);
 	m_writer.ui8((uint8)m_usColourPlaneCount);
-	m_writer.ui8((uint8)m_usBPP);
+	m_writer.ui8((uint8)m_image.getBitsPerPixel());
 	m_writer.ui32(0);
 	
-	m_writer.str(m_strRasterData);
+	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
 }
 
 void			BMPFormat::serializeVersion2(void)
 {
 	if (!getSkipBMPFileHeaderForSerialize())
 	{
-		uint32 uiFileSize = 14 + 16 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_strRasterData.length();
+		uint32 uiFileSize = 14 + 16 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_image.getDataSize();
 
 		string str = "BM";
 		m_writer.str(str);
@@ -254,24 +223,24 @@ void			BMPFormat::serializeVersion2(void)
 	}
 
 	m_writer.ui32(12);
-	m_writer.ui32(m_uiWidth);
-	m_writer.ui32(m_uiHeight);
+	m_writer.ui32(m_image.m_vecSize.x);
+	m_writer.ui32(m_image.m_vecSize.y);
 	m_writer.ui16(1); // plane count
-	m_writer.ui16(m_usBPP);
+	m_writer.ui16(m_image.getBitsPerPixel());
 
 	if (m_bHasPalette)
 	{
 		m_writer.str(m_strPaletteData);
 	}
 
-	m_writer.str(m_strRasterData);
+	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
 }
 
 void			BMPFormat::serializeVersion3(void)
 {
 	if (!getSkipBMPFileHeaderForSerialize())
 	{
-		uint32 uiFileSize = 14 + 40 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_strRasterData.length();
+		uint32 uiFileSize = 14 + 40 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_image.getDataSize();
 
 		string str = "BM";
 		m_writer.str(str);
@@ -282,12 +251,12 @@ void			BMPFormat::serializeVersion3(void)
 	}
 
 	m_writer.ui32(40);
-	m_writer.ui32(m_uiWidth);
-	m_writer.ui32(m_uiHeight);
+	m_writer.ui32(m_image.m_vecSize.x);
+	m_writer.ui32(m_image.m_vecSize.y);
 	m_writer.ui16(1); // plane count
-	m_writer.ui16(m_usBPP);
+	m_writer.ui16(m_image.getBitsPerPixel());
 	m_writer.ui32(0); // uiCompressionMethods
-	m_writer.ui32(m_uiWidth * m_uiHeight * (uint32)((float32)m_usBPP / 8.0f)); // uiBitmapSize
+	m_writer.ui32(m_image.m_vecSize.x * m_image.m_vecSize.y * (uint32)(((float32)m_image.getBitsPerPixel()) / 8.0f)); // uiBitmapSize
 	m_writer.ui32(0); // uiHorizontalResolution
 	m_writer.ui32(0); // uiVerticalResolution
 	m_writer.ui32(0); // uiColoursUsed
@@ -298,14 +267,14 @@ void			BMPFormat::serializeVersion3(void)
 		m_writer.str(m_strPaletteData);
 	}
 
-	m_writer.str(m_strRasterData);
+	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
 }
 
 void			BMPFormat::serializeVersion4(void)
 {
 	if (!getSkipBMPFileHeaderForSerialize())
 	{
-		uint32 uiFileSize = 14 + 108 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_strRasterData.length();
+		uint32 uiFileSize = 14 + 108 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_image.getDataSize();
 
 		string str = "BM";
 		m_writer.str(str);
@@ -316,12 +285,12 @@ void			BMPFormat::serializeVersion4(void)
 	}
 
 	m_writer.ui32(108);
-	m_writer.ui32(m_uiWidth);
-	m_writer.ui32(m_uiHeight);
+	m_writer.ui32(m_image.m_vecSize.x);
+	m_writer.ui32(m_image.m_vecSize.y);
 	m_writer.ui16(1); // plane count
-	m_writer.ui16(m_usBPP);
+	m_writer.ui16(m_image.getBitsPerPixel());
 	m_writer.ui32(0); // uiCompressionMethods
-	m_writer.ui32(m_uiWidth * m_uiHeight * (uint32)((float32)m_usBPP / 8.0f)); // uiBitmapSize
+	m_writer.ui32(m_image.m_vecSize.x * m_image.m_vecSize.y * (uint32)((float32)m_image.getBitsPerPixel() / 8.0f)); // uiBitmapSize
 	m_writer.ui32(0); // uiHorizontalResolution
 	m_writer.ui32(0); // uiVerticalResolution
 	m_writer.ui32(0); // uiColoursUsed
@@ -332,5 +301,5 @@ void			BMPFormat::serializeVersion4(void)
 		m_writer.str(m_strPaletteData);
 	}
 
-	m_writer.str(m_strRasterData);
+	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
 }

@@ -56,12 +56,12 @@ void mx::Image::saveDDSDXT1(std::string& strFilePathOut, mx::ImageData& image)
 	unsigned char* pDataOut = new unsigned char[image.getDataSize()];
 	squish::CompressImage(image.m_pData, image.m_vecSize.x, image.m_vecSize.y, pDataOut, kDxt1);
 
-	Stream s(strFilePathOut);
-	DDSFormat format(s);
-	format.m_uiWidth = image.m_vecSize.x;
-	format.m_uiHeight = image.m_vecSize.y;
-	format.m_uiBPP = 4;
-	format.m_strRasterData = std::string((char*)pDataOut, (image.m_vecSize.x * image.m_vecSize.y) / 2);
+	Stream stream(strFilePathOut);
+	DDSFormat format(stream);
+	format.m_image.m_uiFormat = COMPRESSED_RGB_DXT1;
+	format.m_image.m_vecSize.x = image.m_vecSize.x;
+	format.m_image.m_vecSize.y = image.m_vecSize.y;
+	format.m_image.m_pData = pDataOut;
 	format.serialize();
 
 	delete[] pDataOut;
@@ -162,10 +162,7 @@ void mx::Image::load(std::string& strPathIn, ImageData& imageData)
 		BMPFormat bmp(stream);
 		Format::unserializeFile<BMPFormat>(bmp);
 		
-		imageData.m_uiFormat = bmp.getRasterDataFormat();
-		imageData.m_vecSize.x = bmp.getWidth();
-		imageData.m_vecSize.y = bmp.getHeight();
-		imageData.m_pData = (uint8*)String::copy(bmp.getRasterData());
+		imageData = bmp.m_image;
 		
 		return;
 	}
@@ -175,10 +172,7 @@ void mx::Image::load(std::string& strPathIn, ImageData& imageData)
 		DDSFormat dds(stream);
 		Format::unserializeFile<DDSFormat>(dds);
 		
-		imageData.m_uiFormat = COMPRESSED_RGB_DXT1; // todo
-		imageData.m_vecSize.x = dds.m_uiWidth;
-		imageData.m_vecSize.y = dds.m_uiHeight;
-		imageData.m_pData = (uint8*)String::copy(dds.m_strRasterData);
+		imageData = dds.m_image;
 		
 		return;
 	}

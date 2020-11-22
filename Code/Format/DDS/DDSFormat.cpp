@@ -11,13 +11,22 @@
 #include "Data/EEndian.h"
 
 using namespace std;
+using namespace glm;
 using namespace mx;
 
 DDSFormat::DDSFormat(Stream& stream) :
 	Format(stream, true, LITTLE_ENDIAN),
-	m_uiWidth(0),
-	m_uiHeight(0),
-	m_uiBPP(0)
+	m_image(ImageData(
+		UNKNOWN_IMAGE_FORMAT,
+		g_vecDefaultUvec2,
+		nullptr
+	))
+{
+}
+
+DDSFormat::DDSFormat(Stream& stream, ImageData& image) :
+	Format(stream, true, LITTLE_ENDIAN),
+	m_image(image)
 {
 }
 
@@ -43,14 +52,12 @@ void				DDSFormat::_unserialize(void)
 	// DDS_HEADER structure continued
 	DDSFormat_Header_DDS_PIXELFORMAT_Part2 *pHeader4 = m_reader.structureHeap<DDSFormat_Header_DDS_PIXELFORMAT_Part2>();
 
-	// raster data
-	//m_strRasterData = reader.readString(pHeader1->m_uiWidth * pHeader1->m_uiHeight * (pHeader2->m_uiRGBBitCount / 8));
-	m_strRasterData = m_reader.str((pHeader1->m_uiWidth * pHeader1->m_uiHeight) / 2);
-
-	// copy from raw structs to wrapper structs
-	m_uiWidth = pHeader1->m_uiWidth;
-	m_uiHeight = pHeader1->m_uiHeight;
-	m_uiBPP = pHeader2->m_uiRGBBitCount / 8;
+	// populate ImageData object
+	// todo - this code only supports DXT1 images.
+	m_image.m_uiFormat = COMPRESSED_RGB_DXT1;
+	m_reader.cstr((char*)m_image.m_pData, (pHeader1->m_uiWidth * pHeader1->m_uiHeight) / 2);
+	m_image.m_vecSize.x = pHeader1->m_uiWidth;
+	m_image.m_vecSize.y = pHeader1->m_uiHeight;
 
 	// clean up
 	delete pHeader1;
@@ -78,17 +85,17 @@ void				DDSFormat::_serialize(void)
 	if (bCompressedRasterData)
 	{
 		uiFlags |= 0x80000;
-		uiPitchOrLinearSize = m_strRasterData.length();
+		uiPitchOrLinearSize = m_image.getDataSize();
 	}
 	else
 	{
 		uiFlags |= 8;
-		uiPitchOrLinearSize = m_uiWidth * 4;
+		uiPitchOrLinearSize = m_image.m_vecSize.x * 4;
 	}
 	m_writer.ui32(uiSize);
 	m_writer.ui32(uiFlags);
-	m_writer.ui32(m_uiHeight);
-	m_writer.ui32(m_uiWidth);
+	m_writer.ui32(m_image.m_vecSize.y);
+	m_writer.ui32(m_image.m_vecSize.x);
 	m_writer.ui32(uiPitchOrLinearSize);
 	m_writer.ui32(uiDepth);
 	m_writer.ui32(uiMipMapCount);
@@ -165,5 +172,5 @@ void				DDSFormat::_serialize(void)
 	m_writer.ui32(uiReserved2);
 
 	// data
-	m_writer.str(m_strRasterData);
+	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
 }
