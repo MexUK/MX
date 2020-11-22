@@ -162,7 +162,7 @@ namespace mx
 	
 	// pool
 	template <class T> class VectorPool;
-	template <class Key, class Value> class UMapContainer;
+	template <class Key, class Value> class UMapPool;
 	
 	// static
 	class Crashes;

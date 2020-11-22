@@ -5,7 +5,7 @@
 #include <unordered_map>
 
 template <class Key, class Value>
-class mx::UMapContainer
+class mx::UMapPool
 {
 public:
 	bool									doesKeyExist(Key key);
@@ -26,25 +26,25 @@ protected:
 
 
 template <class Key, class Value>
-bool				mx::UMapContainer<Key, Value>::doesKeyExist(Key key)
+bool				mx::UMapPool<Key, Value>::doesKeyExist(Key key)
 {
 	return m_umapEntries.count(key) != 0;
 }
 
 template <class Key, class Value>
-uint32				mx::UMapContainer<Key, Value>::getEntryCount(void)
+uint32				mx::UMapPool<Key, Value>::getEntryCount(void)
 {
 	return m_umapEntries.size();
 }
 
 template <class Key, class Value>
-void				mx::UMapContainer<Key, Value>::setEntry(Key key, Value value)
+void				mx::UMapPool<Key, Value>::setEntry(Key key, Value value)
 {
 	m_umapEntries[key] = value;
 }
 
 template <class Key, class Value>
-Value				mx::UMapContainer<Key, Value>::getEntry(Key key)
+Value				mx::UMapPool<Key, Value>::getEntry(Key key)
 {
 	if (doesKeyExist(key))
 	{
@@ -54,7 +54,7 @@ Value				mx::UMapContainer<Key, Value>::getEntry(Key key)
 }
 
 template <class Key, class Value>
-Key					mx::UMapContainer<Key, Value>::getKeyByValue(Value value)
+Key					mx::UMapPool<Key, Value>::getKeyByValue(Value value)
 {
 	for (auto& it = m_umapEntries.begin(), it_end = m_umapEntries.end; it != it_end; it++)
 	{
@@ -67,7 +67,7 @@ Key					mx::UMapContainer<Key, Value>::getKeyByValue(Value value)
 }
 
 template <class Key, class Value>
-void				mx::UMapContainer<Key, Value>::removeEntry(Key key)
+void				mx::UMapPool<Key, Value>::removeEntry(Key key)
 {
 	const auto& it = m_umapEntries.find(key);
 	if(it == m_umapEntries.end())
@@ -78,13 +78,13 @@ void				mx::UMapContainer<Key, Value>::removeEntry(Key key)
 }
 
 template <class Key, class Value>
-void				mx::UMapContainer<Key, Value>::removeAllEntries(void)
+void				mx::UMapPool<Key, Value>::removeAllEntries(void)
 {
 	m_umapEntries.clear();
 }
 
 template <class Key, class Value>
-void				mx::UMapContainer<Key, Value>::swapEntries(Key key1, Key key2)
+void				mx::UMapPool<Key, Value>::swapEntries(Key key1, Key key2)
 {
 	Value value1 = getEntry(key1);
 	setEntry(key1, getEntry(key2));

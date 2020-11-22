@@ -189,7 +189,7 @@
     <ClInclude Include="..\..\Code\GPU\OpenGL\OpenGL.h" />
     <ClInclude Include="..\..\Code\Object\IndexedInstance.h" />
     <ClInclude Include="..\..\Code\Object\Singleton.h" />
-    <ClInclude Include="..\..\Code\Pool\UMapContainer.h" />
+    <ClInclude Include="..\..\Code\Pool\UMapPool.h" />
     <ClInclude Include="..\..\Code\Pool\VectorPool.h" />
     <ClInclude Include="..\..\Code\Static\Components\EImageFormat.h" />
     <ClInclude Include="..\..\Code\Static\Components\Frustum.h" />
@@ -260,7 +260,7 @@
     <ClCompile Include="..\..\Code\GPU\OpenGL\GLProgram.cpp" />
     <ClCompile Include="..\..\Code\GPU\OpenGL\GLTexture.cpp" />
     <ClCompile Include="..\..\Code\GPU\OpenGL\OpenGL.cpp" />
-    <ClCompile Include="..\..\Code\Pool\UMapContainer.cpp" />
+    <ClCompile Include="..\..\Code\Pool\UMapPool.cpp" />
     <ClCompile Include="..\..\Code\Pool\VectorPool.cpp" />
     <ClCompile Include="..\..\Code\Static\Components\ImageData.cpp" />
     <ClCompile Include="..\..\Code\Static\Crashes.cpp" />

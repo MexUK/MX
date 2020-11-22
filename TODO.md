@@ -8,8 +8,6 @@ add code for directory stream.
 
 support x64 too.
 
-rename UMapContainer to UMapPool.
-
 ensure both DLL injection techniques are in the same file. (currently one is in Static/Memory and the other one is in Static/Process).
 
 tidy Static/Memory.

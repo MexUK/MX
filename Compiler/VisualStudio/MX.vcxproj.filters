@@ -162,9 +162,6 @@
     <ClInclude Include="..\..\Code\Pool\VectorPool.h">
       <Filter>Header Files\Pool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\Pool\UMapContainer.h">
-      <Filter>Header Files\Pool</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Code\Static\StdVector.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
@@ -453,11 +450,11 @@
     <ClInclude Include="..\..\Code\Static\Components\EImageFormat.h">
       <Filter>Header Files\Static\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Code\Pool\UMapPool.h">
+      <Filter>Header Files\Pool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Code\Pool\UMapContainer.cpp">
-      <Filter>Source Files\Pool</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Code\Pool\VectorPool.cpp">
       <Filter>Source Files\Pool</Filter>
     </ClCompile>
@@ -616,6 +613,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Code\Static\Components\ImageData.cpp">
       <Filter>Source Files\Static\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Pool\UMapPool.cpp">
+      <Filter>Source Files\Pool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
