@@ -55,9 +55,10 @@ void				DDSFormat::_unserialize(void)
 	// populate ImageData object
 	// todo - this code only supports DXT1 images.
 	m_image.m_uiFormat = COMPRESSED_RGB_DXT1;
-	m_reader.cstr((char*)m_image.m_pData, (pHeader1->m_uiWidth * pHeader1->m_uiHeight) / 2);
 	m_image.m_vecSize.x = pHeader1->m_uiWidth;
 	m_image.m_vecSize.y = pHeader1->m_uiHeight;
+	m_image.checkToAllocateData();
+	m_reader.cstr((char*)m_image.m_pData, m_image.getDataSize());
 
 	// clean up
 	delete pHeader1;

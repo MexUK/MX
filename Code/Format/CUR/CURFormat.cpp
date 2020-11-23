@@ -9,14 +9,14 @@ using namespace mx;
 CURFormat::CURFormat(mx::Stream& stream) :
 	BMPFormat(stream)
 {
-	setSkipBMPFileHeaderForSerialize(true);
+	setShouldSerializeHeader1(false);
 	setBMPVersion(3);
 }
 
 CURFormat::CURFormat(mx::Stream& stream, ImageData& image) :
 	BMPFormat(stream, image)
 {
-	setSkipBMPFileHeaderForSerialize(true);
+	setShouldSerializeHeader1(false);
 	setBMPVersion(3);
 }
 
@@ -61,7 +61,5 @@ CURFormat* CURFormat::createFromBMP(BMPFormat* pBMPFormat)
 	pCURFormat->setImage(pBMPFormat->getImage());
 	pCURFormat->setBMPVersion(pBMPFormat->getBMPVersion());
 	pCURFormat->setColourPlaneCount(pBMPFormat->getColourPlaneCount());
-	pCURFormat->setHasPalette(pBMPFormat->doesHavePalette());
-	pCURFormat->setPaletteData(pBMPFormat->getPaletteData());
 	return pCURFormat;
 }

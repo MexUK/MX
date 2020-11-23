@@ -9,14 +9,14 @@ using namespace mx;
 ICOFormat::ICOFormat(mx::Stream& stream) :
 	BMPFormat(stream)
 {
-	setSkipBMPFileHeaderForSerialize(true);
+	setShouldSerializeHeader1(false);
 	setBMPVersion(3);
 }
 
 ICOFormat::ICOFormat(mx::Stream& stream, ImageData& image) :
 	BMPFormat(stream, image)
 {
-	setSkipBMPFileHeaderForSerialize(true);
+	setShouldSerializeHeader1(false);
 	setBMPVersion(3);
 }
 
@@ -61,7 +61,5 @@ ICOFormat* ICOFormat::createFromBMP(BMPFormat* pBMPFormat)
 	pICOFormat->setImage(pBMPFormat->getImage());
 	pICOFormat->setBMPVersion(pBMPFormat->getBMPVersion());
 	pICOFormat->setColourPlaneCount(pBMPFormat->getColourPlaneCount());
-	pICOFormat->setHasPalette(pBMPFormat->doesHavePalette());
-	pICOFormat->setPaletteData(pBMPFormat->getPaletteData());
 	return pICOFormat;
 }

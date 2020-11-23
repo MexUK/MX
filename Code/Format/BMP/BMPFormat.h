@@ -7,15 +7,18 @@
 #include "Format/Format.h"
 #include "Static/Components/ImageData.h"
 
+#define MX_BMP_HEADER1_SIZE				14
+#define MX_BMP_HEADER2_VERSION2_SIZE	16
+#define MX_BMP_HEADER2_VERSION3_SIZE	40
+#define MX_BMP_HEADER2_VERSION4_SIZE	108
+
 class mx::BMPFormat : public mx::Format
 {
 public:
 	mx::ImageData					m_image;
-	uint8							m_bSkipBMPFileHeaderForSerialize	: 1;
-	uint8							m_bHasPalette						: 1;
+	uint8							m_bSerializeHeader1	: 1;
 	uint8							m_uiBMPVersion;
 	uint16							m_usColourPlaneCount;
-	std::string						m_strPaletteData;
 
 public:
 	BMPFormat(mx::Stream& stream);
@@ -40,20 +43,14 @@ public:
 
 	uint16							getBPP(void) { return m_image.getBitsPerPixel(); }
 
-	void							setSkipBMPFileHeaderForSerialize(bool bSkipBMPFileHeaderForSerialize) { m_bSkipBMPFileHeaderForSerialize = bSkipBMPFileHeaderForSerialize; }
-	bool							getSkipBMPFileHeaderForSerialize(void) { return m_bSkipBMPFileHeaderForSerialize; }
+	void							setShouldSerializeHeader1(bool bSerializeHeader1) { m_bSerializeHeader1 = bSerializeHeader1; }
+	bool							shouldSerializeHeader1(void) { return m_bSerializeHeader1; }
 
 	void							setBMPVersion(uint8 uiBMPVersion) { m_uiBMPVersion = uiBMPVersion; }
 	uint8							getBMPVersion(void) { return m_uiBMPVersion; }
 
 	void							setColourPlaneCount(uint16 usColourPlaneCount) { m_usColourPlaneCount = usColourPlaneCount; }
 	uint16							getColourPlaneCount(void) { return m_usColourPlaneCount; }
-
-	void							setHasPalette(bool bHasPalette) { m_bHasPalette = bHasPalette; }
-	bool							doesHavePalette(void) { return m_bHasPalette; }
-
-	void							setPaletteData(std::string& strPaletteData) { m_strPaletteData = strPaletteData; }
-	std::string&					getPaletteData(void) { return m_strPaletteData; }
 
 private:
 	void							unserializeVersion1(void);
@@ -66,5 +63,14 @@ private:
 	void							serializeVersion3(void);
 	void							serializeVersion4(void);
 
-	uint8							detectBMPVersion(void);
+	uint32							detectBMPVersion(void);
+	uint32							getBMPHeader2Size(uint32 uiBMPVersion);
+
+	void							serializeBMPHeader1(uint32 uiBMPVersion);
+	void							serializeTableAndImageData();
+
+	void							populateImageData(uint32 uiWidth, uint32 uiHeight, uint32 uiBitsPerPixel);
+
+	mx::EImageFormat				computeImageFormat(uint16 uiBitsPerPixel);
+	bool							computeTablePresence(uint16 uiBitsPerPixel);
 };

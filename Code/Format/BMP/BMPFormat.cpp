@@ -18,8 +18,7 @@ BMPFormat::BMPFormat(mx::Stream& stream) :
 		g_vecDefaultUvec2,
 		nullptr
 	)),
-	m_bSkipBMPFileHeaderForSerialize(false),
-	m_bHasPalette(false),
+	m_bSerializeHeader1(true),
 	m_uiBMPVersion(4),
 	m_usColourPlaneCount(0)
 {
@@ -28,8 +27,7 @@ BMPFormat::BMPFormat(mx::Stream& stream) :
 BMPFormat::BMPFormat(Stream& stream, ImageData& image) :
 	Format(stream, true, LITTLE_ENDIAN),
 	m_image(image),
-	m_bSkipBMPFileHeaderForSerialize(false),
-	m_bHasPalette(false),
+	m_bSerializeHeader1(true),
 	m_uiBMPVersion(4),
 	m_usColourPlaneCount(0)
 {
@@ -60,12 +58,12 @@ void			BMPFormat::_serialize(void)
 }
 
 // BMP version
-uint8			BMPFormat::detectBMPVersion(void)
+uint32			BMPFormat::detectBMPVersion(void)
 {
 	Stream stream;
 	Reader reader(stream);
 
-	uint8 uiBMPVersion = 0;
+	uint32 uiBMPVersion = 0;
 	string strHeader = reader.str(2);
 	if (strHeader.c_str()[0] == '\0' && strHeader.c_str()[1] == '\0')
 	{
@@ -75,7 +73,7 @@ uint8			BMPFormat::detectBMPVersion(void)
 	else if (strHeader.c_str()[0] == 'B' && strHeader.c_str()[1] == 'M')
 	{
 		// BMP version 2.x, 3.x or 4.x
-		reader.seek(14);
+		reader.seek(MX_BMP_HEADER1_SIZE);
 		switch (reader.ui32())
 		{
 		case 12: // BMP version 2.x
@@ -97,99 +95,50 @@ void			BMPFormat::unserializeVersion1(void)
 {
 	uint16 uiFileType = m_reader.ui16();
 	uint16 uiBitmapType = m_reader.ui16();
-	m_image.m_vecSize.x = m_reader.ui16();
-	m_image.m_vecSize.y = m_reader.ui16();
+	uint16 uiWidth = m_reader.ui16();
+	uint16 uiHeight = m_reader.ui16();
 	uint16 uiBitmapLineWidthBytes = m_reader.ui16();
 	m_usColourPlaneCount = m_reader.ui8();
 	uint8 uiBPP = m_reader.ui8();
 	uint32 uiBitmapBitsZero = m_reader.ui8();
 	
-	uint32 uiImageDataSize = m_image.m_vecSize.x * m_image.m_vecSize.y * (uint32)(((float32)uiBPP) / 8.0f);
-	m_reader.cstr((char*)m_image.m_pData, uiImageDataSize);
+	populateImageData(uiWidth, uiHeight, uiBPP);
 }
 
 void			BMPFormat::unserializeVersion2(void)
 {
-	uint32 uiByteCount;
-
-	// read headers 1 & 2
 	BMPFormat_Header1 header1;
 	BMPFormat_Header2_Version2 header2;
 	m_reader.structure<BMPFormat_Header1>(header1);
 	m_reader.structure<BMPFormat_Header2_Version2>(header2);
 
-	// palette
-	m_bHasPalette = header2.m_usBPP < 16;
-	if (m_bHasPalette)
-	{
-		uiByteCount = 3 * (1 << header2.m_usBPP);
-		m_strPaletteData = m_reader.str(uiByteCount);
-	}
-
-	// raster data
-	uiByteCount = header2.m_uiWidth * header2.m_uiHeight * (uint32)((float32)header2.m_usBPP / 8.0f);
-	m_reader.cstr((char*)m_image.m_pData, uiByteCount);
-
-	// copy from raw structs to wrapper structs
-	m_image.m_vecSize.x = header2.m_uiWidth;
-	m_image.m_vecSize.y = header2.m_uiHeight;
 	m_usColourPlaneCount = header2.m_usPlaneCount;
+
+	populateImageData(header2.m_uiWidth, header2.m_uiHeight, header2.m_usBPP);
 }
 
 void			BMPFormat::unserializeVersion3(void)
 {
-	uint32 uiByteCount;
-
-	// read headers 1 & 2
 	BMPFormat_Header1 header1;
 	BMPFormat_Header2_Version3 header2;
 	m_reader.structure<BMPFormat_Header1>(header1);
 	m_reader.structure<BMPFormat_Header2_Version3>(header2);
 
-	// palette
-	m_bHasPalette = header2.m_usBPP < 16;
-	if (m_bHasPalette)
-	{
-		uiByteCount = 4 * header2.m_uiColoursUsed;
-		m_strPaletteData = m_reader.str(uiByteCount);
-	}
-
-	// raster data
-	uiByteCount = header2.m_uiWidth * header2.m_uiHeight * (uint32)(((float32)header2.m_usBPP) / 8.0f);
-	m_reader.cstr((char*)m_image.m_pData, uiByteCount);
-
-	// copy from raw structs to wrapper structs
-	m_image.m_vecSize.x = header2.m_uiWidth;
-	m_image.m_vecSize.y = header2.m_uiHeight;
 	m_usColourPlaneCount = header2.m_usPlaneCount;
+
+	populateImageData(header2.m_uiWidth, header2.m_uiHeight, header2.m_usBPP);
 }
 
 void			BMPFormat::unserializeVersion4(void)
 {
-	uint32 uiByteCount;
-
-	// read headers 1 & 2
 	BMPFormat_Header1 header1;
-	m_reader.structure<BMPFormat_Header1>(header1);
 	BMPFormat_Header2_Version4 header2;
+	m_reader.structure<BMPFormat_Header1>(header1);
 	m_reader.structure<BMPFormat_Header2_Version4>(header2);
 
-	// palette
-	m_bHasPalette = header2.m_usBPP < 16;
-	if (m_bHasPalette)
-	{
-		uiByteCount = 4 * header2.m_uiColoursUsed;
-		m_strPaletteData = m_reader.str(uiByteCount);
-	}
-
-	// raster data
-	uiByteCount = header2.m_uiWidth * header2.m_uiHeight * (uint32)((float32)header2.m_usBPP / 8.0f);
-	m_reader.cstr((char*)m_image.m_pData, uiByteCount);
-
-	// copy from raw structs to wrapper structs
-	m_image.m_vecSize.x = header2.m_uiWidth;
-	m_image.m_vecSize.y = header2.m_uiHeight;
 	m_usColourPlaneCount = header2.m_usPlaneCount;
+
+	populateImageData(header2.m_uiWidth, header2.m_uiHeight, header2.m_usBPP);
 }
 
 void			BMPFormat::serializeVersion1(void)
@@ -205,22 +154,13 @@ void			BMPFormat::serializeVersion1(void)
 	m_writer.ui8((uint8)m_image.getBitsPerPixel());
 	m_writer.ui32(0);
 	
-	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
+	serializeTableAndImageData(); // no table in BMP version 1
 }
 
 void			BMPFormat::serializeVersion2(void)
 {
-	if (!getSkipBMPFileHeaderForSerialize())
-	{
-		uint32 uiFileSize = 14 + 16 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_image.getDataSize();
-
-		string str = "BM";
-		m_writer.str(str);
-		m_writer.ui32(uiFileSize); // file size
-		m_writer.ui16(0); // reserved 1
-		m_writer.ui16(0); // reserved 2
-		m_writer.ui32(54); // bitmap offset
-	}
+	if (shouldSerializeHeader1())
+		serializeBMPHeader1(2);
 
 	m_writer.ui32(12);
 	m_writer.ui32(m_image.m_vecSize.x);
@@ -228,29 +168,15 @@ void			BMPFormat::serializeVersion2(void)
 	m_writer.ui16(1); // plane count
 	m_writer.ui16(m_image.getBitsPerPixel());
 
-	if (m_bHasPalette)
-	{
-		m_writer.str(m_strPaletteData);
-	}
-
-	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
+	serializeTableAndImageData();
 }
 
 void			BMPFormat::serializeVersion3(void)
 {
-	if (!getSkipBMPFileHeaderForSerialize())
-	{
-		uint32 uiFileSize = 14 + 40 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_image.getDataSize();
+	if (shouldSerializeHeader1())
+		serializeBMPHeader1(3);
 
-		string str = "BM";
-		m_writer.str(str);
-		m_writer.ui32(uiFileSize); // file size
-		m_writer.ui16(0); // reserved 1
-		m_writer.ui16(0); // reserved 2
-		m_writer.ui32(54); // bitmap offset
-	}
-
-	m_writer.ui32(40);
+	m_writer.ui32(MX_BMP_HEADER2_VERSION3_SIZE);
 	m_writer.ui32(m_image.m_vecSize.x);
 	m_writer.ui32(m_image.m_vecSize.y);
 	m_writer.ui16(1); // plane count
@@ -262,29 +188,15 @@ void			BMPFormat::serializeVersion3(void)
 	m_writer.ui32(0); // uiColoursUsed
 	m_writer.ui32(0); // uiColoursImportant
 
-	if (m_bHasPalette)
-	{
-		m_writer.str(m_strPaletteData);
-	}
-
-	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
+	serializeTableAndImageData();
 }
 
 void			BMPFormat::serializeVersion4(void)
 {
-	if (!getSkipBMPFileHeaderForSerialize())
-	{
-		uint32 uiFileSize = 14 + 108 + (m_bHasPalette ? m_strPaletteData.length() : 0) + m_image.getDataSize();
+	if (shouldSerializeHeader1())
+		serializeBMPHeader1(4);
 
-		string str = "BM";
-		m_writer.str(str);
-		m_writer.ui32(uiFileSize); // file size
-		m_writer.ui16(0); // reserved 1
-		m_writer.ui16(0); // reserved 2
-		m_writer.ui32(54); // bitmap offset
-	}
-
-	m_writer.ui32(108);
+	m_writer.ui32(MX_BMP_HEADER2_VERSION4_SIZE);
 	m_writer.ui32(m_image.m_vecSize.x);
 	m_writer.ui32(m_image.m_vecSize.y);
 	m_writer.ui16(1); // plane count
@@ -296,10 +208,74 @@ void			BMPFormat::serializeVersion4(void)
 	m_writer.ui32(0); // uiColoursUsed
 	m_writer.ui32(0); // uiColoursImportant
 
-	if (m_bHasPalette)
-	{
-		m_writer.str(m_strPaletteData);
-	}
+	serializeTableAndImageData();
+}
+
+// serialize utility
+void			BMPFormat::serializeBMPHeader1(uint32 uiBMPVersion)
+{
+	m_writer.cstr((char*)"BM", 2);
+	m_writer.ui32(MX_BMP_HEADER1_SIZE + getBMPHeader2Size(uiBMPVersion) + m_image.getTableSize() + m_image.getDataSize()); // file size
+	m_writer.ui16(0); // reserved 1
+	m_writer.ui16(0); // reserved 2
+	m_writer.ui32(54); // bitmap offset
+}
+
+void			BMPFormat::serializeTableAndImageData()
+{
+	if (m_image.doesHaveTable())
+		m_writer.cstr((char*)m_image.m_pTable, m_image.getTableSize());
 
 	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
+}
+
+// BMP header size
+uint32			BMPFormat::getBMPHeader2Size(uint32 uiBMPVersion)
+{
+	switch (uiBMPVersion)
+	{
+	case 1:		return 0;
+	case 2:		return MX_BMP_HEADER2_VERSION2_SIZE;
+	case 3:		return MX_BMP_HEADER2_VERSION3_SIZE;
+	case 4:		return MX_BMP_HEADER2_VERSION4_SIZE;
+	default:	return 0;
+	}
+}
+
+// populate image data
+void			BMPFormat::populateImageData(uint32 uiWidth, uint32 uiHeight, uint32 uiBitsPerPixel)
+{
+	m_image.m_uiFormat = computeImageFormat(uiBitsPerPixel);
+	m_image.m_vecSize.x = uiWidth;
+	m_image.m_vecSize.y = uiHeight;
+
+	if (computeTablePresence(uiBitsPerPixel))
+	{
+		m_image.checkToAllocateTable();
+		m_reader.cstr((char*)m_image.m_pTable, m_image.getTableSize());
+	}
+
+	m_image.checkToAllocateData();
+	m_reader.cstr((char*)m_image.m_pData, m_image.getDataSize());
+}
+
+// compute properties
+EImageFormat	BMPFormat::computeImageFormat(uint16 uiBitsPerPixel)
+{
+	switch (uiBitsPerPixel)
+	{
+	case 1:		return TABLE_1;
+	case 2:		return TABLE_2;
+	case 4:		return TABLE_4;
+	case 8:		return TABLE_8;
+	case 16:	return SAMPLE_16;
+	case 24:	return UNCOMPRESSED_RGB;
+	case 32:	return UNCOMPRESSED_RGBA;
+	default:	return UNKNOWN_IMAGE_FORMAT;
+	}
+}
+
+bool			BMPFormat::computeTablePresence(uint16 uiBitsPerPixel)
+{
+	return uiBitsPerPixel < 16;
 }
