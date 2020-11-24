@@ -6,7 +6,8 @@ using namespace mx;
 
 MemoryStreamFlow::MemoryStreamFlow() :
 	StreamFlow(STREAM_DEVICE_TYPE_MEMORY),
-	m_pBuffer(nullptr)
+	m_pBuffer(nullptr),
+	m_uiSeek(0)
 {
 }
 
@@ -36,32 +37,35 @@ void			MemoryStreamFlow::close()
 }
 
 // write/read data once
-uint64			MemoryStreamFlow::writeOnce(const uint8* pBuffer, uint64 uiMaxLength)
+uint64			MemoryStreamFlow::writeOnce(const uint8* pBuffer, uint64 uiByteCountToWrite)
 {
-	memcpy(m_pBuffer, pBuffer, uiMaxLength);
-	return 0; // todo
+	memcpy(m_pBuffer + m_uiSeek, pBuffer, uiByteCountToWrite);
+	m_uiSeek += uiByteCountToWrite;
+	return uiByteCountToWrite;
 }
 
-uint64			MemoryStreamFlow::readOnce(uint8* pBuffer, uint64 uiMaxLength)
+uint64			MemoryStreamFlow::readOnce(uint8* pBuffer, uint64 uiByteCountToRead)
 {
-	memcpy(pBuffer, m_pBuffer, uiMaxLength);
-	return 0; // todo
+	memcpy(pBuffer, m_pBuffer + m_uiSeek, uiByteCountToRead);
+	m_uiSeek += uiByteCountToRead;
+	return uiByteCountToRead;
 }
 
 // write/read all data
-void			MemoryStreamFlow::writeAll(const uint8* pBuffer, uint64 uiLength)
+void			MemoryStreamFlow::writeAll(const uint8* pBuffer, uint64 uiByteCountToWrite)
 {
-	memcpy(m_pBuffer, pBuffer, uiLength);
+	writeOnce(pBuffer, uiByteCountToWrite);
 }
 
-void			MemoryStreamFlow::readAll(uint8* pBuffer, uint64 uiLength)
+void			MemoryStreamFlow::readAll(uint8* pBuffer, uint64 uiByteCountToRead)
 {
-	memcpy(pBuffer, m_pBuffer, uiLength);
+	readOnce(pBuffer, uiByteCountToRead);
 }
 
 // seek
-void			MemoryStreamFlow::seek(uint64 uiLength)
+void			MemoryStreamFlow::seek(uint64 uiIndex)
 {
+	m_uiSeek = uiIndex;
 }
 
 // flush

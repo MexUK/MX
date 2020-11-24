@@ -22,11 +22,11 @@ public:
 	bool					open();
 	void					close();
 
-	void					writeOnce(const uint8* pBuffer, uint64 uiMaxLength);
-	void					readOnce(uint8* pBuffer, uint64 uiMaxLength);
+	void					writeOnce(const uint8* pBuffer, uint64 uiByteCountToWrite);
+	void					readOnce(uint8* pBuffer, uint64 uiByteCountToRead);
 
-	void					writeAll(const uint8* pBuffer, uint64 uiLength);
-	void					readAll(uint8* pBuffer, uint64 uiLength);
+	void					writeAll(const uint8* pBuffer, uint64 uiByteCountToWrite);
+	void					readAll(uint8* pBuffer, uint64 uiByteCountToRead);
 
 	void					seek(uint64 uiIndex);
 

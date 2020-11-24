@@ -21,11 +21,11 @@ public:
 	virtual void			open() = 0;
 	virtual void			close() = 0;
 
-	virtual uint64			writeOnce(const uint8* pBuffer, uint64 uiMaxLength) = 0;
-	virtual uint64			readOnce(uint8* pBuffer, uint64 uiMaxLength) = 0;
+	virtual uint64			writeOnce(const uint8* pBuffer, uint64 uiByteCountToWrite) = 0;
+	virtual uint64			readOnce(uint8* pBuffer, uint64 uiByteCountToRead) = 0;
 
-	virtual void			writeAll(const uint8* pBuffer, uint64 uiLength) = 0;
-	virtual void			readAll(uint8* pBuffer, uint64 uiLength) = 0;
+	virtual void			writeAll(const uint8* pBuffer, uint64 uiByteCountToWrite) = 0;
+	virtual void			readAll(uint8* pBuffer, uint64 uiByteCountToRead) = 0;
 
 	virtual void			seek(uint64 uiIndex) = 0;
 

@@ -10,6 +10,7 @@ class mx::MemoryStreamFlow : public mx::StreamFlow
 {
 private:
 	char*					m_pBuffer;
+	uint64					m_uiSeek;
 
 public:
 	MemoryStreamFlow();
@@ -21,11 +22,11 @@ public:
 	virtual void			open() override;
 	virtual void			close() override;
 
-	virtual uint64			writeOnce(const uint8* pBuffer, uint64 uiMaxLength) override;
-	virtual uint64			readOnce(uint8* pBuffer, uint64 uiMaxLength) override;
+	virtual uint64			writeOnce(const uint8* pBuffer, uint64 uiByteCountToWrite) override;
+	virtual uint64			readOnce(uint8* pBuffer, uint64 uiByteCountToRead) override;
 
-	virtual void			writeAll(const uint8* pBuffer, uint64 uiLength) override;
-	virtual void			readAll(uint8* pBuffer, uint64 uiLength) override;
+	virtual void			writeAll(const uint8* pBuffer, uint64 uiByteCountToWrite) override;
+	virtual void			readAll(uint8* pBuffer, uint64 uiByteCountToRead) override;
 
 	virtual void			seek(uint64 uiIndex) override;
 

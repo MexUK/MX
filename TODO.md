@@ -1,10 +1,14 @@
+Please note, this todo list is incomplete.
+
+
+
 add DirectX GPU code.
 
 fix all compiler warnings.
 
-add code for memory stream.
-
 add code for directory stream.
+
+check for file errors in file stream code.
 
 support x64 too.
 
@@ -18,4 +22,5 @@ research better way to load/unload gdi plus. only load if not loaded. only unloa
 
 support other platforms too.
 
-(This todo list is incomplete).
+use size_t where applicable instead of uint64/uint32/unsigned long/etc.
+
