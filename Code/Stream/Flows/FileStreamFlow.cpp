@@ -74,7 +74,7 @@ void			FileStreamFlow::open()
 		}
 	}
 
-	//m_file.seekp(0);
+	seek(0);
 }
 
 void			FileStreamFlow::close()
@@ -96,7 +96,7 @@ uint64			FileStreamFlow::writeOnce(const uint8* pBuffer, uint64 uiByteCountToWri
 	streampos posAfterWrite = m_file.tellp();
 	uint64 uiByteWrittenCount = posAfterWrite - posBeforeWrite;
 
-	return uiByteCountToWrite;
+	return uiByteWrittenCount;
 }
 
 uint64			FileStreamFlow::readOnce(uint8* pBuffer, uint64 uiMaxLength)
@@ -107,15 +107,21 @@ uint64			FileStreamFlow::readOnce(uint8* pBuffer, uint64 uiMaxLength)
 }
 
 // write/read all data
-void			FileStreamFlow::writeAll(const uint8* pBuffer, uint64 uiLength)
+void			FileStreamFlow::writeAll(const uint8* pBuffer, uint64 uiByteCountToWrite)
 {
+	if (pBuffer == nullptr)
+		return;
+
 	uint64 uiByteCountWritten = 0;
-	uint64 uiByteCountToWrite = uiLength;
-	while(uiByteCountWritten < uiLength)
+	uint64 uiByteCountWrittenOnce = 0;
+	uint64 uiRemainingByteCountToWrite = uiByteCountToWrite;
+	do
 	{
-		uiByteCountWritten += writeOnce(pBuffer + uiByteCountWritten, uiByteCountToWrite);
-		uiByteCountToWrite -= uiByteCountWritten;
+		uiByteCountWrittenOnce = writeOnce(pBuffer + uiByteCountWritten, uiRemainingByteCountToWrite);
+		uiByteCountWritten += uiByteCountWrittenOnce;
+		uiRemainingByteCountToWrite -= uiByteCountWrittenOnce;
 	}
+	while (uiByteCountWritten < uiByteCountToWrite);
 }
 
 void			FileStreamFlow::readAll(uint8* pBuffer, uint64 uiLength)
@@ -135,9 +141,6 @@ void			FileStreamFlow::seek(uint64 uiIndex)
 void			FileStreamFlow::flush()
 {
 	ensureOpen();
-
-	//m_file.write(m_szBuffer, m_uiBufferLength); // todo - use tellp()
-	//m_uiBufferLength = 0;
 
 	m_file.flush();
 }

@@ -20,7 +20,7 @@ BMPFormat::BMPFormat(mx::Stream& stream) :
 	)),
 	m_bSerializeHeader1(true),
 	m_uiBMPVersion(4),
-	m_usColourPlaneCount(0)
+	m_usColourPlaneCount(1)
 {
 }
 
@@ -29,7 +29,7 @@ BMPFormat::BMPFormat(Stream& stream, ImageData& image) :
 	m_image(image),
 	m_bSerializeHeader1(true),
 	m_uiBMPVersion(4),
-	m_usColourPlaneCount(0)
+	m_usColourPlaneCount(1)
 {
 }
 
@@ -60,11 +60,8 @@ void			BMPFormat::_serialize(void)
 // BMP version
 uint32			BMPFormat::detectBMPVersion(void)
 {
-	Stream stream;
-	Reader reader(stream);
-
 	uint32 uiBMPVersion = 0;
-	string strHeader = reader.str(2);
+	string strHeader = m_reader.str(2);
 	if (strHeader.c_str()[0] == '\0' && strHeader.c_str()[1] == '\0')
 	{
 		// BMP version 1.x
@@ -73,8 +70,8 @@ uint32			BMPFormat::detectBMPVersion(void)
 	else if (strHeader.c_str()[0] == 'B' && strHeader.c_str()[1] == 'M')
 	{
 		// BMP version 2.x, 3.x or 4.x
-		reader.seek(MX_BMP_HEADER1_SIZE);
-		switch (reader.ui32())
+		m_reader.seek(MX_BMP_HEADER1_SIZE);
+		switch (m_reader.ui32())
 		{
 		case 12: // BMP version 2.x
 			uiBMPVersion = 2;
@@ -86,7 +83,7 @@ uint32			BMPFormat::detectBMPVersion(void)
 			uiBMPVersion = 4;
 		}
 	}
-	reader.seek(2);
+	m_reader.seek(2);
 	return uiBMPVersion;
 }
 
@@ -165,7 +162,7 @@ void			BMPFormat::serializeVersion2(void)
 	m_writer.ui32(12);
 	m_writer.ui32(m_image.m_vecSize.x);
 	m_writer.ui32(m_image.m_vecSize.y);
-	m_writer.ui16(1); // plane count
+	m_writer.ui16(m_usColourPlaneCount);
 	m_writer.ui16(m_image.getBitsPerPixel());
 
 	serializeTableAndImageData();
@@ -179,10 +176,10 @@ void			BMPFormat::serializeVersion3(void)
 	m_writer.ui32(MX_BMP_HEADER2_VERSION3_SIZE);
 	m_writer.ui32(m_image.m_vecSize.x);
 	m_writer.ui32(m_image.m_vecSize.y);
-	m_writer.ui16(1); // plane count
+	m_writer.ui16(m_usColourPlaneCount);
 	m_writer.ui16(m_image.getBitsPerPixel());
 	m_writer.ui32(0); // uiCompressionMethods
-	m_writer.ui32(m_image.m_vecSize.x * m_image.m_vecSize.y * (uint32)(((float32)m_image.getBitsPerPixel()) / 8.0f)); // uiBitmapSize
+	m_writer.ui32(m_image.getDataSize());
 	m_writer.ui32(0); // uiHorizontalResolution
 	m_writer.ui32(0); // uiVerticalResolution
 	m_writer.ui32(0); // uiColoursUsed
@@ -199,10 +196,10 @@ void			BMPFormat::serializeVersion4(void)
 	m_writer.ui32(MX_BMP_HEADER2_VERSION4_SIZE);
 	m_writer.ui32(m_image.m_vecSize.x);
 	m_writer.ui32(m_image.m_vecSize.y);
-	m_writer.ui16(1); // plane count
+	m_writer.ui16(m_usColourPlaneCount);
 	m_writer.ui16(m_image.getBitsPerPixel());
 	m_writer.ui32(0); // uiCompressionMethods
-	m_writer.ui32(m_image.m_vecSize.x * m_image.m_vecSize.y * (uint32)((float32)m_image.getBitsPerPixel() / 8.0f)); // uiBitmapSize
+	m_writer.ui32(m_image.getDataSize());
 	m_writer.ui32(0); // uiHorizontalResolution
 	m_writer.ui32(0); // uiVerticalResolution
 	m_writer.ui32(0); // uiColoursUsed

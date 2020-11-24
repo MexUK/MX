@@ -42,7 +42,7 @@ void mx::Image::convertToGIF(std::string& strPathIn, std::string& strPathOut)
 void mx::Image::convertToDDS(std::string& strPathIn, std::string& strPathOut)
 {
 	mx::ImageData image;
-	load(strPathIn, image);
+	load(strPathIn, image, 4);
 	if (!image.m_pData)
 		return;
 
@@ -53,7 +53,7 @@ void mx::Image::saveDDSDXT1(std::string& strFilePathOut, mx::ImageData& image)
 {
 	Dir::create(strFilePathOut);
 
-	unsigned char* pDataOut = new unsigned char[image.getDataSize()];
+	unsigned char* pDataOut = new unsigned char[(image.m_vecSize.x * image.m_vecSize.y) / 2];
 	squish::CompressImage(image.m_pData, image.m_vecSize.x, image.m_vecSize.y, pDataOut, kDxt1);
 
 	Stream stream(strFilePathOut);
@@ -151,7 +151,7 @@ void mx::Image::resizeImages(std::string& strDirIn, std::string& strDirOut, floa
 }
 
 // load image
-void mx::Image::load(std::string& strPathIn, ImageData& imageData)
+void mx::Image::load(std::string& strPathIn, ImageData& imageData, uint32 uiChannelCount)
 {
 	std::string strExt = Path::ext(strPathIn);
 	std::string strExtUpper = String::upper(strExt);
@@ -186,10 +186,12 @@ void mx::Image::load(std::string& strPathIn, ImageData& imageData)
 		|| strExtUpper == "HDR")
 	{
 		int w, h, n;
-		uint8 *pData = stbi_load(strPathIn.c_str(), &w, &h, &n, 0);
+		uint8 *pData = stbi_load(strPathIn.c_str(), &w, &h, &n, uiChannelCount);
 		if (pData)
 		{
-			imageData.m_uiFormat = n == 3 ? UNCOMPRESSED_RGB : UNCOMPRESSED_RGBA;
+			if (uiChannelCount == 0)
+				uiChannelCount = n;
+			imageData.m_uiFormat = uiChannelCount == 3 ? UNCOMPRESSED_RGB : UNCOMPRESSED_RGBA;
 			imageData.m_vecSize.x = w;
 			imageData.m_vecSize.y = h;
 			imageData.m_pData = pData;

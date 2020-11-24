@@ -167,37 +167,16 @@ void					Writer::mstr(string& strData)
 // vector
 void					Writer::vec2(glm::vec2& vec)
 {
-	f32(vec[0]);
-	f32(vec[1]);
+	cstr((char*)&vec.x, sizeof(glm::vec2));
 }
 
 void					Writer::vec3(glm::vec3& vec)
 {
-	f32(vec[0]);
-	f32(vec[1]);
-	f32(vec[2]);
+	cstr((char*)&vec.x, sizeof(glm::vec3));
 }
 
 // matrix
 void					Writer::mat4(glm::mat4& mat)
 {
-	f32(mat[0][0]);
-	f32(mat[0][1]);
-	f32(mat[0][2]);
-	f32(mat[0][3]);
-
-	f32(mat[1][0]);
-	f32(mat[1][1]);
-	f32(mat[1][2]);
-	f32(mat[1][3]);
-
-	f32(mat[2][0]);
-	f32(mat[2][1]);
-	f32(mat[2][2]);
-	f32(mat[2][3]);
-
-	f32(mat[3][0]);
-	f32(mat[3][1]);
-	f32(mat[3][2]);
-	f32(mat[3][3]);
+	cstr((char*)&mat[0].x, sizeof(glm::mat4));
 }

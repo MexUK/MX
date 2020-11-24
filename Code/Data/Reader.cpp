@@ -160,17 +160,14 @@ string					Reader::mstr()
 glm::vec2				Reader::vec2()
 {
 	glm::vec2 vec;
-	vec[0] = f32();
-	vec[1] = f32();
+	cstr((char*)&vec.x, sizeof(glm::vec2));
 	return vec;
 }
 
 glm::vec3				Reader::vec3()
 {
 	glm::vec3 vec;
-	vec[0] = f32();
-	vec[1] = f32();
-	vec[2] = f32();
+	cstr((char*)&vec.x, sizeof(glm::vec3));
 	return vec;
 }
 
@@ -178,26 +175,6 @@ glm::vec3				Reader::vec3()
 glm::mat4				Reader::mat4()
 {
 	glm::mat4 mat;
-
-	mat[0][0] = f32();
-	mat[0][1] = f32();
-	mat[0][2] = f32();
-	mat[0][3] = f32();
-
-	mat[1][0] = f32();
-	mat[1][1] = f32();
-	mat[1][2] = f32();
-	mat[1][3] = f32();
-
-	mat[2][0] = f32();
-	mat[2][1] = f32();
-	mat[2][2] = f32();
-	mat[2][3] = f32();
-
-	mat[3][0] = f32();
-	mat[3][1] = f32();
-	mat[3][2] = f32();
-	mat[3][3] = f32();
-
+	cstr((char*)&mat[0].x, sizeof(glm::mat4));
 	return mat;
 }

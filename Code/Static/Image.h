@@ -26,7 +26,7 @@ public:
 	static void resizeImages(std::string& strDirIn, std::string& strDirOut, int iWidth, int iHeight);
 	static void resizeImages(std::string& strDirIn, std::string& strDirOut, float fScale);
 
-	static void load(std::string& strPathIn, ImageData& imageData);
+	static void load(std::string& strPathIn, ImageData& imageData, uint32 uiChannelCount = 0);
 
 private:
 	static void convertImageFormat(std::string& strPathIn, std::string& strPathOut, std::wstring wstrEncodingTypeOut);
