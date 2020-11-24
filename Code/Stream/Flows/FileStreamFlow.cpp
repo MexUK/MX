@@ -7,8 +7,7 @@ using namespace std;
 using namespace mx;
 
 FileStreamFlow::FileStreamFlow() :
-	StreamFlow(STREAM_DEVICE_TYPE_FILE)//,
-	//m_uiBufferLength(0)
+	StreamFlow(STREAM_DEVICE_TYPE_FILE)
 {
 }
 
@@ -82,7 +81,6 @@ void			FileStreamFlow::close()
 	ensureOpen();
 
 	m_file.close();
-
 	m_strFilePath = "";
 }
 
@@ -102,8 +100,13 @@ uint64			FileStreamFlow::writeOnce(const uint8* pBuffer, uint64 uiByteCountToWri
 uint64			FileStreamFlow::readOnce(uint8* pBuffer, uint64 uiMaxLength)
 {
 	ensureOpen();
+
+	streampos posBeforeRead = m_file.tellg();
 	m_file.read((char*)pBuffer, uiMaxLength);
-	return 0; // todo
+	streampos posAfterRead = m_file.tellg();
+	uint64 uiByteReadCount = posAfterRead - posBeforeRead;
+
+	return uiByteReadCount;
 }
 
 // write/read all data
@@ -124,15 +127,28 @@ void			FileStreamFlow::writeAll(const uint8* pBuffer, uint64 uiByteCountToWrite)
 	while (uiByteCountWritten < uiByteCountToWrite);
 }
 
-void			FileStreamFlow::readAll(uint8* pBuffer, uint64 uiLength)
+void			FileStreamFlow::readAll(uint8* pBuffer, uint64 uiByteCountToRead)
 {
-	m_file.read((char*)pBuffer, uiLength); // todo
+	if (pBuffer == nullptr)
+		return;
+
+	uint64 uiByteCountRead = 0;
+	uint64 uiByteCountReadOnce = 0;
+	uint64 uiRemainingByteCountToRead = uiByteCountToRead;
+	do
+	{
+		uiByteCountReadOnce = readOnce(pBuffer + uiByteCountRead, uiRemainingByteCountToRead);
+		uiByteCountRead += uiByteCountReadOnce;
+		uiRemainingByteCountToRead -= uiByteCountReadOnce;
+	}
+	while (uiByteCountRead < uiByteCountToRead);
 }
 
 // seek
 void			FileStreamFlow::seek(uint64 uiIndex)
 {
 	ensureOpen();
+
 	m_file.seekg(uiIndex);
 	m_file.seekp(uiIndex);
 }
