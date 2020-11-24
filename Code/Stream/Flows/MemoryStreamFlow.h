@@ -15,7 +15,7 @@ private:
 public:
 	MemoryStreamFlow();
 
-	virtual void			prepare(std::string& strFilePath) override;
+	virtual void			prepare(std::string& strFilePath, bool bCheckForErrors) override;
 	virtual void			prepare(char* pBuffer) override;
 
 	virtual bool			isOpen() override;

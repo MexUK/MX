@@ -14,11 +14,11 @@ Stream::Stream(EStreamDeviceType uiDeviceType) :
 		setDeviceType(uiDeviceType);
 }
 
-Stream::Stream(string& strFilePath) :
+Stream::Stream(string& strFilePath, bool bCheckForErrors) :
 	m_pFlow(nullptr)
 {
 	setDeviceType(STREAM_DEVICE_TYPE_FILE);
-	m_pFlow->prepare(strFilePath);
+	m_pFlow->prepare(strFilePath, bCheckForErrors);
 }
 
 Stream::~Stream()

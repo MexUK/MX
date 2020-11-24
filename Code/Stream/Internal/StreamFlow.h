@@ -14,7 +14,7 @@ private:
 public:
 	StreamFlow(EStreamDeviceType uiDeviceType);
 
-	virtual void			prepare(std::string& strFilePath) = 0;
+	virtual void			prepare(std::string& strFilePath, bool bCheckForErrors) = 0;
 	virtual void			prepare(char* pBuffer) = 0;
 
 	virtual bool			isOpen() = 0;

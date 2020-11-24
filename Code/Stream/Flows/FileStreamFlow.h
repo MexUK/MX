@@ -12,12 +12,13 @@ class mx::FileStreamFlow : public mx::StreamFlow
 private:
 	std::string				m_strFilePath;
 	std::fstream			m_file;
+	bool					m_bCheckForErrors;
 
 public:
 	FileStreamFlow();
 	~FileStreamFlow();
 
-	virtual void			prepare(std::string& strFilePath) override;
+	virtual void			prepare(std::string& strFilePath, bool bCheckForErrors) override;
 	virtual void			prepare(char* pBuffer) override;
 
 	virtual bool			isOpen() override;

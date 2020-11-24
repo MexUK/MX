@@ -6,6 +6,13 @@
 #include "mx.h"
 #include "Internal/EStreamDeviceType.h"
 
+/*
+* Notes.
+* If bCheckForErrors is true,
+*	error checking will occur for all fstream calls, throwing a StreamException on any error,
+*	and fstream::flush will be called after each fstream::write call, which enables checking if fstream::write failed.
+*/
+
 class mx::Stream
 {
 public:
@@ -13,7 +20,7 @@ public:
 
 public:
 	Stream(EStreamDeviceType uiDeviceTypeIn = mx::STREAM_DEVICE_TYPE_UNKNOWN);
-	Stream(std::string& strFilePath);
+	Stream(std::string& strFilePath, bool bCheckForErrors = true);
 	~Stream();
 
 	void					setDeviceType(EStreamDeviceType uiDeviceType);

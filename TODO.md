@@ -8,8 +8,6 @@ fix all compiler warnings.
 
 add code for directory stream.
 
-check for file errors in file stream code.
-
 support x64 too.
 
 ensure both DLL injection techniques are in the same file. (currently one is in Static/Memory and the other one is in Static/Process).

@@ -12,7 +12,7 @@ MemoryStreamFlow::MemoryStreamFlow() :
 }
 
 // prepare
-void			MemoryStreamFlow::prepare(string& strFilePath)
+void			MemoryStreamFlow::prepare(string& strFilePath, bool bCheckForErrors)
 {
 	throw new StreamException(STREAM_ERROR_INVALID_PREPARE_SIGNATURE_FOR_DEVICE_TYPE);
 }

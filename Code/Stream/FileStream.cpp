@@ -4,8 +4,8 @@
 using namespace std;
 using namespace mx;
 
-FileStream::FileStream(string& strFilePath) :
+FileStream::FileStream(string& strFilePath, bool bCheckForErrors) :
 	Stream(STREAM_DEVICE_TYPE_FILE)
 {
-	m_pFlow->prepare(strFilePath);
+	m_pFlow->prepare(strFilePath, bCheckForErrors);
 }

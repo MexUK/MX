@@ -8,5 +8,5 @@
 class mx::FileStream : mx::Stream
 {
 public:
-	FileStream(std::string& strFilePath);
+	FileStream(std::string& strFilePath, bool bCheckForErrors = true);
 };
