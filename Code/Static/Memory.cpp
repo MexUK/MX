@@ -6,6 +6,7 @@ using namespace mx;
 // function invoking
 void			Memory::callCdecl(unsigned long uiFunctionAddress, unsigned short usArgumentCount, ...)
 {
+#ifdef MX_ARCHITECTURE_32
 	va_list vlArgs;
 	va_start(vlArgs, usArgumentCount);
 	unsigned long uiArgument;
@@ -25,7 +26,11 @@ void			Memory::callCdecl(unsigned long uiFunctionAddress, unsigned short usArgum
 		call	uiFunctionAddress
 		add		esp, uiStackByteCount
 	}
-
+#else
+#ifdef MX_ARCHITECTURE_64
+	// todo
+#endif
+#endif
 	/*
 	va_list vlArgs;
 	va_start(vlArgs, usArgumentCount);
@@ -39,6 +44,7 @@ void			Memory::callCdecl(unsigned long uiFunctionAddress, unsigned short usArgum
 
 void			Memory::callThiscall(unsigned long uiFunctionAddress, unsigned long uiThis, unsigned short usArgumentCount, ...)
 {
+#ifdef MX_ARCHITECTURE_32
 	va_list vlArgs;
 	va_start(vlArgs, usArgumentCount);
 	unsigned long uiArgument;
@@ -57,10 +63,16 @@ void			Memory::callThiscall(unsigned long uiFunctionAddress, unsigned long uiThi
 		mov		ecx, uiThis
 		call	uiFunctionAddress
 	}
+#else
+#ifdef MX_ARCHITECTURE_64
+	// todo
+#endif
+#endif
 }
 
 void			Memory::call(unsigned long uiFunctionAddress, unsigned short usArgumentCount, ...)
 {
+#ifdef MX_ARCHITECTURE_32
 	va_list vlArgs;
 	va_start(vlArgs, usArgumentCount);
 	unsigned long uiArgument;
@@ -78,7 +90,12 @@ void			Memory::call(unsigned long uiFunctionAddress, unsigned short usArgumentCo
 	{
 		call	uiFunctionAddress
 	}
-	
+#else
+#ifdef MX_ARCHITECTURE_64
+	// todo
+#endif
+#endif
+
 	/*
 	va_list vlArgs;
 	va_start(vlArgs, usArgumentCount);
@@ -93,7 +110,13 @@ void			Memory::call(unsigned long uiFunctionAddress, unsigned short usArgumentCo
 // machine code modifying
 void			Memory::setMemoryNopped(unsigned long uiAddress, unsigned short usByteCount)
 {
+#ifdef MX_ARCHITECTURE_32
 	memset((void*)uiAddress, 0x90, usByteCount);
+#else
+#ifdef MX_ARCHITECTURE_64
+	// todo
+#endif
+#endif
 }
 
 void			Memory::removeFunctionCall(unsigned long uiCallAddress, unsigned short usArgumentCount, bool bCallerCleanStack)
@@ -101,6 +124,7 @@ void			Memory::removeFunctionCall(unsigned long uiCallAddress, unsigned short us
 	//removeCallArguments(uiCallAddress, usArgumentCount);
 	//removeInstruction_call(uiCallAddress);
 	//removeCallerStackCleanUp(uiCallAddress + 5);
+#ifdef MX_ARCHITECTURE_32
 	uint8 iNOP = (uint8) 0x90;
 	for (int i = 1; i <= usArgumentCount; i++)
 	{
@@ -118,6 +142,11 @@ void			Memory::removeFunctionCall(unsigned long uiCallAddress, unsigned short us
 			*(char*)(uiCallAddress + 5 + i) = iNOP;
 		}
 	}
+#else
+#ifdef MX_ARCHITECTURE_64
+	// todo
+#endif
+#endif
 }
 
 // page access
@@ -247,7 +276,13 @@ uint32_t							Memory::getEIP(HANDLE hThread)
 		return 0;
 	}
 
+#ifdef MX_ARCHITECTURE_32
 	return context.Eip;
+#else
+#ifdef MX_ARCHITECTURE_64
+	return context.Rip;
+#endif
+#endif
 }
 
 bool								Memory::setEIP(HANDLE hThread, uint32_t uiAddr)
@@ -261,7 +296,13 @@ bool								Memory::setEIP(HANDLE hThread, uint32_t uiAddr)
 		return false;
 	}
 
+#ifdef MX_ARCHITECTURE_32
 	context.Eip = uiAddr;
+#else
+#ifdef MX_ARCHITECTURE_64
+	context.Rip = uiAddr;
+#endif
+#endif
 	context.ContextFlags = CONTEXT_FULL;
 	
 	if (0 == SetThreadContext(hThread, &context))
@@ -318,6 +359,7 @@ bool								Memory::addCode(HANDLE hProcess, uint8_t *pCodeData, uint32_t uiCode
 
 bool								Memory::loadDLL(HANDLE hProcess, HANDLE hThread, string& strDllFilePath)
 {
+#ifdef MX_ARCHITECTURE_32
 	// Note: Process hProcess must be suspended when calling this function.
 
 	// prepare snippet to inject into remote process
@@ -348,4 +390,10 @@ bool								Memory::loadDLL(HANDLE hProcess, HANDLE hThread, string& strDllFileP
 		return false;
 
 	return true;
+#else
+#ifdef MX_ARCHITECTURE_64
+// todo
+return true;
+#endif
+#endif
 }

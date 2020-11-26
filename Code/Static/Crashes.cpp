@@ -31,6 +31,7 @@ string					Crashes::getLogText(_EXCEPTION_POINTERS* pExceptionInfo)
 {
 	CONTEXT* ctx = pExceptionInfo->ContextRecord;
 	char szLogText[4096];
+#ifdef MX_ARCHITECTURE_32
 	sprintf_s(
 		szLogText,
 
@@ -61,5 +62,39 @@ string					Crashes::getLogText(_EXCEPTION_POINTERS* pExceptionInfo)
 		ctx->Edi,
 		ctx->EFlags
 	);
+#else
+#ifdef MX_ARCHITECTURE_64
+	sprintf_s(
+		szLogText,
+
+		"Date: %s\n"
+		"Extra: %s\n"
+		"EIP: 0x%x\n"
+		"EAX: 0x%x\n"
+		"EBX: 0x%x\n"
+		"ECX: 0x%x\n"
+		"EDX: 0x%x\n"
+		"ESP: 0x%x\n"
+		"EBP: 0x%x\n"
+		"ESI: 0x%x\n"
+		"EDI: 0x%x\n"
+		"EFlags: 0x%x\n"
+		"------------------------------------------------------------------\n",
+
+		String::getTimestampText().c_str(),
+		m_strExtraText.c_str(),
+		ctx->Rip,
+		ctx->Rax,
+		ctx->Rbx,
+		ctx->Rcx,
+		ctx->Rdx,
+		ctx->Rsp,
+		ctx->Rbp,
+		ctx->Rsi,
+		ctx->Rdi,
+		ctx->EFlags
+	);
+#endif
+#endif
 	return szLogText;
 }

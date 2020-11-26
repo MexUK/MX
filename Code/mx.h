@@ -11,6 +11,23 @@
 #include "ThirdParty/GLM/gtc/type_ptr.hpp"
 #include "ThirdParty/GLM/gtx/matrix_decompose.hpp"
 
+// Visual Studio
+#if _WIN32 || _WIN64
+	#if _WIN64
+		#define MX_ARCHITECTURE_64
+	#else
+		#define MX_ARCHITECTURE_32
+	#endif
+#endif
+// GCC
+#if __GNUC__
+	#if __x86_64__ || __ppc64__
+		#define MX_ARCHITECTURE_64
+	#else
+		#define MX_ARCHITECTURE_32
+	#endif
+#endif
+
 #ifndef MX_SKIP_THE_NO_DEFINES
 	#define NOGDICAPMASKS
 	//#define NOVIRTUALKEYCODES

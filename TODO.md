@@ -22,3 +22,5 @@ try to support as much of the BMP format that I can.
 
 add an Image::save function, to go with the Image::load function.
 
+potentially replace gdi plus usage with stb usage.
+

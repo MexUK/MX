@@ -20,7 +20,7 @@ public:
 
 	static bool								setPageFullAccess(unsigned long lpAddress, unsigned long dwSize);
 	
-	static void*	realloc(uint32_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t uiNewArrayCount);
+	static void*							realloc(uint32_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t uiNewArrayCount);
 
 	template <size_t uiInnerDimensionSize>
 	static void								updateAddresses(void *pNewDataStart, uint32 uiAddresses[][uiInnerDimensionSize], uint32 uiMaxAddrMatch = 0xFFFFFF);
@@ -31,7 +31,6 @@ public:
 												unsigned long uiAddressEnd,
 												std::vector<unsigned long>& vecAddresses,
 												std::vector<std::vector<unsigned long>>& vecAddressReferences);
-	static std::string						generateAddressOverrideCode(unsigned long uiAddressStart, unsigned long uiAddressEnd);
 	
 	static uint32_t							getEIP(HANDLE hThread);
 	static bool								setEIP(HANDLE hThread, uint32_t uiAddr);
@@ -46,6 +45,7 @@ private:
 	__forceinline static void				call(unsigned long uiFunctionAddress);
 };
 
+#ifdef MX_ARCHITECTURE_32
 // assembly instruction wrappers
 void			mx::Memory::push(unsigned long uiArgument)
 {
@@ -95,3 +95,4 @@ void							mx::Memory::updateAddresses(void *pNewDataStart, uint32 pAddresses[][
 		}
 	}
 }
+#endif
