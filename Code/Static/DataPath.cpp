@@ -15,7 +15,7 @@ string					DataPath::getLocalAppDataPath(void)
 	wstringstream ss;
 	ss << pLocalAppDataFolderPath;
 	wstring wstr = ss.str();
-	string str = String::convertStdWStringToStdString(wstr);
+	string str = String::wtoa(wstr);
 	string strLocalAppFolderPath = Path::slash(str);
 	CoTaskMemFree(static_cast<void*>(pLocalAppDataFolderPath));
 	return Path::slash(strLocalAppFolderPath);

@@ -219,7 +219,7 @@ void mx::Image::unloadGdiplus()
 
 Gdiplus::Image* mx::Image::loadImageGDIPlus(std::string& strPathIn)
 {
-	return new Gdiplus::Image(String::convertStdStringToStdWString(strPathIn).c_str(), FALSE);
+	return new Gdiplus::Image(String::atow(strPathIn).c_str(), FALSE);
 }
 
 void mx::Image::saveImageGDIPlus(std::string& strPathOut, Gdiplus::Image *pImageOut)
@@ -236,7 +236,7 @@ void mx::Image::saveImageGDIPlus(std::string& strPathOut, Gdiplus::Image *pImage
 	std::string strDir = Path::getDirectory(strPathOut);
 	Dir::create(strDir);
 
-	pImageOut->Save(String::convertStdStringToStdWString(strPathOut).c_str(), &clsid);
+	pImageOut->Save(String::atow(strPathOut).c_str(), &clsid);
 }
 
 void mx::Image::convertImageFormat(std::string& strPathIn, std::string& strPathOut, std::wstring wstrEncodingTypeOut)

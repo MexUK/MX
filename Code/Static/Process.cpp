@@ -6,10 +6,10 @@
 using namespace std;
 using namespace mx;
 
-// process
+// start existence
 bool							Process::startProcess(string& strEXEFilePath)
 {
-	return (int) ShellExecute(NULL, L"open", String::convertStdStringToStdWString(strEXEFilePath).c_str(), NULL, NULL, SW_SHOWNORMAL) > 32;
+	return (int) ShellExecute(NULL, L"open", String::atow(strEXEFilePath).c_str(), NULL, NULL, SW_SHOWNORMAL) > 32;
 }
 
 bool							Process::isProcessActive(string& strExecutableName)
@@ -22,7 +22,7 @@ bool							Process::isProcessActive(string& strExecutableName)
 	Process32First(hProcessSnap, &pe32);
 	do
 	{
-		if (wstring(pe32.szExeFile) == String::convertStdStringToStdWString(strExecutableName))
+		if (wstring(pe32.szExeFile) == String::atow(strExecutableName))
 		{
 			bFound = true;
 			break;
@@ -33,6 +33,7 @@ bool							Process::isProcessActive(string& strExecutableName)
 	return bFound;
 }
 
+// process fetching
 HANDLE							Process::getProcessByName(string& strExecutableName, uint32_t& uiProcessIdOut)
 {
 	bool bFound = false;
@@ -43,7 +44,7 @@ HANDLE							Process::getProcessByName(string& strExecutableName, uint32_t& uiPr
 	Process32First(hProcessSnap, &pe32);
 	do
 	{
-		if (wstring(pe32.szExeFile) == String::convertStdStringToStdWString(strExecutableName))
+		if (wstring(pe32.szExeFile) == String::atow(strExecutableName))
 		{
 			bFound = true;
 			uiProcessIdOut = pe32.th32ProcessID;
@@ -56,12 +57,6 @@ HANDLE							Process::getProcessByName(string& strExecutableName, uint32_t& uiPr
 	return nullptr;
 }
 
-// process code
-void							Process::injectLibrary(string& strLibraryPath)
-{
-	LoadLibrary(String::convertStdStringToStdWString(strLibraryPath).c_str());
-}
-
 // EXE file
 string							Process::getEXEFilePath(void)
 {
@@ -69,7 +64,7 @@ string							Process::getEXEFilePath(void)
 	wmemset(wszRunningProgramPath, 0, MAX_PATH);
 	GetModuleFileName(NULL, wszRunningProgramPath, MAX_PATH);
 	wstring wstr = wszRunningProgramPath;
-	return String::convertStdWStringToStdString(wstr);
+	return String::wtoa(wstr);
 }
 
 // threads
@@ -81,7 +76,6 @@ HANDLE							Process::getPrimaryThread(uint32_t uiProcessId, uint32_t& uiThreadI
 	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
 	if (hSnapshot == INVALID_HANDLE_VALUE)
 	{
-		//CUtility::debug("0");
 		CloseHandle(hSnapshot);
 		return nullptr;
 	}
@@ -100,7 +94,6 @@ HANDLE							Process::getPrimaryThread(uint32_t uiProcessId, uint32_t& uiThreadI
 
 	if (Thread32First(hSnapshot, &te32) == FALSE)
 	{
-		//CUtility::debug("1");
 		CloseHandle(hSnapshot);
 		return nullptr;
 	}
@@ -113,8 +106,6 @@ HANDLE							Process::getPrimaryThread(uint32_t uiProcessId, uint32_t& uiThreadI
 			{
 				if (GetThreadTimes(hThread, &creationTime, &exitTime, &kernelTime, &userTime) != 0)
 				{
-					//CUtility::debugva("thread id %u creationTime %u", GetThreadId(hThread), creationTime.dwLowDateTime);
-
 					if (creationTime.dwLowDateTime < dwLowestCreationTime)
 					{
 						if (hThreadRet != nullptr)
@@ -164,19 +155,23 @@ HANDLE							Process::getCurrentThreadNonPseudo(void)
 		hThread = GetCurrentThread(),
 		hNewThread;
 	if (DuplicateHandle(GetCurrentProcess(), hThread, GetCurrentProcess(), &hNewThread, 0, false, DUPLICATE_SAME_ACCESS) == 0)
-	{
-		//CUtility::debug("failed to duplicate thread handle in CUtility::getCurrentThreadNonPseudo()");
-	}
+		return nullptr;
 	return hNewThread;
 }
 
 // explorer
 void							Process::openFolder(string& strFolderPath)
 {
-	ShellExecute(NULL, NULL, String::convertStdStringToStdWString(strFolderPath).c_str(), NULL, NULL, SW_SHOWNORMAL);
+	shellCommand(strFolderPath);
 }
 
 void							Process::openTextFile(string& strFilePath)
 {
-	ShellExecute(NULL, NULL, String::convertStdStringToStdWString(strFilePath).c_str(), NULL, NULL, SW_SHOWNORMAL);
+	shellCommand(strFilePath);
+}
+
+// shell
+void							Process::shellCommand(string& strText)
+{
+	ShellExecute(NULL, NULL, String::atow(strText).c_str(), NULL, NULL, SW_SHOWNORMAL);
 }

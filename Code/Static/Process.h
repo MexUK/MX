@@ -11,9 +11,6 @@ public:
 	static bool							isProcessActive(std::string& strExecutableName);
 	static HANDLE						getProcessByName(std::string& strExecutableName, uint32_t& uiProcessIdOut);
 
-	// process code
-	static void							injectLibrary(std::string& strLibraryPath);
-	
 	// EXE file
 	static std::string					getEXEFilePath(void);
 
@@ -27,4 +24,7 @@ public:
 
 	// programs
 	static void							openTextFile(std::string& strFilePath);
+
+private:
+	static void							shellCommand(std::string& strText);
 };

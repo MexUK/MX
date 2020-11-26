@@ -37,7 +37,7 @@ vector<string>		Input::openFile(string& strInitialDirKey, string& strExtensionFi
 			// set initial directory
 			wchar_t wszInitialDir[MAX_PATH];
 			wmemset(wszInitialDir, L'\0', MAX_PATH);
-			wmemcpy(wszInitialDir, String::convertStdStringToStdWString(strInitialDir).c_str(), strInitialDir.length());
+			wmemcpy(wszInitialDir, String::atow(strInitialDir).c_str(), strInitialDir.length());
 
 			IShellItem *psiFolder = nullptr;
 			hr = SHCreateItemFromParsingName(wszInitialDir, NULL, IID_PPV_ARGS(&psiFolder));
@@ -53,12 +53,12 @@ vector<string>		Input::openFile(string& strInitialDirKey, string& strExtensionFi
 				wchar_t *wszExtFilter_Name = new wchar_t[50];
 				wmemset(wszExtFilter_Name, L'\0', 50);
 				str = strExtensionFilter + " Files";
-				wmemcpy(wszExtFilter_Name, String::convertStdStringToStdWString(str).c_str(), (strExtensionFilter + " Files").length());
+				wmemcpy(wszExtFilter_Name, String::atow(str).c_str(), (strExtensionFilter + " Files").length());
 
 				wchar_t *wszExtFilter_Spec = new wchar_t[50];
 				wmemset(wszExtFilter_Spec, L'\0', 50);
 				str = "*." + strExtensionFilter;
-				wmemcpy(wszExtFilter_Spec, String::convertStdStringToStdWString(str).c_str(), ("*." + strExtensionFilter).length());
+				wmemcpy(wszExtFilter_Spec, String::atow(str).c_str(), ("*." + strExtensionFilter).length());
 
 				pFileTypes[i].pszName = wszExtFilter_Name;
 				pFileTypes[i].pszSpec = wszExtFilter_Spec;
@@ -105,7 +105,7 @@ vector<string>		Input::openFile(string& strInitialDirKey, string& strExtensionFi
 								if (SUCCEEDED(hr))
 								{
 									wstring wstr = pszFilePath;
-									vecFilePaths.push_back(String::convertStdWStringToStdString(wstr));
+									vecFilePaths.push_back(String::wtoa(wstr));
 									CoTaskMemFree(pszFilePath);
 								}
 
@@ -130,7 +130,7 @@ vector<string>		Input::openFile(string& strInitialDirKey, string& strExtensionFi
 						if (SUCCEEDED(hr))
 						{
 							wstring wstr = pszFilePath;
-							vecFilePaths.push_back(String::convertStdWStringToStdString(wstr));
+							vecFilePaths.push_back(String::wtoa(wstr));
 							CoTaskMemFree(pszFilePath);
 						}
 						pItem->Release();
@@ -183,7 +183,7 @@ string				Input::saveFile(string& strInitialDirKey, string& strExtensionFilters,
 			// set initial directory
 			wchar_t wszInitialDir[MAX_PATH];
 			wmemset(wszInitialDir, L'\0', MAX_PATH);
-			wmemcpy(wszInitialDir, String::convertStdStringToStdWString(strInitialDir).c_str(), strInitialDir.length());
+			wmemcpy(wszInitialDir, String::atow(strInitialDir).c_str(), strInitialDir.length());
 
 			IShellItem *psiFolder = nullptr;
 			hr = SHCreateItemFromParsingName(wszInitialDir, NULL, IID_PPV_ARGS(&psiFolder));
@@ -199,12 +199,12 @@ string				Input::saveFile(string& strInitialDirKey, string& strExtensionFilters,
 				wchar_t *wszExtFilter_Name = new wchar_t[50];
 				wmemset(wszExtFilter_Name, L'\0', 50);
 				str = strExtensionFilter + " Files";
-				wmemcpy(wszExtFilter_Name, String::convertStdStringToStdWString(str).c_str(), (strExtensionFilter + " Files").length());
+				wmemcpy(wszExtFilter_Name, String::atow(str).c_str(), (strExtensionFilter + " Files").length());
 
 				wchar_t *wszExtFilter_Spec = new wchar_t[50];
 				wmemset(wszExtFilter_Spec, L'\0', 50);
 				str = "*." + strExtensionFilter;
-				wmemcpy(wszExtFilter_Spec, String::convertStdStringToStdWString(str).c_str(), ("*." + strExtensionFilter).length());
+				wmemcpy(wszExtFilter_Spec, String::atow(str).c_str(), ("*." + strExtensionFilter).length());
 
 				pFileTypes[i].pszName = wszExtFilter_Name;
 				pFileTypes[i].pszSpec = wszExtFilter_Spec;
@@ -230,7 +230,7 @@ string				Input::saveFile(string& strInitialDirKey, string& strExtensionFilters,
 					if (SUCCEEDED(hr))
 					{
 						wstring wstr = pszFilePath;
-						strChosenFilePath = String::convertStdWStringToStdString(wstr);
+						strChosenFilePath = String::wtoa(wstr);
 						CoTaskMemFree(pszFilePath);
 					}
 					pItem->Release();
@@ -272,11 +272,11 @@ string				Input::saveFolder(string& strTitle, string& strInitialDirKey)
 
 string				Input::chooseFolderDialog(HWND hOwnerHwnd, string& strTitle, string& strInitialDir)
 {
-	wstring szTitle = String::convertStdStringToStdWString(strTitle);
+	wstring szTitle = String::atow(strTitle);
 	string strFind = "/";
 	string strReplaceWith = "\\";
 	string str = String::replace(strInitialDir, strFind, strReplaceWith);
-	wstring wstrInitialDir = String::convertStdStringToStdWString(str);
+	wstring wstrInitialDir = String::atow(str);
 
 	BROWSEINFO bi = { 0 };
 	bi.hwndOwner = hOwnerHwnd;
@@ -296,7 +296,7 @@ string				Input::chooseFolderDialog(HWND hOwnerHwnd, string& strTitle, string& s
 		if (SHGetPathFromIDList(pidl, szFolderPath))
 		{
 			wstring wstr = szFolderPath;
-			string str = String::convertStdWStringToStdString(wstr);
+			string str = String::wtoa(wstr);
 			return Path::slash(str);
 		}
 	}
@@ -325,7 +325,7 @@ int CALLBACK		Input::onChooseFolderDialogInit(HWND hwnd, UINT uMsg, LPARAM lPara
 // message windows
 uint32				Input::showMessage(string strMessage, string strTitle, uint32 uiButtonType)
 {
-	return MessageBox(getParentWindowHwnd(), String::convertStdStringToStdWString(strMessage).c_str(), String::convertStdStringToStdWString(strTitle).c_str(), uiButtonType);
+	return MessageBox(getParentWindowHwnd(), String::atow(strMessage).c_str(), String::atow(strTitle).c_str(), uiButtonType);
 }
 
 // key states

@@ -222,7 +222,7 @@ void			File::remove(string& strPath)
 
 	//remove(strPath.c_str());
 	//DeleteFile(strPath.c_str());
-	DeleteFileW(String::convertStdStringToStdWString(strPath).c_str());
+	DeleteFileW(String::atow(strPath).c_str());
 }
 
 string			File::getFileNameFromNameWithoutExtension(string& strFolderPath, string& strFileNameWithoutExtension)
@@ -232,7 +232,7 @@ string			File::getFileNameFromNameWithoutExtension(string& strFolderPath, string
 	strFolderPath2 += "*";
 	
 	WIN32_FIND_DATAW ffd;
-	HANDLE hFind = FindFirstFile(String::convertStdStringToStdWString(strFolderPath2).c_str(), &ffd);
+	HANDLE hFind = FindFirstFile(String::atow(strFolderPath2).c_str(), &ffd);
 	if (hFind == INVALID_HANDLE_VALUE)
 	{
 		return "";
@@ -241,12 +241,12 @@ string			File::getFileNameFromNameWithoutExtension(string& strFolderPath, string
 	do
 	{
 		wstring wstr = ffd.cFileName;
-		string str = String::convertStdWStringToStdString(wstr);
+		string str = String::wtoa(wstr);
 		str = Path::removeExt(str);
 		if (String::upper(str) == strFileNameWithoutExtension2)
 		{
 			FindClose(hFind);
-			return String::convertStdWStringToStdString(wstr);
+			return String::wtoa(wstr);
 		}
 	}
 	while (FindNextFile(hFind, &ffd) != 0);
@@ -292,7 +292,7 @@ void			File::setPartialBinary(string& strPath, string& strData, uint32 uiSeek)
 
 bool						File::isFile(string& strPath)
 {
-	uint32 uiAttributes = GetFileAttributes(String::convertStdStringToStdWString(strPath).c_str());
+	uint32 uiAttributes = GetFileAttributes(String::atow(strPath).c_str());
 	return uiAttributes != INVALID_FILE_ATTRIBUTES && (uiAttributes & FILE_ATTRIBUTE_DIRECTORY) != FILE_ATTRIBUTE_DIRECTORY;
 }
 
@@ -512,8 +512,8 @@ void					File::createLink(string& strFilePath, string& strLinkFilePath, string& 
 		IPersistFile* ppf;
 
 		// Set the path to the shortcut target and add the description.
-		psl->SetPath(String::convertStdStringToStdWString(strFilePath).c_str());
-		psl->SetDescription(String::convertStdStringToStdWString(strLinkDescription).c_str());
+		psl->SetPath(String::atow(strFilePath).c_str());
+		psl->SetDescription(String::atow(strLinkDescription).c_str());
 
 		// Query IShellLink for the IPersistFile interface, used for saving the
 		// shortcut in persistent storage. 

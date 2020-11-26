@@ -16,7 +16,7 @@ using namespace mx;
 
 bool						mx::Dir::isFolder(string& strPath)
 {
-	uint32 uiAttributes = GetFileAttributes(String::convertStdStringToStdWString(strPath).c_str());
+	uint32 uiAttributes = GetFileAttributes(String::atow(strPath).c_str());
 	return uiAttributes != INVALID_FILE_ATTRIBUTES && (uiAttributes & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY;
 }
 
@@ -63,7 +63,7 @@ bool						mx::Dir::isEmpty(string& strFolderPath)
 #ifdef WIN32
 	bool bEntryFound = false;
 	WIN32_FIND_DATAW FindFileData;
-	HANDLE hFind = FindFirstFile((String::convertStdStringToStdWString(strFolderPath) + L"*").c_str(), &FindFileData);
+	HANDLE hFind = FindFirstFile((String::atow(strFolderPath) + L"*").c_str(), &FindFileData);
 	if (hFind == INVALID_HANDLE_VALUE)
 	{
 		return false;
@@ -101,7 +101,7 @@ bool						mx::Dir::isEmpty(string& strFolderPath)
 void						mx::Dir::empty(string& strFolderPath)
 {
 	WIN32_FIND_DATAW FindFileData;
-	HANDLE hFind = FindFirstFile((String::convertStdStringToStdWString(strFolderPath) + L"*").c_str(), &FindFileData);
+	HANDLE hFind = FindFirstFile((String::atow(strFolderPath) + L"*").c_str(), &FindFileData);
 	if (hFind == INVALID_HANDLE_VALUE)
 	{
 		return;
@@ -114,17 +114,17 @@ void						mx::Dir::empty(string& strFolderPath)
 		{
 			if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 			{
-				string str = strFolderPath + String::convertStdWStringToStdString(wstr) + "/";
+				string str = strFolderPath + String::wtoa(wstr) + "/";
 				empty(str);
 			}
 			else
 			{
-				::remove((strFolderPath + String::convertStdWStringToStdString(wstr)).c_str());
+				::remove((strFolderPath + String::wtoa(wstr)).c_str());
 			}
 		}
 	} while (FindNextFile(hFind, &FindFileData));
 	FindClose(hFind);
-	RemoveDirectory(String::convertStdStringToStdWString(strFolderPath).c_str());
+	RemoveDirectory(String::atow(strFolderPath).c_str());
 }
 
 void						mx::Dir::remove(string& strFolderPath, bool bRecursive)
@@ -133,7 +133,7 @@ void						mx::Dir::remove(string& strFolderPath, bool bRecursive)
 	{
 		WIN32_FIND_DATA FindFileData;
 		string str1 = strFolderPath + "*";
-		HANDLE hFind = FindFirstFile(String::convertStdStringToStdWString(str1).c_str(), &FindFileData);
+		HANDLE hFind = FindFirstFile(String::atow(str1).c_str(), &FindFileData);
 		if (hFind == INVALID_HANDLE_VALUE)
 		{
 			return;
@@ -145,13 +145,13 @@ void						mx::Dir::remove(string& strFolderPath, bool bRecursive)
 				if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 				{
 					wstring wstr = FindFileData.cFileName;
-					string str = strFolderPath + String::convertStdWStringToStdString(wstr) + "/";
+					string str = strFolderPath + String::wtoa(wstr) + "/";
 					remove(str);
 				}
 				else
 				{
 					wstring wstr = FindFileData.cFileName;
-					string str = strFolderPath + String::convertStdWStringToStdString(wstr);
+					string str = strFolderPath + String::wtoa(wstr);
 					File::remove(str);
 				}
 			}
@@ -159,7 +159,7 @@ void						mx::Dir::remove(string& strFolderPath, bool bRecursive)
 		FindClose(hFind);
 	}
 
-	RemoveDirectory(String::convertStdStringToStdWString(strFolderPath).c_str());
+	RemoveDirectory(String::atow(strFolderPath).c_str());
 }
 
 void						mx::Dir::rename(std::string& strPath, std::string& strNewPath)
@@ -216,7 +216,7 @@ vector<string>				mx::Dir::getFileNames(string& strFolderPath, string strFileExt
 	vector<string> vecFileNames;
 	strFolderPath2 += "*";
 	WIN32_FIND_DATAW ffd;
-	HANDLE hFind = FindFirstFile(String::convertStdStringToStdWString(strFolderPath2).c_str(), &ffd);
+	HANDLE hFind = FindFirstFile(String::atow(strFolderPath2).c_str(), &ffd);
 	if (hFind == INVALID_HANDLE_VALUE)
 	{
 		return vecFileNames;
@@ -228,7 +228,7 @@ vector<string>				mx::Dir::getFileNames(string& strFolderPath, string strFileExt
 		{
 			// file
 			wstring wstrFileName(ffd.cFileName);
-			string strFileName = String::convertStdWStringToStdString(wstrFileName);
+			string strFileName = String::wtoa(wstrFileName);
 			string strFileExt = Path::ext(strFileName);
 			if (strExtensionFilterUpper.length() == 0 || umapExtensionsFilterKeyed.count(String::upper(strFileExt)) == 1)
 				vecFileNames.push_back(strFileName);
@@ -247,7 +247,7 @@ vector<string>				mx::Dir::getFilePaths(string& strFolderPath, bool bDeep, strin
 
 	vector<string> vecFilePathsToReturn;
 	WIN32_FIND_DATAW ffd;
-	HANDLE hFind = FindFirstFile((String::convertStdStringToStdWString(strFolderPathWildcard)).c_str(), &ffd);
+	HANDLE hFind = FindFirstFile((String::atow(strFolderPathWildcard)).c_str(), &ffd);
 	if (hFind == INVALID_HANDLE_VALUE)
 	{
 		return vecFilePathsToReturn;
@@ -268,7 +268,7 @@ vector<string>				mx::Dir::getFilePaths(string& strFolderPath, bool bDeep, strin
 			// folder
 			if (bDeep && wstrEntryName != L"." && wstrEntryName != L"..")
 			{
-				string strNextFolderPath = strFolderPathSlashed + String::convertStdWStringToStdString(wstrEntryName) + "/";
+				string strNextFolderPath = strFolderPathSlashed + String::wtoa(wstrEntryName) + "/";
 				vector<string> vec2 = getFilePaths(strNextFolderPath, true, strExtensionFilterUpper);
 				vecFilePathsToReturn = StdVector::combineVectors(vecFilePathsToReturn, vec2);
 			}
@@ -276,7 +276,7 @@ vector<string>				mx::Dir::getFilePaths(string& strFolderPath, bool bDeep, strin
 		else
 		{
 			// file
-			string strFileName = String::convertStdWStringToStdString(wstrEntryName);
+			string strFileName = String::wtoa(wstrEntryName);
 			string strFileExt = Path::ext(strFileName);
 			if (strExtensionFilterUpper.length() == 0 || umapExtensionsFilterKeyed.count(String::upper(strFileExt)) == 1)
 				vecFilePathsToReturn.push_back(strFolderPathSlashed + strFileName);
@@ -293,7 +293,7 @@ vector<string>				mx::Dir::getFolderNames(string& strFolderPath)
 
 	vector<string> vecFolderNames;
 	WIN32_FIND_DATAW ffd;
-	HANDLE hFind = FindFirstFile(String::convertStdStringToStdWString(strFolderPathWildcard).c_str(), &ffd);
+	HANDLE hFind = FindFirstFile(String::atow(strFolderPathWildcard).c_str(), &ffd);
 	if (hFind == INVALID_HANDLE_VALUE)
 	{
 		return vecFolderNames;
@@ -305,7 +305,7 @@ vector<string>				mx::Dir::getFolderNames(string& strFolderPath)
 		{
 			// folder
 			wstring wstr = ffd.cFileName;
-			string strFolderName = String::convertStdWStringToStdString(wstr);
+			string strFolderName = String::wtoa(wstr);
 			if (strFolderName != "." && strFolderName != "..")
 			{
 				vecFolderNames.push_back(strFolderName);
@@ -324,7 +324,7 @@ vector<string>				mx::Dir::getFolderPaths(string& strFolderPath, bool bDeep)
 
 	vector<string> vecFolderPathsToReturn;
 	WIN32_FIND_DATAW ffd;
-	HANDLE hFind = FindFirstFile((String::convertStdStringToStdWString(strFolderPathWildcard)).c_str(), &ffd);
+	HANDLE hFind = FindFirstFile((String::atow(strFolderPathWildcard)).c_str(), &ffd);
 	if (hFind == INVALID_HANDLE_VALUE)
 	{
 		return vecFolderPathsToReturn;
@@ -338,7 +338,7 @@ vector<string>				mx::Dir::getFolderPaths(string& strFolderPath, bool bDeep)
 			// folder
 			if (wstrEntryName != L"." && wstrEntryName != L"..")
 			{
-				string strFoundFolderPath = strFolderPathSlashed + String::convertStdWStringToStdString(wstrEntryName) + "/";
+				string strFoundFolderPath = strFolderPathSlashed + String::wtoa(wstrEntryName) + "/";
 				vecFolderPathsToReturn.push_back(strFoundFolderPath);
 
 				if (bDeep)
@@ -357,5 +357,5 @@ vector<string>				mx::Dir::getFolderPaths(string& strFolderPath, bool bDeep)
 // internal
 bool						mx::Dir::createSingle(string& strPath)
 {
-	return CreateDirectory(String::convertStdStringToStdWString(strPath).c_str(), NULL) != 0;
+	return CreateDirectory(String::atow(strPath).c_str(), NULL) != 0;
 }

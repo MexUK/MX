@@ -128,7 +128,7 @@ public:
 	static char*							copy(std::string& str);
 
 	// string/wstring conversion
-	static std::wstring						convertStdStringToStdWString(std::string& str)
+	static std::wstring						atow(std::string& str)
 	{
 		//setlocale(LC_ALL, "");
 		std::wstring wc(str.length()+1, L'#');
@@ -137,7 +137,7 @@ public:
 		return wc;
 	}
 
-	static std::string						convertStdWStringToStdString(std::wstring& str)
+	static std::string						wtoa(std::wstring& str)
 	{
 		int len;
 		int slength = (int)str.length() + 1;

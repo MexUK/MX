@@ -7,11 +7,11 @@ using namespace mx;
 void			Registry::setRegistryValueString(string& strKey1, string& strKey2, string& strValue)
 {
 	HKEY hKey;
-	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::convertStdStringToStdWString(strKey1).c_str(), NULL, KEY_ALL_ACCESS, &hKey) == ERROR_FILE_NOT_FOUND)
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::atow(strKey1).c_str(), NULL, KEY_ALL_ACCESS, &hKey) == ERROR_FILE_NOT_FOUND)
 	{
-		RegCreateKeyEx(HKEY_CURRENT_USER, String::convertStdStringToStdWString(strKey1).c_str(), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &hKey, NULL);
+		RegCreateKeyEx(HKEY_CURRENT_USER, String::atow(strKey1).c_str(), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &hKey, NULL);
 	}
-	RegSetValueEx(hKey, String::convertStdStringToStdWString(strKey2).c_str(), 0, REG_SZ, (BYTE*)String::convertStdStringToStdWString(strValue).c_str(), strValue.length()*sizeof(wchar_t));
+	RegSetValueEx(hKey, String::atow(strKey2).c_str(), 0, REG_SZ, (BYTE*)String::atow(strValue).c_str(), strValue.length()*sizeof(wchar_t));
 	RegCloseKey(hKey);
 }
 
@@ -21,11 +21,11 @@ string			Registry::getRegistryValueString(string& strKey1, string& strKey2)
 	DWORD uiBufferSize = 16383;
 
 	HKEY hKey;
-	if (RegOpenKey(HKEY_CURRENT_USER, String::convertStdStringToStdWString(strKey1).c_str(), &hKey) != ERROR_SUCCESS)
+	if (RegOpenKey(HKEY_CURRENT_USER, String::atow(strKey1).c_str(), &hKey) != ERROR_SUCCESS)
 	{
 		return "";
 	}
-	if (RegQueryValueEx(hKey, String::convertStdStringToStdWString(strKey2).c_str(), NULL, NULL, (LPBYTE)szBuffer, &uiBufferSize) != ERROR_SUCCESS)
+	if (RegQueryValueEx(hKey, String::atow(strKey2).c_str(), NULL, NULL, (LPBYTE)szBuffer, &uiBufferSize) != ERROR_SUCCESS)
 	{
 		return "";
 	}
@@ -34,18 +34,18 @@ string			Registry::getRegistryValueString(string& strKey1, string& strKey2)
 	szBuffer[uiBufferSize] = '\0';
 
 	wstring wstr = szBuffer;
-	string strData = String::convertStdWStringToStdString(wstr);
+	string strData = String::wtoa(wstr);
 	return strData;
 }
 
 void			Registry::setRegistryValueInt(string& strKey1, string& strKey2, int iValue)
 {
 	HKEY hKey;
-	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::convertStdStringToStdWString(strKey1).c_str(), NULL, KEY_ALL_ACCESS, &hKey) == ERROR_FILE_NOT_FOUND)
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::atow(strKey1).c_str(), NULL, KEY_ALL_ACCESS, &hKey) == ERROR_FILE_NOT_FOUND)
 	{
-		RegCreateKeyEx(HKEY_CURRENT_USER, String::convertStdStringToStdWString(strKey1).c_str(), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &hKey, NULL);
+		RegCreateKeyEx(HKEY_CURRENT_USER, String::atow(strKey1).c_str(), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &hKey, NULL);
 	}
-	RegSetValueEx(hKey, String::convertStdStringToStdWString(strKey2).c_str(), 0, REG_DWORD, (BYTE*)&iValue, 4);
+	RegSetValueEx(hKey, String::atow(strKey2).c_str(), 0, REG_DWORD, (BYTE*)&iValue, 4);
 	RegCloseKey(hKey);
 }
 
@@ -55,11 +55,11 @@ int				Registry::getRegistryValueInt(string& strKey1, string& strKey2)
 	DWORD uiBufferSize = 4;
 
 	HKEY hKey;
-	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::convertStdStringToStdWString(strKey1).c_str(), 0, KEY_READ, &hKey) != ERROR_SUCCESS)
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::atow(strKey1).c_str(), 0, KEY_READ, &hKey) != ERROR_SUCCESS)
 	{
 		return 0;
 	}
-	if (RegQueryValueEx(hKey, String::convertStdStringToStdWString(strKey2).c_str(), NULL, NULL, (LPBYTE)&uiValue, &uiBufferSize) != ERROR_SUCCESS)
+	if (RegQueryValueEx(hKey, String::atow(strKey2).c_str(), NULL, NULL, (LPBYTE)&uiValue, &uiBufferSize) != ERROR_SUCCESS)
 	{
 		return 0;
 	}
@@ -71,24 +71,24 @@ int				Registry::getRegistryValueInt(string& strKey1, string& strKey2)
 void			Registry::removeRegistryValue(string& strKey1, string& strKey2)
 {
 	HKEY hKey;
-	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::convertStdStringToStdWString(strKey1).c_str(), 0, KEY_SET_VALUE, &hKey) != ERROR_SUCCESS)
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::atow(strKey1).c_str(), 0, KEY_SET_VALUE, &hKey) != ERROR_SUCCESS)
 	{
 		return;
 	}
 
-	RegDeleteValue(hKey, String::convertStdStringToStdWString(strKey2).c_str());
+	RegDeleteValue(hKey, String::atow(strKey2).c_str());
 	RegCloseKey(hKey);
 }
 
 void			Registry::removeRegistryKey(string& strKey1, string& strKey2)
 {
 	HKEY hKey;
-	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::convertStdStringToStdWString(strKey1).c_str(), 0, DELETE, &hKey) != ERROR_SUCCESS)
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, String::atow(strKey1).c_str(), 0, DELETE, &hKey) != ERROR_SUCCESS)
 	{
 		return;
 	}
 
-	RegDeleteKey(hKey, String::convertStdStringToStdWString(strKey2).c_str());
+	RegDeleteKey(hKey, String::atow(strKey2).c_str());
 	RegCloseKey(hKey);
 }
 

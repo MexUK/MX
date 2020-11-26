@@ -199,7 +199,7 @@ bool					OpenGL::initContext(HWND hWindow, int32 iMajorVersion, int32 iMinorVers
 		int iPixelFormat2, iNumFormats;
 		if (wglChoosePixelFormatARB(hWindowDC, iPixelFormatAttribList, NULL, 1, &iPixelFormat2, (UINT*)&iNumFormats) == FALSE)
 		{
-			MessageBox(NULL, String::convertStdStringToStdWString(string("Couldn't initialize OpenGL! (Part 4.5) Windows Error Code: ") + String::toString((::uint32)GetLastError())).c_str(), L"Fatal Error", MB_ICONERROR);
+			MessageBox(NULL, String::atow(string("Couldn't initialize OpenGL! (Part 4.5) Windows Error Code: ") + String::toString((::uint32)GetLastError())).c_str(), L"Fatal Error", MB_ICONERROR);
 			return false;
 		}
 
@@ -275,7 +275,7 @@ GPUProgram* OpenGL::addProgram(string& strVertexShaderFilePath, string& strFragm
 	if (uiError != GL_NO_ERROR)
 	{
 		strError = "Failed to link program (" + String::toString(uiError) + ") (" + strVertexShaderFilePath + ", " + strFragmentShaderFilePath + ")";
-		MessageBox(NULL, String::convertStdStringToStdWString(strError).c_str(), L"Error", MB_OK);
+		MessageBox(NULL, String::atow(strError).c_str(), L"Error", MB_OK);
 	}
 
 	GLint uiIsLinked = 0;
@@ -289,7 +289,7 @@ GPUProgram* OpenGL::addProgram(string& strVertexShaderFilePath, string& strFragm
 		glDeleteProgram(pProgram->m_uiId);
 		string strInfoLog = vecInfoLog.data();
 		strError = "Failed to link program (GL_LINK_STATUS)\n\n" + String::toString(pProgram->m_uiId) + "\n\n" + strInfoLog;
-		MessageBox(NULL, String::convertStdStringToStdWString(strError).c_str(), L"Error", MB_OK);
+		MessageBox(NULL, String::atow(strError).c_str(), L"Error", MB_OK);
 	}
 
 	pProgram->use();
@@ -309,21 +309,21 @@ uint32					OpenGL::prepareShader(uint32 uiShaderType, string& strShaderFilePath)
 	if (glGetError() != GL_NO_ERROR)
 	{
 		str = "glCreateShader Failed\n\n" + strShaderFilePath;
-		MessageBox(NULL, String::convertStdStringToStdWString(str).c_str(), L"Error", MB_OK);
+		MessageBox(NULL, String::atow(str).c_str(), L"Error", MB_OK);
 	}
 
 	glShaderSource(uiShader, 1, &pShaderCode, NULL);
 	if (glGetError() != GL_NO_ERROR)
 	{
 		str = "glShaderSource Failed\n\n" + strShaderFilePath;
-		MessageBox(NULL, String::convertStdStringToStdWString(str).c_str(), L"Error", MB_OK);
+		MessageBox(NULL, String::atow(str).c_str(), L"Error", MB_OK);
 	}
 
 	glCompileShader(uiShader);
 	if (glGetError() != GL_NO_ERROR)
 	{
 		str = "glCompileShader Failed\n\n" + strShaderFilePath;
-		MessageBox(NULL, String::convertStdStringToStdWString(str).c_str(), L"Error", MB_OK);
+		MessageBox(NULL, String::atow(str).c_str(), L"Error", MB_OK);
 	}
 
 	GLint uiIsCompiled = 0;
@@ -337,7 +337,7 @@ uint32					OpenGL::prepareShader(uint32 uiShaderType, string& strShaderFilePath)
 		glDeleteShader(uiShader);
 		string strInfoLog = vecInfoLog.data();
 		str = "Failed to compile shader (GL_COMPILE_STATUS)\n\n" + strShaderFilePath + "\n\n" + strInfoLog;
-		MessageBox(NULL, String::convertStdStringToStdWString(str).c_str(), L"Error", MB_OK);
+		MessageBox(NULL, String::atow(str).c_str(), L"Error", MB_OK);
 	}
 
 	return uiShader;
