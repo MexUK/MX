@@ -453,6 +453,9 @@
     <ClInclude Include="..\..\Code\Pool\UMapPool.h">
       <Filter>Header Files\Pool</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Code\Static\GUI.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Code\Pool\VectorPool.cpp">
@@ -616,6 +619,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Code\Pool\UMapPool.cpp">
       <Filter>Source Files\Pool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\GUI.cpp">
+      <Filter>Source Files\Static</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

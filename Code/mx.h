@@ -187,6 +187,7 @@ namespace mx
 	class Debug;
 	class Dir;
 	class File;
+	class GUI;
 	class Image;
 	class Input;
 	class Math;
