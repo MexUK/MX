@@ -3,7 +3,7 @@
 using namespace std;
 using namespace mx;
 
-// assembly wrapper driver functions
+// function invoking
 void			Memory::callCdecl(unsigned long uiFunctionAddress, unsigned short usArgumentCount, ...)
 {
 	va_list vlArgs;
@@ -90,46 +90,12 @@ void			Memory::call(unsigned long uiFunctionAddress, unsigned short usArgumentCo
 	*/
 }
 
-// memory nopped
+// machine code modifying
 void			Memory::setMemoryNopped(unsigned long uiAddress, unsigned short usByteCount)
 {
-	/*
-	MemoryRange *pMemoryRange = new MemoryRange(uiAddress, usByteCount);
-	pMemoryRange->setMemoryNoppedState(true);
-	m_vecNoppedMemory.push_back(pMemoryRange);
-	*/
+	memset((void*)uiAddress, 0x90, usByteCount);
 }
 
-void			Memory::restoreNoppedMemory(unsigned long uiAddress)
-{
-	/*
-	MemoryRange *pMemoryRange = getNoppedMemoryRangeByAddress(uiAddress);
-	if (pMemoryRange == nullptr)
-	{
-		return;
-	}
-	pMemoryRange->setMemoryNoppedState(false);
-	m_vecNoppedMemory.erase(find(m_vecNoppedMemory.begin(), m_vecNoppedMemory.end(), pMemoryRange));
-	delete pMemoryRange;
-	*/
-}
-
-MemoryRange*	Memory::getNoppedMemoryRangeByAddress(unsigned long uiAddress)
-{
-	/*
-	for (unsigned long i = 0, j = m_vecNoppedMemory.size(); i < j; i++)
-	{
-		if (m_vecNoppedMemory[i]->m_uiAddress == uiAddress)
-		{
-			return m_vecNoppedMemory[i];
-		}
-	}
-	return nullptr;
-	*/
-	return nullptr;
-}
-
-// function call
 void			Memory::removeFunctionCall(unsigned long uiCallAddress, unsigned short usArgumentCount, bool bCallerCleanStack)
 {
 	//removeCallArguments(uiCallAddress, usArgumentCount);
@@ -154,20 +120,14 @@ void			Memory::removeFunctionCall(unsigned long uiCallAddress, unsigned short us
 	}
 }
 
-// data
-void			Memory::copyAndDeleteUint8Array(void* pDestination, uint8* pSource, uint64 uiByteCountToCopy)
-{
-	memcpy(pDestination, pSource, (size_t)uiByteCountToCopy);
-	delete[] pSource;
-}
-
-// memory
+// page access
 bool			Memory::setPageFullAccess(unsigned long lpAddress, unsigned long dwSize)
 {
 	unsigned long lpflOldProtect;
 	return VirtualProtect((LPVOID) lpAddress, dwSize, PAGE_EXECUTE_READWRITE, &lpflOldProtect) != 0;
 }
 
+// address rewriting
 void* Memory::realloc(uint32_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t uiNewArrayCount)
 {
 	void* pNewArray = malloc(uiNewArrayCount * uiArrayEntrySize);
@@ -188,9 +148,9 @@ void* Memory::realloc(uint32_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t 
 	return pNewArray;
 }
 
-// generate array of addresses
 vector<unsigned long>	Memory::getAddressReferences(unsigned long uiAddress)
 {
+	// todo - shouldn't use hardcoded addresses
 	vector<unsigned long> vecAddresses;
 	unsigned long uiLong = 0;
 	unsigned char
@@ -275,64 +235,7 @@ void						Memory::getAddressReferencesForRange(
 	}
 }
 
-string					Memory::generateAddressOverrideCode(unsigned long uiAddressStart, unsigned long uiAddressEnd)
-{
-	vector<unsigned long> vecAddresses;
-	vector<vector<unsigned long>> vecAddressReferences;
-	getAddressReferencesForRange(uiAddressStart, uiAddressEnd, vecAddresses, vecAddressReferences);
-	
-	string strText;
-	
-	strText += "unsigned long uiNewPoolAddress = (unsigned long) new char[ucNewLimit * 56];\n";
-
-	strText += "unsigned long uiNewAddresses [] = {\n";
-	for (unsigned long i = 0, j = vecAddresses.size(); i < j; i++)
-	{
-		strText += "\t";
-		//strText += toHexString(uiNewPoolAddress + (vecAddresses[i == 0 ? 0 : (vecAddresses[i] - vecAddresses[0])]));
-		strText += "uiNewPoolAddress + (";
-		////////////////////strText += to_string(i == 0 ? 0 : (vecAddresses[i] - vecAddresses[0]));
-		strText += ")";
-		if (i != (j - 1))
-		{
-			strText += ",";
-		}
-		strText += "\n";
-	}
-	strText += "};\n";
-
-	strText += "unsigned long uiAddressReferences [][";
-	//strText += to_string(vecAddresses.size());
-	/////////////////////////strText += to_string(50);
-	strText += "] = {\n";
-	for (unsigned long i = 0, j = vecAddressReferences.size(); i < j; i++)
-	{
-		strText += "\t// ";
-		/////////////////////////strText += toHexString(vecAddresses[i]);
-		strText += "\n\t{\n";
-		vecAddressReferences[i].push_back(0);
-		for (unsigned long i2 = 0, j2 = vecAddressReferences[i].size(); i2 < j2; i2++)
-		{
-			strText += "\t\t";
-			/////////////////////////strText += toHexString(vecAddressReferences[i][i2]);
-			if (i2 != (j2 - 1))
-			{
-				strText += ",";
-			}
-			strText += "\n";
-		}
-		strText += "\t}";
-		if (i != (j - 1))
-		{
-			strText += ",";
-		}
-		strText += "\n";
-	}
-	strText += "};\n";
-	
-	return strText;
-}
-
+// CPU registers
 uint32_t							Memory::getEIP(HANDLE hThread)
 {
 	CONTEXT context;
@@ -384,6 +287,7 @@ bool								Memory::resumeAt(HANDLE hThread, uint32_t uiAddr)
 	return true;
 }
 
+// machine code insertion
 bool								Memory::addCode(HANDLE hProcess, uint8_t *pCodeData, uint32_t uiCodeDataSize, uint32_t& uiCodeAddrOut)
 {
 	// allocate memory in process

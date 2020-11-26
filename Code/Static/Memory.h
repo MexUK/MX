@@ -15,12 +15,8 @@ public:
 	static void								call(unsigned long uiFunctionAddress, unsigned short usArgumentCount, ...);
 
 	static void								setMemoryNopped(unsigned long uiAddress, unsigned short usByteCount = 1);
-	static void								restoreNoppedMemory(unsigned long uiAddress);
-	static MemoryRange*						getNoppedMemoryRangeByAddress(unsigned long uiAddress);
-
-	static void								removeFunctionCall(unsigned long uiCallAddress, unsigned short usArgumentCount = 0, bool bCallerCleanStack = false);
 	
-	static void								copyAndDeleteUint8Array(void* pDestination, uint8* pSource, uint64 uiByteCountToCopy);
+	static void								removeFunctionCall(unsigned long uiCallAddress, unsigned short usArgumentCount = 0, bool bCallerCleanStack = false);
 
 	static bool								setPageFullAccess(unsigned long lpAddress, unsigned long dwSize);
 	
@@ -48,10 +44,6 @@ private:
 	__forceinline void						push(unsigned long uiArgument);
 	__forceinline void						removeStackArguments(unsigned short usStackEntryCount);
 	__forceinline static void				call(unsigned long uiFunctionAddress);
-	
-private:
-	// non static
-	std::vector<MemoryRange*>				m_vecNoppedMemory;
 };
 
 // assembly instruction wrappers

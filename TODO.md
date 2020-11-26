@@ -10,8 +10,6 @@ add code for directory stream.
 
 support x64 too.
 
-tidy Static/Memory.
-
 split Static/Input into 2 places. (currently it contains both GUI input based code and keyboard input based code).
 
 research better way to load/unload gdi plus. only load if not loaded. only unload if loaded by MX.
