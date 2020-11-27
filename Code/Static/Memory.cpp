@@ -157,7 +157,7 @@ bool			Memory::setPageFullAccess(unsigned long lpAddress, unsigned long dwSize)
 }
 
 // address rewriting
-void* Memory::realloc(uint32_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t uiNewArrayCount)
+void* Memory::realloc(size_t uiAddrRangeStart, size_t uiAddrRangeEnd, size_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t uiNewArrayCount)
 {
 	void* pNewArray = malloc(uiNewArrayCount * uiArrayEntrySize);
 	memset(pNewArray, 0, uiNewArrayCount * uiArrayEntrySize);
@@ -166,7 +166,7 @@ void* Memory::realloc(uint32_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t 
 	uint32_t uiNewAddr = uiNewArrayAddr;
 	for (uint32_t uiAddr = uiArrayAddr; uiAddr < (uiArrayAddr + uiArrayEntrySize); uiAddr++)
 	{
-		vector<unsigned long> vecAddresses = getAddressReferences(uiAddr);
+		vector<unsigned long> vecAddresses = getAddressReferences(uiAddrRangeStart, uiAddrRangeEnd, uiAddr);
 		for (uint32_t uiAddr2 : vecAddresses)
 		{
 			*(uint32_t*)uiAddr2 = uiNewAddr;
@@ -177,9 +177,8 @@ void* Memory::realloc(uint32_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t 
 	return pNewArray;
 }
 
-vector<unsigned long>	Memory::getAddressReferences(unsigned long uiAddress)
+vector<unsigned long>	Memory::getAddressReferences(size_t uiAddrRangeStart, size_t uiAddrRangeEnd, size_t uiFindAddr)
 {
-	// todo - shouldn't use hardcoded addresses
 	vector<unsigned long> vecAddresses;
 	unsigned long uiLong = 0;
 	unsigned char
@@ -188,8 +187,8 @@ vector<unsigned long>	Memory::getAddressReferences(unsigned long uiAddress)
 		ucByte2,
 		ucByte3;
 	for (unsigned char
-			*pMemory = (unsigned char*) 0x400000,
-			*pMemoryEnd = (unsigned char*) (0xA14000 - (sizeof(unsigned long) - 1));
+			*pMemory = (unsigned char*)uiAddrRangeStart,
+			*pMemoryEnd = (unsigned char*) (uiAddrRangeEnd - (sizeof(unsigned long) - 1));
 		pMemory != pMemoryEnd;
 		pMemory++)
 	{
@@ -202,48 +201,12 @@ vector<unsigned long>	Memory::getAddressReferences(unsigned long uiAddress)
 		//if (convertByesToLong() == uiAddress)
 		//uiLong = ucByte3 + (ucByte2 * 256) + (ucByte1 * 65536) + (ucByte0 * 16777216);
 		uiLong = ucByte0 + (ucByte1 * 256) + (ucByte2 * 65536) + (ucByte3 * 16777216);
-		if (uiLong == uiAddress)
+		if (uiLong == uiFindAddr)
 		{
 			vecAddresses.push_back((unsigned long) pMemory);
 		}
 	}
 	return vecAddresses;
-
-	/*
-	HANDLE hProcess = GetCurrentProcess();
-	unsigned long uiMemoryOut;
-	unsigned long uiLong = 0;
-	unsigned char
-		ucByte0,
-		ucByte1,
-		ucByte2,
-		ucByte3;
-
-	vector<unsigned long> vecAddresses;
-	for (unsigned long
-		uiMemory = (unsigned long) 0x400000,
-		uiMemoryEnd = (unsigned long) (0xA14000 - (sizeof(unsigned long) - 1));
-	uiMemory != uiMemoryEnd;
-	uiMemory += 1)
-	{
-		ucByte0 = *(unsigned char*) uiMemory;
-		ucByte1 = *(unsigned char*) (uiMemory + 1);
-		ucByte2 = *(unsigned char*) (uiMemory + 2);
-		ucByte3 = *(unsigned char*) (uiMemory + 3);
-
-		//ReadProcessMemory(hProcess, (void*) uiMemory, &uiMemoryOut, 4, NULL);
-		//if ((*(unsigned long*) uiMemory) == uiAddress)
-		//if (uiMemoryOut == uiAddress)
-		uiLong = ucByte0 + (ucByte1 * 256) + (ucByte2 * 65536) + (ucByte3 * 16777216);
-		//uiLong = ucByte2 + (ucByte1 * 256) + (ucByte0 * 65536);
-		if (uiLong == uiAddress)
-		{
-			//CUtility::debugva("found: %u", uiMemory);
-			vecAddresses.push_back(uiMemory);
-		}
-	}
-	return vecAddresses;
-	*/
 }
 
 void						Memory::getAddressReferencesForRange(
@@ -255,7 +218,7 @@ void						Memory::getAddressReferencesForRange(
 	vector<unsigned long> vecAddressReferences2;
 	for (unsigned long uiAddress = uiAddressStart; uiAddress <= uiAddressEnd; uiAddress++)
 	{
-		vecAddressReferences2 = getAddressReferences(uiAddress);
+		vecAddressReferences2 = getAddressReferences(uiAddress, uiAddressStart, uiAddressEnd);
 		if (vecAddressReferences2.size())
 		{
 			vecAddresses.push_back(uiAddress);

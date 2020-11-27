@@ -20,12 +20,12 @@ public:
 
 	static bool								setPageFullAccess(unsigned long lpAddress, unsigned long dwSize);
 	
-	static void*							realloc(uint32_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t uiNewArrayCount);
+	static void*							realloc(size_t uiAddrRangeStart, size_t uiAddrRangeEnd, size_t uiArrayAddr, uint32_t uiArrayEntrySize, uint32_t uiNewArrayCount);
 
 	template <size_t uiInnerDimensionSize>
 	static void								updateAddresses(void *pNewDataStart, uint32 uiAddresses[][uiInnerDimensionSize], uint32 uiMaxAddrMatch = 0xFFFFFF);
 	
-	static std::vector<unsigned long>		getAddressReferences(unsigned long uiAddress);
+	static std::vector<unsigned long>		getAddressReferences(size_t uiAddrRangeStart, size_t uiAddrRangeEnd, size_t uiFindAddr);
 	static void								getAddressReferencesForRange(
 												unsigned long uiAddressStart,
 												unsigned long uiAddressEnd,
