@@ -4,7 +4,7 @@ using namespace std;
 using namespace mx;
 
 // function invoking
-void			Memory::callCdecl(unsigned long uiFunctionAddress, unsigned short usArgumentCount, ...)
+void			Memory::callCdecl(size_t uiFunctionAddress, unsigned short usArgumentCount, ...)
 {
 #ifdef MX_ARCHITECTURE_32
 	va_list vlArgs;
@@ -42,7 +42,7 @@ void			Memory::callCdecl(unsigned long uiFunctionAddress, unsigned short usArgum
 	*/
 }
 
-void			Memory::callThiscall(unsigned long uiFunctionAddress, unsigned long uiThis, unsigned short usArgumentCount, ...)
+void			Memory::callThiscall(size_t uiFunctionAddress, size_t uiThis, unsigned short usArgumentCount, ...)
 {
 #ifdef MX_ARCHITECTURE_32
 	va_list vlArgs;
@@ -70,7 +70,7 @@ void			Memory::callThiscall(unsigned long uiFunctionAddress, unsigned long uiThi
 #endif
 }
 
-void			Memory::call(unsigned long uiFunctionAddress, unsigned short usArgumentCount, ...)
+void			Memory::call(size_t uiFunctionAddress, unsigned short usArgumentCount, ...)
 {
 #ifdef MX_ARCHITECTURE_32
 	va_list vlArgs;
@@ -108,7 +108,7 @@ void			Memory::call(unsigned long uiFunctionAddress, unsigned short usArgumentCo
 }
 
 // machine code modifying
-void			Memory::setMemoryNopped(unsigned long uiAddress, unsigned short usByteCount)
+void			Memory::setMemoryNopped(size_t uiAddress, unsigned short usByteCount)
 {
 #ifdef MX_ARCHITECTURE_32
 	memset((void*)uiAddress, 0x90, usByteCount);
@@ -119,7 +119,7 @@ void			Memory::setMemoryNopped(unsigned long uiAddress, unsigned short usByteCou
 #endif
 }
 
-void			Memory::removeFunctionCall(unsigned long uiCallAddress, unsigned short usArgumentCount, bool bCallerCleanStack)
+void			Memory::removeFunctionCall(size_t uiCallAddress, unsigned short usArgumentCount, bool bCallerCleanStack)
 {
 	//removeCallArguments(uiCallAddress, usArgumentCount);
 	//removeInstruction_call(uiCallAddress);
@@ -150,7 +150,7 @@ void			Memory::removeFunctionCall(unsigned long uiCallAddress, unsigned short us
 }
 
 // page access
-bool			Memory::setPageFullAccess(unsigned long lpAddress, unsigned long dwSize)
+bool			Memory::setPageFullAccess(size_t lpAddress, unsigned long dwSize)
 {
 	unsigned long lpflOldProtect;
 	return VirtualProtect((LPVOID) lpAddress, dwSize, PAGE_EXECUTE_READWRITE, &lpflOldProtect) != 0;
@@ -161,15 +161,15 @@ void* Memory::realloc(size_t uiAddrRangeStart, size_t uiAddrRangeEnd, size_t uiA
 {
 	void* pNewArray = malloc(uiNewArrayCount * uiArrayEntrySize);
 	memset(pNewArray, 0, uiNewArrayCount * uiArrayEntrySize);
-	uint32_t uiNewArrayAddr = (uint32_t)pNewArray;
+	size_t uiNewArrayAddr = (size_t)pNewArray;
 
-	uint32_t uiNewAddr = uiNewArrayAddr;
-	for (uint32_t uiAddr = uiArrayAddr; uiAddr < (uiArrayAddr + uiArrayEntrySize); uiAddr++)
+	size_t uiNewAddr = uiNewArrayAddr;
+	for (size_t uiAddr = uiArrayAddr; uiAddr < (uiArrayAddr + uiArrayEntrySize); uiAddr++)
 	{
-		vector<unsigned long> vecAddresses = getAddressReferences(uiAddrRangeStart, uiAddrRangeEnd, uiAddr);
-		for (uint32_t uiAddr2 : vecAddresses)
+		vector<size_t> vecAddresses = getAddressReferences(uiAddrRangeStart, uiAddrRangeEnd, uiAddr);
+		for (size_t uiAddr2 : vecAddresses)
 		{
-			*(uint32_t*)uiAddr2 = uiNewAddr;
+			*(size_t*)uiAddr2 = uiNewAddr;
 		}
 		uiNewAddr++;
 	}
@@ -177,10 +177,10 @@ void* Memory::realloc(size_t uiAddrRangeStart, size_t uiAddrRangeEnd, size_t uiA
 	return pNewArray;
 }
 
-vector<unsigned long>	Memory::getAddressReferences(size_t uiAddrRangeStart, size_t uiAddrRangeEnd, size_t uiFindAddr)
+vector<size_t>	Memory::getAddressReferences(size_t uiAddrRangeStart, size_t uiAddrRangeEnd, size_t uiFindAddr)
 {
-	vector<unsigned long> vecAddresses;
-	unsigned long uiLong = 0;
+	vector<size_t> vecAddresses;
+	size_t uiLong = 0;
 	unsigned char
 		ucByte0,
 		ucByte1,
@@ -188,10 +188,11 @@ vector<unsigned long>	Memory::getAddressReferences(size_t uiAddrRangeStart, size
 		ucByte3;
 	for (unsigned char
 			*pMemory = (unsigned char*)uiAddrRangeStart,
-			*pMemoryEnd = (unsigned char*) (uiAddrRangeEnd - (sizeof(unsigned long) - 1));
+			*pMemoryEnd = (unsigned char*) (uiAddrRangeEnd - (sizeof(size_t) - 1));
 		pMemory != pMemoryEnd;
 		pMemory++)
 	{
+		// todo - 64 bit support
 		ucByte0 = *(unsigned char*) pMemory;
 		ucByte1 = *(unsigned char*) (pMemory + 1);
 		ucByte2 = *(unsigned char*) (pMemory + 2);
@@ -203,20 +204,20 @@ vector<unsigned long>	Memory::getAddressReferences(size_t uiAddrRangeStart, size
 		uiLong = ucByte0 + (ucByte1 * 256) + (ucByte2 * 65536) + (ucByte3 * 16777216);
 		if (uiLong == uiFindAddr)
 		{
-			vecAddresses.push_back((unsigned long) pMemory);
+			vecAddresses.push_back((size_t) pMemory);
 		}
 	}
 	return vecAddresses;
 }
 
 void						Memory::getAddressReferencesForRange(
-	unsigned long uiAddressStart,
-	unsigned long uiAddressEnd,
-	vector<unsigned long>& vecAddresses,
-	vector<vector<unsigned long>>& vecAddressReferences)
+	size_t uiAddressStart,
+	size_t uiAddressEnd,
+	vector<size_t>& vecAddresses,
+	vector<vector<size_t>>& vecAddressReferences)
 {
-	vector<unsigned long> vecAddressReferences2;
-	for (unsigned long uiAddress = uiAddressStart; uiAddress <= uiAddressEnd; uiAddress++)
+	vector<size_t> vecAddressReferences2;
+	for (size_t uiAddress = uiAddressStart; uiAddress <= uiAddressEnd; uiAddress++)
 	{
 		vecAddressReferences2 = getAddressReferences(uiAddress, uiAddressStart, uiAddressEnd);
 		if (vecAddressReferences2.size())
@@ -228,11 +229,11 @@ void						Memory::getAddressReferencesForRange(
 }
 
 // CPU registers
-uint32_t							Memory::getEIP(HANDLE hThread)
+size_t							Memory::getInstructionAddress(HANDLE hThread)
 {
 	CONTEXT context;
 	ZeroMemory(&context, sizeof(CONTEXT));
-	context.ContextFlags = CONTEXT_FULL;
+	context.ContextFlags = CONTEXT_CONTROL;
 
 	if (GetThreadContext(hThread, &context) == 0)
 	{
@@ -248,11 +249,11 @@ uint32_t							Memory::getEIP(HANDLE hThread)
 #endif
 }
 
-bool								Memory::setEIP(HANDLE hThread, uint32_t uiAddr)
+bool								Memory::setInstructionAddress(HANDLE hThread, size_t uiAddr)
 {
 	CONTEXT context;
 	ZeroMemory(&context, sizeof(CONTEXT));
-	context.ContextFlags = CONTEXT_FULL;
+	context.ContextFlags = CONTEXT_CONTROL;
 	
 	if (GetThreadContext(hThread, &context) == 0)
 	{
@@ -276,9 +277,9 @@ bool								Memory::setEIP(HANDLE hThread, uint32_t uiAddr)
 	return true;
 }
 
-bool								Memory::resumeAt(HANDLE hThread, uint32_t uiAddr)
+bool								Memory::resumeAt(HANDLE hThread, size_t uiAddr)
 {
-	if (!setEIP(hThread, uiAddr))
+	if (!setInstructionAddress(hThread, uiAddr))
 	{
 		return false;
 	}
@@ -292,7 +293,7 @@ bool								Memory::resumeAt(HANDLE hThread, uint32_t uiAddr)
 }
 
 // machine code insertion
-bool								Memory::addCode(HANDLE hProcess, uint8_t *pCodeData, uint32_t uiCodeDataSize, uint32_t& uiCodeAddrOut)
+bool								Memory::addCode(HANDLE hProcess, uint8_t *pCodeData, uint32_t uiCodeDataSize, size_t& uiCodeAddrOut)
 {
 	// allocate memory in process
 	void *pCode = VirtualAllocEx(hProcess, NULL, uiCodeDataSize, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
@@ -315,7 +316,7 @@ bool								Memory::addCode(HANDLE hProcess, uint8_t *pCodeData, uint32_t uiCode
 	}
 
 	// pass back address of code
-	uiCodeAddrOut = (uint32_t)pCode;
+	uiCodeAddrOut = (size_t)pCode;
 
 	return true;
 }
@@ -340,7 +341,7 @@ bool								Memory::loadDLL(HANDLE hProcess, HANDLE hThread, string& strDllFileP
 	memcpy(pInjectedData, aSnippetCode, uiSnippetCodeSize);
 
 	*(uint32_t*)(pInjectedData + 14) = (uint32_t)LoadLibraryA;
-	*(uint32_t*)(pInjectedData + 29) = Memory::getEIP(hThread);
+	*(uint32_t*)(pInjectedData + 29) = (uint32_t)Memory::getInstructionAddress(hThread);
 	memcpy(pInjectedData + uiSnippetCodeSize, strDllFilePath.c_str(), strDllFilePath.length() + 1);
 
 	// add snippet to remote process
