@@ -22,3 +22,9 @@ add an Image::save function, to go with the Image::load function.
 
 potentially replace gdi plus usage with stb usage.
 
+add signed integers to streams.
+
+add float80 for streams, and String::pack/String::unpack.
+
+don't use tellg for fetching stream position. e.g. in Stream::size.
+

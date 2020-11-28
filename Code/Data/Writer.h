@@ -37,4 +37,10 @@ public:
 	void					vec3(glm::vec3& vec);
 
 	void					mat4(glm::mat4& mat);
+
+	template <class T>
+	void structure(T& structure)
+	{
+		cstr((char*)&structure, sizeof(T));
+	};
 };

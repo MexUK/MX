@@ -100,10 +100,15 @@ void			Stream::readAll(uint8* pBuffer, uint64 uiLength)
 	m_pFlow->readAll(pBuffer, uiLength);
 }
 
-// seek
+// position/size
 void			Stream::seek(uint64 uiIndex)
 {
 	m_pFlow->seek(uiIndex);
+}
+
+uint64			Stream::size()
+{
+	return m_pFlow->size();
 }
 
 // flush

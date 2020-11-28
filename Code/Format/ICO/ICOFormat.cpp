@@ -10,14 +10,14 @@ ICOFormat::ICOFormat(mx::Stream& stream) :
 	BMPFormat(stream)
 {
 	setShouldSerializeHeader1(false);
-	setBMPVersion(3);
+	setSerializeBMPVersion(3);
 }
 
 ICOFormat::ICOFormat(mx::Stream& stream, ImageData& image) :
 	BMPFormat(stream, image)
 {
 	setShouldSerializeHeader1(false);
-	setBMPVersion(3);
+	setSerializeBMPVersion(3);
 }
 
 // serialization
@@ -59,7 +59,6 @@ ICOFormat* ICOFormat::createFromBMP(BMPFormat* pBMPFormat)
 	Stream stream;
 	ICOFormat* pICOFormat = new ICOFormat(stream);
 	pICOFormat->setImage(pBMPFormat->getImage());
-	pICOFormat->setBMPVersion(pBMPFormat->getBMPVersion());
-	pICOFormat->setColourPlaneCount(pBMPFormat->getColourPlaneCount());
+	pICOFormat->setSerializeBMPVersion(pBMPFormat->getSerializeBMPVersion());
 	return pICOFormat;
 }

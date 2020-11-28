@@ -28,6 +28,7 @@ public:
 	virtual void			readAll(uint8* pBuffer, uint64 uiByteCountToRead) = 0;
 
 	virtual void			seek(uint64 uiIndex) = 0;
+	virtual uint64			size() = 0;
 
 	virtual void			flush() = 0;
 };

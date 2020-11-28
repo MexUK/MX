@@ -508,7 +508,7 @@ GPUImage*				OpenGL::addImage(GPUProgram *pProgram, string& strImageFilePath, GP
 	pGLImage->m_pImageBuffers = pGpuImageBuffers ? pGpuImageBuffers : addImageBuffers(pProgram);
 
 	// send texture to GPU
-	pGLImage->m_uiTextureBuffer = addTexture(pProgram, image.m_pData, image.m_uiFormat, image.m_vecSize, true);
+	pGLImage->m_uiTextureBuffer = addTexture(pProgram, image.m_pRaster, image.m_uiFormat, image.m_vecSize, true);
 
 	return pGLImage;
 }
@@ -541,8 +541,8 @@ void					OpenGL::takeScreenshot(uvec2& vecSize, string& strBMPFilePath, bool bAl
 
 		bmp.serialize();
 
-		delete[] image.m_pData;
-		image.m_pData = nullptr;
+		delete[] image.m_pRaster;
+		image.m_pRaster = nullptr;
 	}
 
 	if (bAlsoTakeJPEG)

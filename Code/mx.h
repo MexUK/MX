@@ -90,6 +90,7 @@ namespace mx
 	extern glm::uvec2			g_vecDefaultUvec2;
 	extern glm::vec3			g_vecDefaultVec3;
 	extern std::string			g_strBlankString;
+	extern tagICEXYZTRIPLE		g_blankCEXYZTRIPLE;
 	
 	// misc
 	const uint32				SECTOR_BYTE_COUNT = 2048;
@@ -125,12 +126,15 @@ namespace mx
 	
 	// format
 	class Format;
+	class FormatException;
+	enum EFormatException;
 
 	class BMPFormat;
-	struct BMPFormat_Header1;
-	struct BMPFormat_Header2_Version2;
-	struct BMPFormat_Header2_Version3;
-	struct BMPFormat_Header2_Version4;
+	class BMPMeta;
+	enum EBMPCompressionType;
+	enum EBMPDIBHeader;
+	enum EBMPDIBHeaderType;
+	enum EBMPFileType;
 
 	class CURFormat;
 

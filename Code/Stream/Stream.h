@@ -36,6 +36,7 @@ public:
 	void					readAll(uint8* pBuffer, uint64 uiByteCountToRead);
 
 	void					seek(uint64 uiIndex);
+	uint64					size();
 
 	void					flush();
 

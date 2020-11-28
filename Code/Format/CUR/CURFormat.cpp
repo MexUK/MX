@@ -10,14 +10,14 @@ CURFormat::CURFormat(mx::Stream& stream) :
 	BMPFormat(stream)
 {
 	setShouldSerializeHeader1(false);
-	setBMPVersion(3);
+	setSerializeBMPVersion(3);
 }
 
 CURFormat::CURFormat(mx::Stream& stream, ImageData& image) :
 	BMPFormat(stream, image)
 {
 	setShouldSerializeHeader1(false);
-	setBMPVersion(3);
+	setSerializeBMPVersion(3);
 }
 
 // serialization
@@ -59,7 +59,6 @@ CURFormat* CURFormat::createFromBMP(BMPFormat* pBMPFormat)
 	Stream stream;
 	CURFormat* pCURFormat = new CURFormat(stream);
 	pCURFormat->setImage(pBMPFormat->getImage());
-	pCURFormat->setBMPVersion(pBMPFormat->getBMPVersion());
-	pCURFormat->setColourPlaneCount(pBMPFormat->getColourPlaneCount());
+	pCURFormat->setSerializeBMPVersion(pBMPFormat->getSerializeBMPVersion());
 	return pCURFormat;
 }

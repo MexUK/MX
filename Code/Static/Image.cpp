@@ -43,7 +43,7 @@ void mx::Image::convertToDDS(std::string& strPathIn, std::string& strPathOut)
 {
 	mx::ImageData image;
 	load(strPathIn, image, 4);
-	if (!image.m_pData)
+	if (!image.m_pRaster)
 		return;
 
 	saveDDSDXT1(strPathOut, image);
@@ -53,18 +53,18 @@ void mx::Image::saveDDSDXT1(std::string& strFilePathOut, mx::ImageData& image)
 {
 	Dir::create(strFilePathOut);
 
-	unsigned char* pDataOut = new unsigned char[(image.m_vecSize.x * image.m_vecSize.y) / 2];
-	squish::CompressImage(image.m_pData, image.m_vecSize.x, image.m_vecSize.y, pDataOut, kDxt1);
+	unsigned char* pRasterOut = new unsigned char[(image.m_vecSize.x * image.m_vecSize.y) / 2];
+	squish::CompressImage(image.m_pRaster, image.m_vecSize.x, image.m_vecSize.y, pRasterOut, kDxt1);
 
 	Stream stream(strFilePathOut);
 	DDSFormat format(stream);
 	format.m_image.m_uiFormat = COMPRESSED_RGB_DXT1;
 	format.m_image.m_vecSize.x = image.m_vecSize.x;
 	format.m_image.m_vecSize.y = image.m_vecSize.y;
-	format.m_image.m_pData = pDataOut;
+	format.m_image.m_pRaster = pRasterOut;
 	format.serialize();
 
-	delete[] pDataOut;
+	delete[] pRasterOut;
 }
 
 // size
@@ -186,15 +186,15 @@ void mx::Image::load(std::string& strPathIn, ImageData& imageData, uint32 uiChan
 		|| strExtUpper == "HDR")
 	{
 		int w, h, n;
-		uint8 *pData = stbi_load(strPathIn.c_str(), &w, &h, &n, uiChannelCount);
-		if (pData)
+		uint8* pRaster = stbi_load(strPathIn.c_str(), &w, &h, &n, uiChannelCount);
+		if (pRaster)
 		{
 			if (uiChannelCount == 0)
 				uiChannelCount = n;
 			imageData.m_uiFormat = uiChannelCount == 3 ? UNCOMPRESSED_RGB : UNCOMPRESSED_RGBA;
 			imageData.m_vecSize.x = w;
 			imageData.m_vecSize.y = h;
-			imageData.m_pData = pData;
+			imageData.m_pRaster = pRaster;
 			
 			return;
 		}
@@ -203,7 +203,7 @@ void mx::Image::load(std::string& strPathIn, ImageData& imageData, uint32 uiChan
 	imageData.m_uiFormat = UNKNOWN_IMAGE_FORMAT;
 	imageData.m_vecSize.x = 0;
 	imageData.m_vecSize.y = 0;
-	imageData.m_pData = nullptr;
+	imageData.m_pRaster = nullptr;
 }
 
 // internal

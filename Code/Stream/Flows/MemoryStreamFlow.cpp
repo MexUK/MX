@@ -62,10 +62,15 @@ void			MemoryStreamFlow::readAll(uint8* pBuffer, uint64 uiByteCountToRead)
 	readOnce(pBuffer, uiByteCountToRead);
 }
 
-// seek
+// position/size
 void			MemoryStreamFlow::seek(uint64 uiIndex)
 {
 	m_uiSeek = uiIndex;
+}
+
+uint64			MemoryStreamFlow::size()
+{
+	return -1; // todo?
 }
 
 // flush

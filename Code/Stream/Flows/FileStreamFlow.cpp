@@ -176,7 +176,7 @@ void			FileStreamFlow::readAll(uint8* pBuffer, uint64 uiByteCountToRead)
 	while (uiByteCountRead < uiByteCountToRead);
 }
 
-// seek
+// position/size
 void			FileStreamFlow::seek(uint64 uiIndex)
 {
 	ensureOpen();
@@ -188,6 +188,21 @@ void			FileStreamFlow::seek(uint64 uiIndex)
 	m_file.seekp(uiIndex);
 	if (m_bCheckForErrors && !m_file)
 		throw new StreamException(STREAM_ERROR_FILE_SET_SEEK);
+}
+
+uint64			FileStreamFlow::size()
+{
+	ensureOpen();
+
+	m_file.seekg(0, std::ios::end);
+	if (m_bCheckForErrors && !m_file)
+		throw new StreamException(STREAM_ERROR_FILE_SET_SEEK);
+
+	streampos posAfterSeek = m_file.tellg();
+	if (m_bCheckForErrors && (!m_file || posAfterSeek == -1))
+		throw new StreamException(STREAM_ERROR_FILE_GET_SEEK);
+
+	return posAfterSeek;
 }
 
 // flush

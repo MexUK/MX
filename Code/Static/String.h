@@ -127,6 +127,9 @@ public:
 	// allocation/copy
 	static char*							copy(std::string& str);
 
+	// code page
+	static bool								isCodePage1252(std::string& strText);
+
 	// string/wstring conversion
 	static std::wstring						atow(std::string& str)
 	{

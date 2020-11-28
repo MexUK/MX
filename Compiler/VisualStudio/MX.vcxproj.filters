@@ -375,19 +375,7 @@
     <ClInclude Include="..\..\Code\Static\Crashes.h">
       <Filter>Header Files\Static</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version2.h">
-      <Filter>Header Files\Format\BMP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version3.h">
-      <Filter>Header Files\Format\BMP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version4.h">
-      <Filter>Header Files\Format\BMP</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Code\Format\BMP\BMPFormat.h">
-      <Filter>Header Files\Format\BMP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header1.h">
       <Filter>Header Files\Format\BMP</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Code\Format\CUR\CURFormat.h">
@@ -455,6 +443,27 @@
     </ClInclude>
     <ClInclude Include="..\..\Code\Static\GUI.h">
       <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\EFormatException.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\FormatException.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\EBMPCompressionType.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\EBMPDIBHeader.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\EBMPDIBHeaderType.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\EBMPFileType.h">
+      <Filter>Header Files\Format\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Format\BMP\BMPMeta.h">
+      <Filter>Header Files\Format\BMP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -622,6 +631,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Code\Static\GUI.cpp">
       <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Format\BMP\BMPMeta.cpp">
+      <Filter>Source Files\Format\BMP</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -722,6 +722,25 @@ char*				String::copy(string& str)
 	return pData;
 }
 
+bool				String::isCodePage1252(string& strText)
+{
+	const char* pText = strText.data();
+	for (uint32 i = 0, j = strText.length(); i < j; i++)
+	{
+		const char c = pText[i];
+		switch (c)
+		{
+		case 129:
+		case 141:
+		case 143:
+		case 144:
+		case 157:
+			return false;
+		}
+	}
+	return true;
+}
+
 bool				String::isIn(string& strText, string& strFind, bool bCaseSensitive, uint32 uiStartIndex)
 {
 	if(bCaseSensitive)

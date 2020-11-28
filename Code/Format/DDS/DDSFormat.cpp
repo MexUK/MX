@@ -57,8 +57,8 @@ void				DDSFormat::_unserialize(void)
 	m_image.m_uiFormat = COMPRESSED_RGB_DXT1;
 	m_image.m_vecSize.x = pHeader1->m_uiWidth;
 	m_image.m_vecSize.y = pHeader1->m_uiHeight;
-	m_image.checkToAllocateData();
-	m_reader.cstr((char*)m_image.m_pData, m_image.getDataSize());
+	m_image.checkToAllocateRaster();
+	m_reader.cstr((char*)m_image.m_pRaster, m_image.getRasterSize());
 
 	// clean up
 	delete pHeader1;
@@ -86,7 +86,7 @@ void				DDSFormat::_serialize(void)
 	if (bCompressedRasterData)
 	{
 		uiFlags |= 0x80000;
-		uiPitchOrLinearSize = m_image.getDataSize();
+		uiPitchOrLinearSize = m_image.getRasterSize();
 	}
 	else
 	{
@@ -173,5 +173,5 @@ void				DDSFormat::_serialize(void)
 	m_writer.ui32(uiReserved2);
 
 	// data
-	m_writer.cstr((char*)m_image.m_pData, m_image.getDataSize());
+	m_writer.cstr((char*)m_image.m_pRaster, m_image.getRasterSize());
 }

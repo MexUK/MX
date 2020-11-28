@@ -160,16 +160,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Code\Format\BMP\BMPFormat.h" />
-    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header1.h" />
-    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version2.h" />
-    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version3.h" />
-    <ClInclude Include="..\..\Code\Format\BMP\BMPFormat_Header2_Version4.h" />
+    <ClInclude Include="..\..\Code\Format\BMP\BMPMeta.h" />
+    <ClInclude Include="..\..\Code\Format\BMP\EBMPCompressionType.h" />
+    <ClInclude Include="..\..\Code\Format\BMP\EBMPDIBHeader.h" />
+    <ClInclude Include="..\..\Code\Format\BMP\EBMPDIBHeaderType.h" />
+    <ClInclude Include="..\..\Code\Format\BMP\EBMPFileType.h" />
     <ClInclude Include="..\..\Code\Format\CUR\CURFormat.h" />
     <ClInclude Include="..\..\Code\Format\DDS\DDSFormat.h" />
     <ClInclude Include="..\..\Code\Format\DDS\DDSFormat_Header_DDS_HEADER.h" />
     <ClInclude Include="..\..\Code\Format\DDS\DDSFormat_Header_DDS_HEADER_DXT10.h" />
     <ClInclude Include="..\..\Code\Format\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part1.h" />
     <ClInclude Include="..\..\Code\Format\DDS\DDSFormat_Header_DDS_PIXELFORMAT_Part2.h" />
+    <ClInclude Include="..\..\Code\Format\EFormatException.h" />
+    <ClInclude Include="..\..\Code\Format\FormatException.h" />
     <ClInclude Include="..\..\Code\Format\ICO\ICOFormat.h" />
     <ClInclude Include="..\..\Code\Format\JSON\EJSONType.h" />
     <ClInclude Include="..\..\Code\Format\JSON\JSONArray.h" />
@@ -264,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Code\Format\BMP\BMPFormat.cpp" />
+    <ClCompile Include="..\..\Code\Format\BMP\BMPMeta.cpp" />
     <ClCompile Include="..\..\Code\Format\CUR\CURFormat.cpp" />
     <ClCompile Include="..\..\Code\Format\DDS\DDSFormat.cpp" />
     <ClCompile Include="..\..\Code\Format\ICO\ICOFormat.cpp" />

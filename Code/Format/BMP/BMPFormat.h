@@ -4,21 +4,19 @@
 
 #include "mx.h"
 #include "Types.h"
-#include "Format/Format.h"
 #include "Static/Components/ImageData.h"
+#include "Format/Format.h"
+#include "Format/BMP/BMPMeta.h"
 
 #define MX_BMP_HEADER1_SIZE				14
-#define MX_BMP_HEADER2_VERSION2_SIZE	16
-#define MX_BMP_HEADER2_VERSION3_SIZE	40
-#define MX_BMP_HEADER2_VERSION4_SIZE	108
 
 class mx::BMPFormat : public mx::Format
 {
 public:
 	mx::ImageData					m_image;
+	mx::BMPMeta						m_meta;
 	uint8							m_bSerializeHeader1	: 1;
-	uint8							m_uiBMPVersion;
-	uint16							m_usColourPlaneCount;
+	uint8							m_uiSerializeBMPVersion;
 
 public:
 	BMPFormat(mx::Stream& stream);
@@ -38,39 +36,58 @@ public:
 	void							setHeight(uint32 uiHeight) { m_image.m_vecSize.y = uiHeight; }
 	uint32							getHeight(void) { return m_image.m_vecSize.y; }
 
-	void							setRasterData(uint8* pRasterData) { m_image.m_pData = pRasterData; }
-	uint8*							getRasterData(void) { return m_image.m_pData; }
+	void							setRasterData(uint8* pRaster) { m_image.m_pRaster = pRaster; }
+	uint8*							getRasterData(void) { return m_image.m_pRaster; }
 
 	uint16							getBPP(void) { return m_image.getBitsPerPixel(); }
 
 	void							setShouldSerializeHeader1(bool bSerializeHeader1) { m_bSerializeHeader1 = bSerializeHeader1; }
 	bool							shouldSerializeHeader1(void) { return m_bSerializeHeader1; }
 
-	void							setBMPVersion(uint8 uiBMPVersion) { m_uiBMPVersion = uiBMPVersion; }
-	uint8							getBMPVersion(void) { return m_uiBMPVersion; }
-
-	void							setColourPlaneCount(uint16 usColourPlaneCount) { m_usColourPlaneCount = usColourPlaneCount; }
-	uint16							getColourPlaneCount(void) { return m_usColourPlaneCount; }
+	void							setSerializeBMPVersion(uint8 uiSerializeBMPVersion) { m_uiSerializeBMPVersion = uiSerializeBMPVersion; }
+	uint8							getSerializeBMPVersion(void) { return m_uiSerializeBMPVersion; }
 
 private:
-	void							unserializeVersion1(void);
-	void							unserializeVersion2(void);
-	void							unserializeVersion3(void);
-	void							unserializeVersion4(void);
+	static EBMPFileType				getFileTypeByTwoCC(uint16 uiTwoCC);
+	static uint16					getTwoCCByFileType(EBMPFileType uiBMPFileType);
+	static EBMPDIBHeaderType		getDIBHeaderTypeByFileType(EBMPFileType uiBMPFileType);
 
-	void							serializeVersion1(void);
-	void							serializeVersion2(void);
-	void							serializeVersion3(void);
-	void							serializeVersion4(void);
+	EBMPDIBHeaderType				detectFileHeaderTwoCC();
+	EBMPDIBHeader					detectDIBHeader(EBMPDIBHeaderType uiDIBHeaderType);
+	EBMPCompressionType				detectCompressionType(uint32 uiCompressionType, EBMPDIBHeaderType uiDIBHeaderType);
+	bool							detectTablePresence();
 
-	uint32							detectBMPVersion(void);
-	uint32							getBMPHeader2Size(uint32 uiBMPVersion);
+	uint32							computeFileSize();
+	uint32							computeTableSize();
+	uint32							computeTableEntryByteCount();
+	mx::EImageFormat				computeRasterFormat();
+	uint32							computeRasterOffset();
 
-	void							serializeBMPHeader1(uint32 uiBMPVersion);
-	void							serializeTableAndImageData();
+	void							parseFileHeader();
+	void							parseDIBHeader();
+	void							parseTable();
+	void							parseRaster();
 
-	void							populateImageData(uint32 uiWidth, uint32 uiHeight, uint32 uiBitsPerPixel);
+	void							parseDIBHeader_BITMAPCOREHEADER();
+	void							parseDIBHeader_OS21XBITMAPHEADER();
+	void							parseDIBHeader_OS22XBITMAPHEADER_64();
+	void							parseDIBHeader_OS22XBITMAPHEADER_16();
+	void							parseDIBHeader_BITMAPV2INFOHEADER();
+	void							parseDIBHeader_BITMAPV3INFOHEADER();
+	void							parseDIBHeader_BITMAPV4HEADER();
+	void							parseDIBHeader_BITMAPV5HEADER();
 
-	mx::EImageFormat				computeImageFormat(uint16 uiBitsPerPixel);
-	bool							computeTablePresence(uint16 uiBitsPerPixel);
+	void							storeFileHeader();
+	void							storeDIBHeader();
+	void							storeTable();
+	void							storeRaster();
+
+	void							storeDIBHeader_BITMAPCOREHEADER();
+	void							storeDIBHeader_OS21XBITMAPHEADER();
+	void							storeDIBHeader_OS22XBITMAPHEADER_64();
+	void							storeDIBHeader_OS22XBITMAPHEADER_16();
+	void							storeDIBHeader_BITMAPV2INFOHEADER();
+	void							storeDIBHeader_BITMAPV3INFOHEADER();
+	void							storeDIBHeader_BITMAPV4HEADER();
+	void							storeDIBHeader_BITMAPV5HEADER();
 };
