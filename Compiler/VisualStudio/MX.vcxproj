@@ -100,7 +100,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
     </ClCompile>
@@ -128,7 +128,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
     </ClCompile>

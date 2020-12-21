@@ -253,7 +253,7 @@ bool								Memory::setInstructionAddress(HANDLE hThread, size_t uiAddr)
 {
 	CONTEXT context;
 	ZeroMemory(&context, sizeof(CONTEXT));
-	context.ContextFlags = CONTEXT_CONTROL;
+	context.ContextFlags = CONTEXT_FULL;
 	
 	if (GetThreadContext(hThread, &context) == 0)
 	{
@@ -267,7 +267,7 @@ bool								Memory::setInstructionAddress(HANDLE hThread, size_t uiAddr)
 	context.Rip = uiAddr;
 #endif
 #endif
-	context.ContextFlags = CONTEXT_FULL;
+	//context.ContextFlags = CONTEXT_FULL;
 	
 	if (0 == SetThreadContext(hThread, &context))
 	{
@@ -338,11 +338,11 @@ bool								Memory::loadDLL(HANDLE hProcess, HANDLE hThread, string& strDllFileP
 	uint32_t uiInjectedDataSize = uiSnippetCodeSize + strDllFilePath.length() + 1;
 
 	unsigned char* pInjectedData = new unsigned char[uiInjectedDataSize];
-	memcpy(pInjectedData, aSnippetCode, uiSnippetCodeSize);
+	::memcpy(pInjectedData, aSnippetCode, uiSnippetCodeSize);
 
 	*(uint32_t*)(pInjectedData + 14) = (uint32_t)LoadLibraryA;
 	*(uint32_t*)(pInjectedData + 29) = (uint32_t)Memory::getInstructionAddress(hThread);
-	memcpy(pInjectedData + uiSnippetCodeSize, strDllFilePath.c_str(), strDllFilePath.length() + 1);
+	::memcpy(pInjectedData + uiSnippetCodeSize, strDllFilePath.c_str(), strDllFilePath.length() + 1);
 
 	// add snippet to remote process
 	uint32_t uiCodeAddr;

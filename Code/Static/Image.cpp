@@ -9,7 +9,7 @@
 using namespace mx;
 using namespace squish;
 
-Gdiplus::GdiplusStartupInput mx::Image::m_startupInput;
+//Gdiplus::GdiplusStartupInput mx::Image::m_startupInput;
 ULONG_PTR mx::Image::m_uiToken;
 
 // format
@@ -73,6 +73,7 @@ void mx::Image::resize(std::string& strPathIn, std::string& strPathOut, int iWid
 	loadGdiplus();
 
 	{
+		/*
 		Gdiplus::Image* pImage = loadImageGDIPlus(strPathIn);
 
 		Gdiplus::Image* pNewImage = new Gdiplus::Bitmap(iWidth, iHeight);
@@ -83,6 +84,7 @@ void mx::Image::resize(std::string& strPathIn, std::string& strPathOut, int iWid
 
 		delete pImage;
 		delete pNewImage;
+		*/
 	}
 
 	unloadGdiplus();
@@ -93,6 +95,7 @@ void mx::Image::resize(std::string& strPathIn, std::string& strPathOut, float fS
 	loadGdiplus();
 
 	{
+		/*
 		Gdiplus::Image* pImage = loadImageGDIPlus(strPathIn);
 
 		int iNewWidth = (int)(fScale * ((float)pImage->GetWidth()));
@@ -105,6 +108,7 @@ void mx::Image::resize(std::string& strPathIn, std::string& strPathOut, float fS
 		saveImageGDIPlus(strPathOut, pNewImage);
 
 		delete pNewImage;
+		*/
 	}
 
 	unloadGdiplus();
@@ -209,19 +213,22 @@ void mx::Image::load(std::string& strPathIn, ImageData& imageData, uint32 uiChan
 // internal
 void mx::Image::loadGdiplus()
 {
-	Gdiplus::GdiplusStartup(&m_uiToken, &m_startupInput, nullptr);
+	//Gdiplus::GdiplusStartup(&m_uiToken, &m_startupInput, nullptr);
 }
 
 void mx::Image::unloadGdiplus()
 {
-	Gdiplus::GdiplusShutdown(m_uiToken);
+	//Gdiplus::GdiplusShutdown(m_uiToken);
 }
 
+/*
 Gdiplus::Image* mx::Image::loadImageGDIPlus(std::string& strPathIn)
 {
 	return new Gdiplus::Image(String::atow(strPathIn).c_str(), FALSE);
 }
+*/
 
+/*
 void mx::Image::saveImageGDIPlus(std::string& strPathOut, Gdiplus::Image *pImageOut)
 {
 	std::string strExt = Path::ext(strPathOut);
@@ -238,13 +245,14 @@ void mx::Image::saveImageGDIPlus(std::string& strPathOut, Gdiplus::Image *pImage
 
 	pImageOut->Save(String::atow(strPathOut).c_str(), &clsid);
 }
+*/
 
 void mx::Image::convertImageFormat(std::string& strPathIn, std::string& strPathOut, std::wstring wstrEncodingTypeOut)
 {
 	loadGdiplus();
 
-	Gdiplus::Image *pImage = loadImageGDIPlus(strPathIn);
-	saveImageGDIPlus(strPathOut, pImage);
+	//Gdiplus::Image *pImage = loadImageGDIPlus(strPathIn);
+	//saveImageGDIPlus(strPathOut, pImage);
 
 	unloadGdiplus();
 }
@@ -266,6 +274,7 @@ std::wstring mx::Image::getEncodingTypeFromFileExtension(std::string& strFileExt
 		return L"";
 }
 
+/*
 int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
 {
 	UINT  num = 0;		  // number of image encoders
@@ -295,3 +304,4 @@ int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
 	free(pImageCodecInfo);
 	return -1;
 }
+*/

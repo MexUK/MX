@@ -36,12 +36,12 @@ private:
 	static void loadGdiplus();
 	static void unloadGdiplus();
 	
-	static Gdiplus::Image* loadImageGDIPlus(std::string& strPathIn);
-	static void saveImageGDIPlus(std::string& strPathOut, Gdiplus::Image* pImageOut);
+	//static Gdiplus::Image* loadImageGDIPlus(std::string& strPathIn);
+	//static void saveImageGDIPlus(std::string& strPathOut, Gdiplus::Image* pImageOut);
 
 	static void saveDDSDXT1(std::string& strFilePathOut, mx::ImageData& image);
 
 private:
-	static Gdiplus::GdiplusStartupInput m_startupInput;
+	//static Gdiplus::GdiplusStartupInput m_startupInput;
 	static ULONG_PTR m_uiToken;
 };

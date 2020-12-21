@@ -8,15 +8,15 @@ using namespace mx;
 
 string			Path::replaceSlashes(string& strPath)
 {
-	string strFind = "\\";
-	string strReplaceWith = "/";
+	string strFind = "/";
+	string strReplaceWith = "\\";
 	return String::replace(strPath, strFind, strReplaceWith);
 }
 
 string			Path::getFileName(string& strPath)
 {
 	string strPath2 = replaceSlashes(strPath);
-	size_t uiPosition = strPath2.find_last_of("/");
+	size_t uiPosition = strPath2.find_last_of("\\");
 	if (uiPosition == string::npos)
 	{
 		return strPath2;
@@ -33,7 +33,7 @@ string			Path::getFolderName(string& strPath)
 string			Path::getDirectory(string& strPath)
 {
 	string strPath2 = replaceSlashes(strPath);
-	size_t uiPosition = strPath2.find_last_of("/");
+	size_t uiPosition = strPath2.find_last_of("\\");
 	if (uiPosition == string::npos)
 	{
 		return "";
@@ -44,7 +44,7 @@ string			Path::getDirectory(string& strPath)
 string			Path::removeFileName(string& strPath)
 {
 	string strPath2 = replaceSlashes(strPath);
-	size_t uiPosition = strPath2.find_last_of("/");
+	size_t uiPosition = strPath2.find_last_of("\\");
 	if (uiPosition == string::npos)
 	{
 		return strPath2;
@@ -57,7 +57,7 @@ string			Path::removeFolderName(string& strPath)
 	string strPath2 = unslash(strPath);
 	
 	string strPath3 = replaceSlashes(strPath2);
-	size_t uiPosition = strPath3.find_last_of("/");
+	size_t uiPosition = strPath3.find_last_of("\\");
 	if (uiPosition != string::npos)
 	{
 		strPath2 = strPath2.substr(0, uiPosition + 1);

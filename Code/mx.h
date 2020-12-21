@@ -28,6 +28,7 @@
 	#endif
 #endif
 
+/*
 #ifndef MX_SKIP_THE_NO_DEFINES
 	#define NOGDICAPMASKS
 	//#define NOVIRTUALKEYCODES
@@ -69,6 +70,7 @@
 	#define NODEFERWINDOWPOS
 	#define NOMCX
 #endif
+*/
 #include <Windows.h>
 
 #include "ThirdParty/GLEW/GL/glew.h"
@@ -76,11 +78,13 @@
 
 #include "ThirdParty/STB/stb_image.h"
 
+/*
 #define min(x,y) ((x) < (y) ? (x) : (y)) // for GDI+
 #define max(x,y) ((x) > (y) ? (x) : (y)) // for GDI+
 #include <Gdiplus.h>
 #undef min
 #undef max
+*/
 
 namespace mx
 {
