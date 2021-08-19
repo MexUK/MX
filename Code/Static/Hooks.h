@@ -158,8 +158,8 @@ public:
 
 		// jmp from original game function to hook
 		memset((uint8_t*)uiInstructionAddress, '\0', uiInstructionsOctetCount);
-		*(uint8_t*)uiInstructionAddress = (uint8_t)0xFFu;
-		*(uint8_t*)(uiInstructionAddress + 1) = (uint8_t)0x25u;
+		*(uint8_t*)uiInstructionAddress = 0xFF;
+		*(uint8_t*)(uiInstructionAddress + 1) = 0x25;
 		*(size_t*)(uiInstructionAddress + 2) = uiHookAddr2;
 	}
 
