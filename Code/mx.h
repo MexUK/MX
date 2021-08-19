@@ -196,6 +196,7 @@ namespace mx
 	class Dir;
 	class File;
 	class GUI;
+	class Hooks;
 	class Image;
 	class Input;
 	class Math;

@@ -225,6 +225,7 @@
     <ClInclude Include="..\..\Code\Static\File.h" />
     <ClInclude Include="..\..\Code\Static\Dir.h" />
     <ClInclude Include="..\..\Code\Static\GUI.h" />
+    <ClInclude Include="..\..\Code\Static\Hooks.h" />
     <ClInclude Include="..\..\Code\Static\Image.h" />
     <ClInclude Include="..\..\Code\Static\Input.h" />
     <ClInclude Include="..\..\Code\Static\Math.h" />
@@ -294,6 +295,7 @@
     <ClCompile Include="..\..\Code\Static\File.cpp" />
     <ClCompile Include="..\..\Code\Static\Dir.cpp" />
     <ClCompile Include="..\..\Code\Static\GUI.cpp" />
+    <ClCompile Include="..\..\Code\Static\Hooks.cpp" />
     <ClCompile Include="..\..\Code\Static\Image.cpp" />
     <ClCompile Include="..\..\Code\Static\Input.cpp" />
     <ClCompile Include="..\..\Code\Static\Math.cpp" />

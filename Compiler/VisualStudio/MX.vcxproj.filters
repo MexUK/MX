@@ -465,6 +465,9 @@
     <ClInclude Include="..\..\Code\Format\BMP\BMPMeta.h">
       <Filter>Header Files\Format\BMP</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Code\Static\Hooks.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Code\Pool\VectorPool.cpp">
@@ -634,6 +637,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Code\Format\BMP\BMPMeta.cpp">
       <Filter>Source Files\Format\BMP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Static\Hooks.cpp">
+      <Filter>Source Files\Static</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
